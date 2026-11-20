@@ -35,10 +35,11 @@
 
 | 目录 | 用途 | 现有 |
 |:---:|---|---:|
-| [`docs/`](docs/) | 系统化知识笔记：内存布局 · 调用约定 · 工具链 · 引擎专项 · 协议 · 反作弊 | 8 篇 |
+| [`docs/`](docs/) | 系统化知识笔记：内存布局 · 调用约定 · 工具链 · 引擎专项 · 协议 · 反作弊 · Ghidra | 9 篇 |
 | [`labs/`](labs/) | 可编译、可下断点的实验，一个概念一个实验 | 1 个 |
 | [`writeups/`](writeups/) | crackme / CTF / 目标分析的完整题解 | 0 篇 |
-| [`notes/`](notes/) | 零散观察与踩坑记录，随手记，不成体系 | 0 条 |
+| [`notes/`](notes/) | 零散观察与踩坑记录，随手记，不成体系 | 1 条 |
+| [`tools/`](tools/) | Ghidra 启动/同步脚本、GhidraScript 与反编译辅助 | 脚本 |
 | [`resources.md`](resources.md) | 书单、靶场、社区，以及法律与授权边界 | 清单 |
 
 > **第一次来？** 先读 [`docs/00-roadmap.md`](docs/00-roadmap.md) 看 12 周路线，跑一遍 [`labs/01-struct-layout`](labs/01-struct-layout/)，再用 [`notes/_TEMPLATE.md`](notes/_TEMPLATE.md) 写下第一条记录。
