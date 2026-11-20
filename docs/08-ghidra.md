@@ -16,11 +16,32 @@
 
 ## 启动
 
-```powershell
-powershell -ExecutionPolicy Bypass -File .\tools\ghidra.ps1
-```
+**最快的方式：桌面上的 `Ghidra` 图标**（双击即可）。
 
-或直接双击 `D:\tools\ghidra\ghidra_12.2_PUBLIC\ghidraRun.bat`。
+也可以：
+
+| 方式 | 操作 |
+|---|---|
+| 桌面快捷方式 | 双击 `Ghidra` |
+| 开始菜单 | 搜索 `Ghidra` |
+| VS Code | `Ctrl+Shift+P` → `Tasks: Run Task` → `启动 Ghidra` |
+| 命令行 | `powershell -ExecutionPolicy Bypass -File .\tools\ghidra.ps1` |
+
+> **为什么快捷方式要多绕一层？**
+>
+> 快捷方式里的真实命令是：
+>
+> ```text
+> cmd.exe /c start "" "E:\harness\reversing-journal\tools\launch-ghidra.bat"
+> ```
+>
+> 三个原因，每一个都是踩出来的：
+>
+> 1. **不能直接指向 `ghidraRun.bat`** —— 改过 `JAVA_HOME` 后，**已经运行的资源管理器不会刷新环境变量**，可能仍用旧的 JDK 21 而报错。
+> 2. **必须经 `cmd /c start` 分离** —— 否则启动器会占住调用方的控制台句柄，调用方一直挂住不返回。
+> 3. **`.bat` 结尾必须 `exit`** —— Windows 资源管理器打开 `.bat` 用的是 **`cmd /K`（不是 `/c`）**，命令跑完会停在提示符，后台白留一个窗口。
+>
+> 图标来自 `D:\tools\ghidra\ghidra_12.2_PUBLIC\support\ghidra.ico`。
 
 ## 第一次分析：player_O0.exe
 
