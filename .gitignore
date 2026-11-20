@@ -1,0 +1,33 @@
+# 编译产物
+*.exe
+*.o
+*.obj
+*.dll
+*.lib
+*.pdb
+*.ilk
+*.exp
+*.map
+
+# 调试产物
+*.core
+*.dmp
+core.*
+
+# IDE / 编辑器
+.vs/
+.idea/
+.vscode/
+*.user
+*.swp
+*.swo
+
+# 系统
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# 临时文件
+*.tmp
+*.log
+*.bak
