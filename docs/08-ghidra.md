@@ -45,13 +45,39 @@
 
 ## 第一次分析：player_O0.exe
 
-### 1. 建项目
+### 线路 A（省事）：直接打开预置项目
 
-`File` → `New Project...` → `Non-Shared Project` → 选一个目录（例如 `D:\ghidra-projects`）→ 项目名 `learn`
+`player_O0.exe` 和 `player_O2.exe` 已经导入并分析好了：
 
-### 2. 导入文件
+`File` → `Open Project...` → 选
 
-`File` → `Import File...` → 选 `labs/01-struct-layout/player_O0.exe`
+```text
+D:\tools\ghidra-projects\learn.gpr
+```
+
+打开后左侧 `Symbol Tree` → `Functions` → 双击 `take_damage` 就行。
+
+### 线路 B（推荐）：自己从零走一遍
+
+练手建议走这条。熟悉之后再偷懒。
+
+**1. 建项目**
+
+`File` → `New Project...` → `Non-Shared Project`
+→ 目录选 `D:\tools\ghidra-projects`（不存在的话直接在对话框里新建）
+→ 项目名 `learn`
+
+**2. 导入文件**
+
+`File` → `Import File...` → 选
+
+```text
+E:\harness\reversing-journal\labs\01-struct-layout\player_O0.exe
+```
+
+> **找不到文件怎么办？**
+> 1. 把上面这个完整路径直接粘贴到文件对话框的「文件名」输入框，回车。
+> 2. 这个 `.exe` 是本地编译产物（`*.exe` 被 `.gitignore` 忽略，不会进仓库）。如果真丢了，重跑一次 [`build.ps1`](../labs/01-struct-layout/build.ps1) 就有了。
 
 导入后会弹「Analyze?」→ 选 **Yes**，用默认分析选项即可。
 
