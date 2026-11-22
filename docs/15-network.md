@@ -120,12 +120,19 @@ memmove(buf, buf + 2 + total, have - 2 - total);   // 把剩下的挪到前面
 
 **54 = 14（以太网头）+ 20（IPv4 头）+ 20（TCP 头）。**
 
-> 说明：`demo.pcapng` 里的包头没有 TCP 选项，所以是 54。
-> **你自己真抓包时，TCP 头通常带 12 字节选项（时间戳之类），那时是 66。**
-> 所以 Wireshark 里一个 12 字节的 HELLO 会显示成 `TCP 78` 而不是 66——差的就是这 12 字节。
-> 这不是错，这就是"包头大小取决于选项"。
+> **同一个协议，换一个抓包点，包头就换一种算法。** `demo.pcapng` 是以太网封装（14 字节），所以是 54；
+> 真在 loopback 上抓时，Npcap 用的是 **NULL/Loopback** 封装（开头 4 字节是地址族，不是以太网头），包头只有 **44**。
+> 实测证据（`capture/evidence/live-capture.txt`，HELLO 帧 `frame.len=56` = 4+20+20+12）：
+>
+> ```text
+> 4   56  12   0x01  10      ← HELLO
+> 11  60  16   0x02  14      ← ATTACK
+> 15  68  24   0x03  22      ← HP_SYNC
+> ```
+>
+> 所以别背「包头 54 字节」——先问**在哪抓的**：以太网 54、loopback 44、VLAN 还要再多 4。
 
-结论：**你每发 16 字节游戏数据，线路上其实跑了 70~82 字节。** 带宽就是这么吃掉的。
+结论：**以太网上，你每发 16 字节游戏数据，线路上其实跑 70 字节；loopback 上是 60 字节。** 带宽就是这么吃掉的。
 
 ## 四、握手和挥手：连接不是"打开就有"
 
@@ -406,35 +413,46 @@ REJECT seq=1 dmg=30.00 out of range (0 < dmg <= 25); hp stays 100.00
 > 抓包改一个字段 → 看服务端认不认。认 = 有漏洞；不认 = 有校验。
 
 
-## 八、自己抓一次（需要管理员，2 分钟）
+## 八、自己抓一次（本机实测：普通窗口也能抓，2 分钟）
 
 ```powershell
-# 1) 右键开始菜单 → 「终端(管理员)」
 cd E:\harness\reversing-journal\labs\07-net-os\capture
 powershell -ExecutionPolicy Bypass -File .\capture.ps1
-# 2) 它开始抓包后，另开一个普通窗口跑：
-cd ..\net ; .\run.ps1
-# 3) 回到管理员窗口按回车停止
+# 它开始抓包后，另开一个窗口跑靶场：
+cd ..\net ; powershell -ExecutionPolicy Bypass -File .\run.ps1
+# 回到抓包窗口按回车停止
 ```
 
-脚本会自动用 `zombie.lua` 生成 `dissect.txt`，你在 Wireshark 里应该看到：
+> 权限：这台机器上**普通（非管理员）窗口实测也能抓 loopback**——`capture/evidence/live-capture.txt` 里
+> 是 Medium 完整性级别抓到的 62 个包。脚本在非管理员时只警告、不退出；
+> 万一 dumpcap 报 `You do not have permission`，再换管理员窗口。
+
+抓完你会看到同一帧**出现两次**（`frame 4` 和 `frame 9` 都是 HELLO）：
+因为 tap 是中间人，客户端→tap、tap→服务端 是**两条 TCP 连接**，各被抓了一遍。
+
+真实抓包的帧长（`tshark -Y zombie -T fields -e frame.len -e tcp.len` 原样）：
 
 ```text
-ZOMBIE 78 HELLO client_id=1 version=1
-ZOMBIE 82 ATTACK damage=5.00 seq=1 claimed_hp=95.00
-ZOMBIE 90 HP_SYNC player_id=1 hp=95.00/100.00 tick=1 alive=1
+4   56  12   0x01  10      ← HELLO
+11  60  16   0x02  14      ← ATTACK
+15  68  24   0x03  22      ← HP_SYNC
+51  48   4   0x05   2      ← BYE
 ```
 
-（76/82/90 = 66 字节包头 + 12/16/24 载荷。注意这里比 demo 的 66/70/78 各大 12，
-因为真实抓包带 TCP 选项——第三节埋的那个伏笔在这里应验。）
+**56/60/68，不是 demo 里的 66/70/78。** 差的 10 字节在链路层：
+
+| 抓包点 | 链路层 | 头部 | HELLO 总长 |
+|---|---|---|---|
+| `demo.pcapng`（text2pcap 合成以太网） | Ethernet II | 14+20+20 = **54** | 66 |
+| 真实 loopback（Npcap） | **NULL/Loopback**（4 字节） | 4+20+20 = **44** | 56 |
 
 在 `-V` 里点开一帧，你能逐层看到：
 
 ```text
-Frame → Ethernet II → Internet Protocol Version 4 → Transmission Control Protocol → ZOMBIE
+Frame → Null/Loopback → Internet Protocol Version 4 → Transmission Control Protocol → ZOMBIE
 ```
 
-**这就是"封包"两个字的实物**：一层套一层，每层只关心自己的头。
+**这就是「封包」两个字的实物**：一层套一层，每层只关心自己的头。
 
 > 为什么必须管理员？因为从网卡抓包要用 Npcap 驱动，那是内核里的东西（14 讲：用户态碰不到）。
 > 这也顺便解释了一件事：**能抓包 = 能拿到明文**，所以现代游戏协议要么 TLS，要么自己加密。

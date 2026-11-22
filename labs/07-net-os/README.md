@@ -183,55 +183,30 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\analyze.ps1
 
 ---
 
-## 第 5 步（可选）：真抓包（要管理员）
+## 第 5 步（可选）：真抓包（本机实测：普通窗口也能抓）
 
-Wireshark 在这台机器的 `E:\Wireshark`，抓回环需要管理员（Npcap 驱动在核心里）。
+Wireshark 在这台机器的 `E:\Wireshark`。**这台机器上普通（非管理员）窗口实测也能抓 loopback**——
+`capture\evidence\live-capture.txt` 就是 Medium 完整性级别抓到的 62 个包（脚本非管理员时只警告不退出）。
 
 ```powershell
-# 1) 管理员 PowerShell
 cd E:\harness\reversing-journal\labs\07-net-os\capture
 powershell -ExecutionPolicy Bypass -File .\capture.ps1
-# 2) 它开始抓后，另开一个普通窗口：cd ..\net ; .\run.ps1
-# 3) 回管理员窗口按回车
+# 它开始抓后，另开一个窗口：cd ..\net ; powershell -ExecutionPolicy Bypass -File .\run.ps1
+# 回到抓包窗口按回车停止
 ```
 
-抓完会自动调 `zombie.lua` 生成 `dissect.txt`，你应该看到：
+抓完会自动调 `zombie.lua` 生成 `dissect.txt`。真实抓包的帧长是 **56/60/68**：
 
 ```text
-ZOMBIE 78 HELLO client_id=1 version=1
-ZOMBIE 82 ATTACK damage=5.00 seq=1 claimed_hp=95.00
-ZOMBIE 90 HP_SYNC player_id=1 hp=95.00/100.00 tick=1 alive=1
+ZOMBIE 56 HELLO client_id=1 version=1
+ZOMBIE 60 ATTACK damage=5.00 seq=1 claimed_hp=95.00
+ZOMBIE 68 HP_SYNC player_id=1 hp=95.00/100.00 tick=1 alive=1
 ```
 
-没有管理员权限也能学：`capture\demo.pcapng` 里的 ZOMBIE 字节是真的（取自上面的真实运行），
-只有 IP/TCP 头是为了演示合成的；用 `tshark -r demo.pcapng -X lua_script:zombie.lua` 就能看解析效果。
+比 demo 里的 66/70/78 小 10 字节，因为 loopback 的链路层是 NULL/Loopback（4 字节）而不是以太网（14 字节）——
+**同一个协议，换个抓包点，包头算法就变**（详见 `docs/15-network.md` 第三、八节）。
+
+如果 dumpcap 报 `You do not have permission`，换管理员窗口重跑；没有抓包权限也能学：
+`capture\demo.pcapng` 里的 ZOMBIE 字节是真的（取自真实运行），只有 IP/TCP 头是演示合成的。
 
 ---
-
-## 做完自查
-
-- [ ] 我能写出 ZOMBIE 帧的 4 个字段和各自偏移
-- [ ] 我能解释"为什么收到 16006 字节需要 3 次 recv"
-- [ ] 我能把 `00 00 be 42` 读成 95.0
-- [ ] 我能说出 `--trust-client` 和 `--authoritative` 的结果为什么不同
-- [ ] 我能算出"基址 + 0x1450"在 x64dbg 里对应哪个地址
-- [ ] 我知道 `send` 的缓冲区指针在 `RDX`
-
-## 出问题了看这里
-
-| 症状 | 原因 / 解法 |
-|---|---|
-| `bind failed, WSA 10013` | 端口被别的程序占了。用 `netstat -ano` 看 47001 那一行的 PID，`taskkill /PID xxx /F`，或换端口 |
-| 跑不了 `.ps1`，说"未签名" | 用 `powershell -ExecutionPolicy Bypass -File .\xxx.ps1` |
-| `dumpcap: You do not have permission` | 没用管理员窗口 |
-| 客户端 `WARN no HP_SYNC` | 服务端没起来 / 端口不对（先起服务端再起客户端） |
-| Ghidra 报 Java 找不到 | `re\analyze.ps1` 里已经写好 `JAVA_HOME=D:\tools\jdk-25\jdk-25.0.5+8` |
-
-## 证据在哪（文档里引用的所有数字都在这）
-
-```
-net\evidence\   build.txt imports.txt run.txt tap.txt netstat.txt trust-client.txt big-frame.txt
-os\evidence\    run1-3.txt run4_copy.txt aslr.txt handles.txt threads.txt build.txt
-capture\evidence\ demo-summary.txt demo-dissect.txt demo-fields.txt snapshot-reassembly.txt
-re\evidence\    *_objdump-p.txt *_objdump-d.txt *_ghidra-callers.txt
-```

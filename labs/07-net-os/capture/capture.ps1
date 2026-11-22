@@ -1,11 +1,12 @@
 ﻿<#
 .SYNOPSIS
     ZOMBIE 抓包脚本：抓 127.0.0.1:47000/47001 的 loopback 流量，抓完自动展开。
-    第一次使用请用【管理员】PowerShell 运行。
+    第一次使用请用【管理员】PowerShell 运行（本机实测普通窗口也能抓，见 evidence\live-capture.txt；
+    但有些机器/策略会拒，管理员窗口最稳）。
 
 .DESCRIPTION
     流程：
-      1. 检查是不是管理员，不是就直接退出（dumpcap 抓包必须要管理员）。
+      1. 检查权限：不是管理员只警告、不退出（本机普通窗口实测可抓），真正被拒时 dumpcap 会报错。
       2. dumpcap 抓 \Device\NPF_Loopback，过滤器 "tcp port 47000 or tcp port 47001"，
          写 evidence\zombie.pcapng。
       3. 提示你到另一个窗口跑 net\run.ps1（server + tap + client 三方）。
@@ -112,22 +113,20 @@ if ($ExistingPcap -ne '') {
 }
 
 # ==========================================================================
-# B. 真抓包（必须是管理员）
+# B. 真抓包（管理员最稳；本机实测普通窗口也能抓）
 # ==========================================================================
 Write-Host '== 检查管理员权限 =='
 if (-not (Test-IsAdmin)) {
-    Write-Host ''
-    Write-Host '这个脚本要在【管理员】PowerShell 里跑，因为 dumpcap 抓网卡需要管理员权限。' -ForegroundColor Red
-    Write-Host '当前不是管理员。请这样做：'
-    Write-Host '  1) 右键“开始”按钮 -> 终端(管理员)；或者 Win+X -> Windows PowerShell (管理员)'
-    Write-Host '  2) cd E:\harness\reversing-journal\labs\07-net-os\capture'
-    Write-Host '  3) powershell -ExecutionPolicy Bypass -File .\capture.ps1'
-    Write-Host ''
-    Write-Host '如果你只是想用已有的 pcapng 生成解析文本，那个不需要管理员：' -ForegroundColor Yellow
-    Write-Host '  powershell -ExecutionPolicy Bypass -File .\capture.ps1 -ExistingPcap .\demo.pcapng' -ForegroundColor Yellow
-    exit 1
+    Write-Host '   不是管理员。' -ForegroundColor Yellow
+    Write-Host '   本机实测：普通窗口的 dumpcap 也能抓 loopback（见 evidence\live-capture.txt，62 个包）。' -ForegroundColor Yellow
+    Write-Host '   如果下面 dumpcap 报 "You do not have permission"，再换管理员窗口重跑：' -ForegroundColor Yellow
+    Write-Host '     右键开始 -> 终端(管理员) -> 然后重新执行本脚本' -ForegroundColor Yellow
+    Write-Host '   3 秒后继续尝试...' -ForegroundColor Yellow
+    Start-Sleep -Seconds 3
 }
-Write-Host '   是管理员，继续。'
+else {
+    Write-Host '   是管理员，继续。'
+}
 
 $dumpcap  = Resolve-Tool $WiresharkDir 'dumpcap.exe'
 $capinfos = Resolve-Tool $WiresharkDir 'capinfos.exe'

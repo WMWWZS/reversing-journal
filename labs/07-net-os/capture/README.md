@@ -127,11 +127,14 @@ frame.number,tcp.len,zombie.opcode,zombie.total_len,zombie.client_id,zombie.dama
 
 ## 三、真抓包：抓你自己跑出来的那一次
 
-### 3.1 为什么要管理员
+### 3.1 权限：本机实测普通窗口也能抓
 
-抓包要经过 Npcap 驱动打开网卡设备 `\Device\NPF_Loopback`。不是管理员时，dumpcap 会直接拒绝：
-`You do not have permission to capture`。所以这一步必须用**管理员** PowerShell。
-（本机当前是非管理员，所以下面这段抓包流程没法替你实测——脚本本身和抓完之后的展开都实测过，见 `NOTES.md`。）
+抓包要经过 Npcap 驱动打开 `\Device\NPF_Loopback`。有些机器/策略下非管理员会被直接拒绝
+（`You do not have permission to capture`），所以要留一条「换管理员窗口」的后路。
+
+**但这台机器实测不用**：Medium 完整性级别的普通窗口抓到了 62 个包，证据在
+[`evidence/live-capture.txt`](evidence/live-capture.txt)（`whoami /groups` 是 Medium、`IsInRole(Administrator)=False`）。
+所以 `capture.ps1` 在非管理员时**只警告、不退出**；万一 dumpcap 真被拒，再按 3.2 开管理员窗口。
 
 ### 3.2 开一个管理员 PowerShell
 
