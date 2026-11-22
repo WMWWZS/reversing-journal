@@ -2,6 +2,8 @@
 
 > 这是 `docs/14-operating-system.md` 和 `docs/15-network.md` 的**动手配套**。
 > 不是模拟：真进程、真 socket、真 TCP、真的掉血。
+>
+> 同一批实验已分别并入两个专题仓库：[os-journal](https://github.com/WMWWZS/os-journal) labs/02（内核/地址空间视角）与 [network-journal](https://github.com/WMWWZS/network-journal) labs/06（协议/抓包视角）。这里保留的是**逆向视角**的完整版。
 > 全程 60~90 分钟。做完你应该能说清楚三句话：
 >
 > 1. 我发的 16 个字节，在网线上是什么样？

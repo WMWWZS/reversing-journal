@@ -1,8 +1,10 @@
-﻿# 14 · 操作系统：你双击 exe 之后，内核到底给了你什么
+# 14 · 操作系统：你双击 exe 之后，内核到底给了你什么
 
 > 前置：13 讲栈帧。
 > 这一篇不背概念。下面每一个数字都是 `labs/07-net-os/os/osprobe.exe` 在**这台机器上真跑出来**的，
 > 原始输出在 `labs/07-net-os/os/evidence/run1.txt`。你跑出来的数字会和这里不一样——**不一样本身就是这节课的内容**。
+>
+> 📚 同一个主题的原理版在姊妹仓库 [os-journal](https://github.com/WMWWZS/os-journal)（12 周课 + labs/02-address-space-probe）；本篇是它的**逆向视角**版本：所有数字同样取自那份 evidence。
 
 ## 0. 先看一个真进程的自白
 

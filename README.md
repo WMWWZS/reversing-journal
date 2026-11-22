@@ -1,4 +1,4 @@
-﻿<div align="center">
+<div align="center">
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/banner-dark.svg">
@@ -17,7 +17,7 @@
 <img src="https://img.shields.io/badge/platform-Windows_11_x64-0d1117?style=flat-square&amp;labelColor=161b22&amp;logo=windows&amp;logoColor=0078D4" alt="platform">
 <img src="https://img.shields.io/badge/status-week_01--10-d29922?style=flat-square&amp;labelColor=161b22" alt="status">
 
-<sub><a href="docs/00-roadmap.md">12 周路线</a> · <a href="labs/">实验</a> · <a href="writeups/">题解</a> · <a href="resources.md">资源</a> · <a href="notes/_TEMPLATE.md">记录模板</a></sub>
+<sub><a href="docs/00-roadmap.md">12 周路线</a> · <a href="labs/">实验</a> · <a href="writeups/">题解</a> · <a href="resources.md">资源</a> · <a href="notes/_TEMPLATE.md">记录模板</a><br>姊妹仓库：<a href="https://github.com/WMWWZS/os-journal">os-journal</a> · <a href="https://github.com/WMWWZS/network-journal">network-journal</a></sub>
 
 </div>
 
@@ -92,6 +92,34 @@ flowchart LR
     E --> F["防护设计<br>攻击面 · 检测点 · 服务端权威"]
 ```
 
+## ▍ 姊妹仓库
+
+这套东西不放在一个仓库里。**同一批实验，三种视角**：
+
+| 仓库 | 讲什么 | 和这里的关系 |
+|---|---|---|
+| **reversing-journal**（本仓库） | 逆向主线：内存布局 · 汇编 · 栈帧 · PE · 工具 · 引擎 · 反作弊 | 从**对面**看：别人写的程序怎么被读出来 |
+| [os-journal](https://github.com/WMWWZS/os-journal) | 操作系统原理：内核边界 · 调度 · 虚拟内存 · 文件与 I/O · 同步 · 观测 | 逆向的**地基**：进程、地址空间、句柄、syscall 是谁给的 |
+| [network-journal](https://github.com/WMWWZS/network-journal) | 网络通信原理：分层 · TCP 状态机 · TLS · DNS · 私有协议 · 抓包 | 逆向的**战场**：联机游戏的分析对象全在这一层 |
+
+```mermaid
+flowchart LR
+    OS["os-journal<br>内核 · 内存 · 句柄"] --> RJ["reversing-journal<br>逆向主线"]
+    NET["network-journal<br>协议 · 抓包"] --> RJ
+    RJ --> LAB["labs/07-net-os<br>同一批实验的逆向版"]
+    OS -. 同一份 osprobe 证据 .-> LAB
+    NET -. 同一份 ZOMBIE 抓包 .-> LAB
+```
+
+这次新增的三份产出，每个主题都有**原理版**和**逆向版**，证据是同一份：
+
+| 实验 | 原理版（专题仓库） | 逆向版（本仓库） |
+|---|---|---|
+| 进程地址空间 / ASLR / TEB / 句柄 / syscall | `os-journal` → `labs/02-address-space-probe` | [`docs/14`](docs/14-operating-system.md) + [`labs/07-net-os/os`](labs/07-net-os/os/) |
+| 自定义二进制协议 / 抓包 / 改包 / 反编译 | `network-journal` → `labs/06-zombie-protocol` | [`docs/15`](docs/15-network.md) + [`labs/07-net-os/net`](labs/07-net-os/net/) |
+
+> 为什么要分仓：**原理课要能测量、逆向课要能还原**。同一份 evidence 在两个仓库里被问的是不同的问题——
+> os-journal 问"这个数字为什么是这样"，本仓库问"这段代码为什么长成这样"。
 ## ▍ 原则
 
 | 原则 | 落地方式 |

@@ -3,6 +3,8 @@
 > 前置：14 讲操作系统（进程/句柄/内核态）。
 > 这一课的全部字节都来自 `labs/07-net-os/net` 里那个真跑起来的靶场（TCP、127.0.0.1、真掉血），
 > 原始日志在 `labs/07-net-os/net/evidence/`。抓包解析器在 `labs/07-net-os/capture/`。
+>
+> 📚 同一个主题的原理版在姊妹仓库 [network-journal](https://github.com/WMWWZS/network-journal)（12 周课 + labs/06-zombie-protocol）；本篇是它的**逆向视角**版本：同一批抓包，换成从 exe 内部看。
 
 ## 0. 先看真的：一次攻击，线上跑过去 16 个字节
 
