@@ -1,0 +1,48 @@
+﻿
+========== run1 : live osprobe.exe process, PID 49328 (snapshot at +1.6 s, inside --hold 4000) ==========
+PS> Get-Process -Id 49328 | Select-Object Id,ProcessName,Handles,Threads,WorkingSet64
+
+   Id ProcessName Handles Threads               WorkingSet64
+   -- ----------- ------- -------               ------------
+49328 osprobe          59 {51956, 52792, 42308}      4767744
+PS> Get-Process -Id 49328 | Select-Object -ExpandProperty Handles
+  59
+PS> tasklist /v /fi "PID eq 49328"
+
+Image Name                     PID Session Name        Session#    Mem Usage Status          User Name                                              CPU Time Window Title                                                            
+========================= ======== ================ =========== ============ =============== ================================================== ============ ========================================================================
+osprobe.exe                  49328 Console                    1      4,656 K Unknown         DESKTOP-QE8M0K4\风林火山                                0:00:00 N/A
+  (process was still alive at snapshot time: True)
+  (Threads is a list of thread ids, not a count; the [D] section of run*.txt says which ones our code made)
+
+========== run2 : live osprobe.exe process, PID 5352 (snapshot at +1.5 s, inside --hold 4000) ==========
+PS> Get-Process -Id 5352 | Select-Object Id,ProcessName,Handles,Threads,WorkingSet64
+
+  Id ProcessName Handles Threads               WorkingSet64
+  -- ----------- ------- -------               ------------
+5352 osprobe          59 {24148, 49700, 32700}      4771840
+PS> Get-Process -Id 5352 | Select-Object -ExpandProperty Handles
+  59
+PS> tasklist /v /fi "PID eq 5352"
+
+Image Name                     PID Session Name        Session#    Mem Usage Status          User Name                                              CPU Time Window Title                                                            
+========================= ======== ================ =========== ============ =============== ================================================== ============ ========================================================================
+osprobe.exe                   5352 Console                    1      4,660 K Unknown         DESKTOP-QE8M0K4\风林火山                                0:00:00 N/A
+  (process was still alive at snapshot time: True)
+  (Threads is a list of thread ids, not a count; the [D] section of run*.txt says which ones our code made)
+
+========== run3 : live osprobe.exe process, PID 52496 (snapshot at +1.5 s, inside --hold 4000) ==========
+PS> Get-Process -Id 52496 | Select-Object Id,ProcessName,Handles,Threads,WorkingSet64
+
+   Id ProcessName Handles Threads               WorkingSet64
+   -- ----------- ------- -------               ------------
+52496 osprobe          59 {49712, 34660, 27976}      4771840
+PS> Get-Process -Id 52496 | Select-Object -ExpandProperty Handles
+  59
+PS> tasklist /v /fi "PID eq 52496"
+
+Image Name                     PID Session Name        Session#    Mem Usage Status          User Name                                              CPU Time Window Title                                                            
+========================= ======== ================ =========== ============ =============== ================================================== ============ ========================================================================
+osprobe.exe                  52496 Console                    1      4,660 K Unknown         DESKTOP-QE8M0K4\风林火山                                0:00:00 N/A
+  (process was still alive at snapshot time: True)
+  (Threads is a list of thread ids, not a count; the [D] section of run*.txt says which ones our code made)

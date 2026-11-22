@@ -1,0 +1,135 @@
+================================================================
+ osprobe.exe -- real numbers from a real Windows process
+ built with MinGW-w64 gcc 14.2.0, -O0 -g, Win32 API only
+================================================================
+
+--- [A] THE ADDRESSES IN ONE PLACE (address-space partitions) ---
+A1 module base     GetModuleHandle(NULL)                 = 0x00007ff6ec840000
+A2 global variable &g_global  (module .data section)     = 0x00007ff6ec846000
+A3 heap block      HeapAlloc(GetProcessHeap(), 0, 64)    = 0x000001cf565f13e0
+A4 stack local     &local_marker (local var in main())   = 0x000000b03a1ff677
+A5 kernel32 base   GetModuleHandle("kernel32.dll")      = 0x00007ff8772c0000
+A6 ntdll    base   GetModuleHandle("ntdll.dll")         = 0x00007ff877d90000
+   (g_global = 0x1122334455667788, local_marker = 0x5a, the heap block was filled with 0xAB)
+   (A5/A6: kernel32 and ntdll are shared image mappings. In this boot every
+    process sees the same base for them, and a debugger shows that value.)
+
+   where each of them really lives (VirtualQuery on each address):
+   A1 -> region base=0x00007ff6ec840000 size=0x00001000 state=MEM_COMMIT  type=MEM_IMAGE   Protect=PAGE_READONLY    module=osprobe.exe
+   A2 -> region base=0x00007ff6ec846000 size=0x00001000 state=MEM_COMMIT  type=MEM_IMAGE   Protect=PAGE_WRITECOPY   module=osprobe.exe
+   A3 -> region base=0x000001cf565f1000 size=0x00001000 state=MEM_COMMIT  type=MEM_PRIVATE Protect=PAGE_READWRITE
+   A4 -> region base=0x000000b03a1ff000 size=0x00001000 state=MEM_COMMIT  type=MEM_PRIVATE Protect=PAGE_READWRITE
+   (note: A4's region size is only what the stack has committed SO FAR;
+    the stack grows on demand, so by the time [B] runs more pages are in)
+
+   sorted from LOW address to HIGH address (this run):
+     0x000000b03a1ff677  A4 local variable (stack)
+     0x000001cf565f13e0  A3 heap block
+     0x00007ff6ec840000  A1 module base (osprobe.exe image)
+     0x00007ff6ec846000  A2 global g_global (inside that image)
+     0x00007ff8772c0000  A5 kernel32.dll (shared image)
+     0x00007ff877d90000  A6 ntdll.dll (shared image, usually highest)
+   low  = stack (grows down from StackBase), then the heap
+   high = the .exe image, and the system DLLs above it
+
+--- [B] VirtualQuery(): WALK THE WHOLE ADDRESS SPACE OF THIS PROCESS ---
+B0 scanned 0x0000000000000000 .. 0x00007fffffff0000
+   regions found: 103
+     by State : MEM_COMMIT=62  MEM_RESERVE=15  MEM_FREE=26
+     committed by Type: MEM_IMAGE=35  MEM_MAPPED=15  MEM_PRIVATE=12
+   (a 'region' is one run of pages with the same state/type/Protect.
+    The kernel keeps them in this process's VAD tree; VirtualQuery walks it.)
+
+B1 MEM_IMAGE regions: the .exe and every DLL it loaded
+IMAGE  base=0x00007ff6ec840000  size=0x00001000 (     4 KB)  state=MEM_COMMIT  type=MEM_IMAGE    Protect=PAGE_READONLY                  osprobe.exe
+IMAGE  base=0x00007ff6ec841000  size=0x00005000 (    20 KB)  state=MEM_COMMIT  type=MEM_IMAGE    Protect=PAGE_EXECUTE_READ              osprobe.exe
+IMAGE  base=0x00007ff6ec846000  size=0x00001000 (     4 KB)  state=MEM_COMMIT  type=MEM_IMAGE    Protect=PAGE_WRITECOPY                 osprobe.exe
+IMAGE  base=0x00007ff874ff0000  size=0x00001000 (     4 KB)  state=MEM_COMMIT  type=MEM_IMAGE    Protect=PAGE_READONLY                  ucrtbase.dll
+
+B2 MEM_PRIVATE heap regions: the regions that hold the HeapAlloc blocks
+HEAP   base=0x000001cf565e0000  size=0x00012000 (    72 KB)  state=MEM_COMMIT  type=MEM_PRIVATE  Protect=PAGE_READWRITE                 process heap block A3
+HEAP   base=0x000001cf56aa0000  size=0x00010000 (    64 KB)  state=MEM_COMMIT  type=MEM_PRIVATE  Protect=PAGE_READWRITE                 private heap (HeapCreate)
+
+B3 MEM_PRIVATE stack regions: the thread stack
+STACK  base=0x000000b03a1f8000  size=0x00008000 (    32 KB)  state=MEM_COMMIT  type=MEM_PRIVATE  Protect=PAGE_READWRITE                 main stack
+GUARD  base=0x000000b03a1f5000  size=0x00003000 (    12 KB)  state=MEM_COMMIT  type=MEM_PRIVATE  Protect=PAGE_READWRITE|PAGE_GUARD      stack guard page
+   (the guard page is how Windows grows a stack: touch it -> kernel commits
+    the next page and moves the guard one page lower)
+
+--- [C] PROCESS / THREAD IDENTITY ---
+C1 process id  PID                    = 49328
+C2 thread id   TID (this = main thread)= 51956
+C3 open handles GetProcessHandleCount() = 56
+   (a handle is an index into this process's handle table; every file,
+    event, thread, process ... you open costs one slot)
+C4 threads now (Toolhelp32 snapshot inside the process): 2 thread(s), TIDs: 51956 52792
+   (our code has NOT called CreateThread at this point - main is the only
+    thread we created. If the line above shows 2, something else created
+    one inside this process. That is possible on Windows, and it is why a
+    tool like Get-Process can show more threads than your code made.)
+
+--- [D] A REAL SECOND THREAD AND ITS OWN STACK (read from the TEB) ---
+D0 TEB self = gs:0x30 = 0x000000b039f88000   PEB = gs:0x60 = 0x000000b039f87000
+   (gs points at the TEB: NT_TIB is the first part of it, so
+    gs:0x08 = TEB+0x08 = StackBase, gs:0x10 = TEB+0x10 = StackLimit)
+D1 main    TID=51956  [TEB+0x08] StackBase  = 0x000000b03a200000
+D2 main    TID=51956  [TEB+0x10] StackLimit = 0x000000b03a1fa000
+   CreateThread() -> hThread = 0x00000000000000b4  (waiting for it to report)
+D3 worker  TID=42308  [TEB+0x08] StackBase  = 0x000000b03a600000
+D4 worker  TID=42308  [TEB+0x10] StackLimit = 0x000000b03a5fd000
+D5 threads now (Toolhelp32 snapshot inside the process): 3 thread(s), TIDs: 51956 52792 42308
+   (that is our own count: main thread + the one we just created.
+    A tool like Get-Process may show MORE threads than this: any
+    process may create a thread inside yours. We saw one extra on
+    this machine - it is not in our code.)
+   main stack  : StackBase=0x000000b03a200000  StackLimit=0x000000b03a1fa000  size=24 KB
+   worker stack: StackBase=0x000000b03a600000  StackLimit=0x000000b03a5fd000  size=12 KB
+   the two threads have TWO DIFFERENT stacks: 0x000000b03a200000 vs 0x000000b03a600000
+   worker's local var &w_local = 0x000000b03a5ff92b -> VirtualQuery: region base=0x000000b03a5ff000 size=0x00001000 type=MEM_PRIVATE Protect=PAGE_READWRITE
+
+[HOLD] process stays alive for 4000 ms so another window can look at it:
+       Get-Process -Id 49328 | Select-Object Id,Handles,Threads
+   worker thread was told to exit (SetEvent) and joined; thread count back to 1
+
+--- [E] 5000 REAL SYSTEM CALLS vs 5000 PURE USER-SPACE ITERATIONS ---
+   this machine's clock tick: GetSystemTimeAdjustment TimeIncrement=156250 x100ns
+   = 15.6250 ms.  GetProcessTimes() only moves in whole ticks here, so a
+   batch shorter than one tick reads as +0.000 ms. That is the
+   resolution floor, NOT "the syscall was free" (see scaling table).
+
+CONTROL (no syscall)   5000 x "acc += i"
+   wall(QueryPerformanceCounter) +   0.002 ms
+   user +   0.000 ms   kernel +   0.000 ms   <- 0 syscalls, 0 kernel time
+   (the loop really ran: acc = 12497500)
+
+SYSCALL batches: CreateEventW + CloseHandleW
+     calls    wall ms   user ms  kernel ms   user tick  kern tick
+      5000      2.332     0.000      0.000          0         0
+    400000    194.867    46.875    140.625          3         9
+   1600000    787.820    31.250    750.000          2        48
+   (calls=5000 is the batch this lab asks for: its wall time is only ~2.4 ms,
+    i.e. below one 15.6 ms tick, so its CPU columns can read +0.000 ms - that
+    is the resolution floor, not a free syscall; the bigger batches fix that)
+
+   per pair, from the 1600000-call batch:
+     wall    0.492 us
+     kernel  0.469 us   <- the 1600000 kernel entries/exits are billed here
+     user    0.020 us
+   cross-check: the 5000-call batch took 2.332 ms of wall time = 0.466 us/pair;
+   the big batch says 0.488 us/pair of CPU total, the same number.
+   open handles before=58 after=58  (2005000 create+close pairs, no leak)
+   reading: kernel time is where the 2005000 calls were paid; user-mode code in
+            front of them costs a small fraction. Both CPU columns move in
+            whole ticks, so one batch can read 0 or 1 tick too high/low.
+
+--- [F] GetFileType() ON THREE DIFFERENT KINDS OF HANDLE ---
+F1 CreateFileW("osprobe_tmp.txt")      handle=0x00000000000000d4  type=0x00000001  FILE_TYPE_DISK    (E:\harness\reversing-journal\labs\07-net-os\os\osprobe_tmp.txt)
+F2 CreatePipe() write end              handle=0x00000000000000c8  type=0x00000003  FILE_TYPE_PIPE    (anonymous pipe: kernel object, no filename)
+F3 CreateFileW("CONOUT$")              handle=0x00000000000000e0  type=0x00000002  FILE_TYPE_CHAR    (console = character device)
+F4 GetStdHandle(STD_OUTPUT_HANDLE)     handle=0x00000000000009c4  type=0x00000001  FILE_TYPE_DISK    -> this run's stdout is redirected to a FILE on disk (that is why it is not CHAR)
+  reading: the handle value alone does not tell you what it is;
+           GetFileType asks the kernel what object it points at.
+           Run osprobe.exe directly in a console and F4 becomes FILE_TYPE_CHAR.
+
+--- done: osprobe.exe finished, exit code 0 ---
+PID was 49328, main TID was 51956

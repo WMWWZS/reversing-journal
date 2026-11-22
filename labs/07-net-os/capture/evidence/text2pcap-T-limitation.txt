@@ -1,0 +1,26 @@
+﻿# 证据：text2pcap -T 的 dummy TCP 头不能表达 SYN/seq/ack 标志（固定为 seq=0, ack=0, flags=0x000）
+# 所以 demo.pcapng 不是用 -T 生成的，而是：mkpcap.py 造完整 Ethernet/IP/TCP 帧 -> text2pcap -l 1 包装成 pcapng
+
+# 输入文件（evidence\text2pcap-T-input.txt，1 个包，12 字节 ZOMBIE HELLO 帧）：
+#TEXT
+000000  0a 00 01 00 01 00 00 00 01 00 00 00
+
+# 命令：
+& "E:\Wireshark\text2pcap.exe" -T 52341,4001 -F pcapng "E:\harness\reversing-journal\labs\07-net-os\capture\evidence\text2pcap-T-input.txt" "E:\harness\reversing-journal\labs\07-net-os\capture\evidence\text2pcap-T.pcapng"
+
+# 用 tshark -V 看这个包（只挑 TCP 关键字段）：
+    000. .... = Flags: 0x0
+Transmission Control Protocol, Src Port: 52341, Dst Port: 4001, Seq: 1, Len: 12
+    Sequence Number: 1    (relative sequence number)
+    Sequence Number (raw): 0
+    [Next Sequence Number: 13    (relative sequence number)]
+    Acknowledgment Number: 0
+    Acknowledgment number (raw): 0
+    Flags: 0x000 (<None>)
+        .... ...0 .... = Acknowledgment: Not set
+        .... .... 0... = Push: Not set
+        .... .... ..0. = Syn: Not set
+        .... .... ...0 = Fin: Not set
+        [TCP Flags: ············]
+    TCP payload (12 bytes)
+Data (12 bytes)

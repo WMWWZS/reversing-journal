@@ -1,4 +1,4 @@
-<div align="center">
+﻿<div align="center">
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/banner-dark.svg">
@@ -15,7 +15,7 @@
 <a href="labs/"><img src="https://img.shields.io/badge/stack-C%2B%2B__x86--64-0d1117?style=flat-square&amp;labelColor=161b22&amp;logo=cplusplus&amp;logoColor=00599C" alt="stack"></a>
 <a href="docs/07-anticheat.md"><img src="https://img.shields.io/badge/focus-game_security-0d1117?style=flat-square&amp;labelColor=161b22" alt="focus"></a>
 <img src="https://img.shields.io/badge/platform-Windows_11_x64-0d1117?style=flat-square&amp;labelColor=161b22&amp;logo=windows&amp;logoColor=0078D4" alt="platform">
-<img src="https://img.shields.io/badge/status-week_01--02-d29922?style=flat-square&amp;labelColor=161b22" alt="status">
+<img src="https://img.shields.io/badge/status-week_01--10-d29922?style=flat-square&amp;labelColor=161b22" alt="status">
 
 <sub><a href="docs/00-roadmap.md">12 周路线</a> · <a href="labs/">实验</a> · <a href="writeups/">题解</a> · <a href="resources.md">资源</a> · <a href="notes/_TEMPLATE.md">记录模板</a></sub>
 
@@ -35,14 +35,16 @@
 
 | 目录 | 用途 | 现有 |
 |:---:|---|---:|
-| [`docs/`](docs/) | 系统化知识笔记：内存布局 · 调用约定 · 工具链 · 引擎专项 · 协议 · 反作弊 · Ghidra · PE 格式 | 10 篇 |
-| [`labs/`](labs/) | 可编译、可下断点的实验，一个概念一个实验 | 1 个 |
-| [`writeups/`](writeups/) | crackme / CTF / 目标分析的完整题解 | 0 篇 |
-| [`notes/`](notes/) | 零散观察与踩坑记录，随手记，不成体系 | 1 条 |
+| [`docs/`](docs/) | 系统化知识笔记：内存布局 · 调用约定 · 工具链 · 引擎专项 · 协议 · 反作弊 · Ghidra · PE · 寄存器 · 栈帧 · 操作系统 · 网络 | 15 篇 |
+| [`labs/`](labs/) | 可编译、可下断点的实验，一个概念一个实验 | 3 个 |
+| [`writeups/`](writeups/) | crackme / CTF / 目标分析的完整题解 | 1 篇 |
+| [`notes/`](notes/) | 零散观察与踩坑记录，随手记，不成体系 | 3 条 |
 | [`tools/`](tools/) | Ghidra 启动/同步脚本、GhidraScript 与反编译辅助 | 脚本 |
 | [`resources.md`](resources.md) | 书单、靶场、社区，以及法律与授权边界 | 清单 |
 
 > **第一次来？** 先读 [`docs/00-roadmap.md`](docs/00-roadmap.md) 看 12 周路线，跑一遍 [`labs/01-struct-layout`](labs/01-struct-layout/)，再用 [`notes/_TEMPLATE.md`](notes/_TEMPLATE.md) 写下第一条记录。
+>
+> **想知道"网络和操作系统"长什么样？** 直接跑 [`labs/07-net-os`](labs/07-net-os/)：一个真掉血的联机靶场 + 真 socket + 真抓包 + 真反编译。
 
 ## ▍ 进度
 
@@ -53,19 +55,19 @@ phase    topic                                state    progress
 03-04    pe-format / toolchain                TODO     [----------]
 05-06    memory-analysis / struct-rebuild     TODO     [----------]
 07-08    engine-specialty / unity / unreal    TODO     [----------]
-09-10    network-protocol                     TODO     [----------]
+09-10    network-protocol / os                RUNNING  [######>---]   labs/07 done
 11-12    anticheat / defense-design           TODO     [----------]
 ----------------------------------------------------------------------------------
-summary  phases 1/6 started   |   labs 1/5 done   |   writeups 0
+summary  phases 2/6 started   |   labs 3/5 done   |   writeups 1
 ```
 
 | 周次 | 主题 | 产出 | 状态 |
 |:---:|---|---|:---:|
-| 1–2 | C++ 内存模型 + x86-64 汇编 | [`labs/01-struct-layout`](labs/01-struct-layout/) ✅ | 🟡 进行中 |
+| 1–2 | C++ 内存模型 + x86-64 汇编 | [`labs/01-struct-layout`](labs/01-struct-layout/) ✅ | 🟡 进行中 |\n| 13–15 | 栈帧 · 寄存器 · 标志位 · 操作系统 · 网络 | [`docs/13`](docs/13-stack-frame.md) / [`docs/14`](docs/14-operating-system.md) / [`docs/15`](docs/15-network.md) ✅ | 🟢 已完成 |
 | 3–4 | PE 结构 + 逆向工具熟练 | 3 篇 crackme 题解 | ⬜ 未开始 |
 | 5–6 | 单机游戏内存分析与结构重建 | 实体结构重建 | ⬜ 未开始 |
 | 7–8 | 引擎专项（Unity / Unreal） | 定位一个具体属性字段 | ⬜ 未开始 |
-| 9–10 | 网络协议分析 | 一次完整请求的结构图 | ⬜ 未开始 |
+| 9–10 | 网络协议分析 | [`labs/07-net-os`](labs/07-net-os/) ✅ 一次完整请求的结构图 | 🟡 进行中 |
 | 11–12 | 反作弊机制研究与防护设计 | 一份防护方案文档 | ⬜ 未开始 |
 
 > 详细拆解见 [`docs/00-roadmap.md`](docs/00-roadmap.md)。
@@ -106,7 +108,7 @@ $ ./env.sh
 [ok] windows 11 x64
 [ok] mingw-w64      gcc 14.2 / gdb / objdump
 [ok] ghidra         12.2   (JDK 25)
-[--] x64dbg / windbg
+[ok] x64dbg
 [--] ida free
 [--] arm64 toolchain
 ```
