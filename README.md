@@ -10,14 +10,14 @@
 面向 <strong>游戏安全防护</strong> 的逆向工程学习手记 —— 不是教人写外挂，<br>
 而是搞懂「作弊器是怎么工作的」，再把它堵死。
 
-<a href="docs/00-roadmap.md"><img src="https://img.shields.io/badge/roadmap-12_weeks-0d1117?style=flat-square&amp;labelColor=161b22" alt="roadmap"></a>
+<a href="docs/00-roadmap.md"><img src="https://img.shields.io/badge/roadmap-24_weeks-0d1117?style=flat-square&amp;labelColor=161b22" alt="roadmap"></a>
 <a href="docs/03-toolchain.md"><img src="https://img.shields.io/badge/toolchain-MinGW--w64_GCC-0d1117?style=flat-square&amp;labelColor=161b22&amp;logo=gnu&amp;logoColor=e6edf3" alt="toolchain"></a>
 <a href="labs/"><img src="https://img.shields.io/badge/stack-C%2B%2B__x86--64-0d1117?style=flat-square&amp;labelColor=161b22&amp;logo=cplusplus&amp;logoColor=00599C" alt="stack"></a>
 <a href="docs/07-anticheat.md"><img src="https://img.shields.io/badge/focus-game_security-0d1117?style=flat-square&amp;labelColor=161b22" alt="focus"></a>
 <img src="https://img.shields.io/badge/platform-Windows_11_x64-0d1117?style=flat-square&amp;labelColor=161b22&amp;logo=windows&amp;logoColor=0078D4" alt="platform">
 <img src="https://img.shields.io/badge/status-week_01--10-d29922?style=flat-square&amp;labelColor=161b22" alt="status">
 
-<sub><a href="docs/00-roadmap.md">12 周路线</a> · <a href="labs/">实验</a> · <a href="writeups/">题解</a> · <a href="resources.md">资源</a> · <a href="notes/_TEMPLATE.md">记录模板</a><br>姊妹仓库：<a href="https://github.com/WMWWZS/os-journal">os-journal</a> · <a href="https://github.com/WMWWZS/network-journal">network-journal</a></sub>
+<sub><a href="docs/00-roadmap.md">24 周路线</a> · <a href="labs/">实验</a> · <a href="writeups/">题解</a> · <a href="resources.md">资源</a> · <a href="notes/_TEMPLATE.md">记录模板</a><br>姊妹仓库：<a href="https://github.com/WMWWZS/os-journal">os-journal</a> · <a href="https://github.com/WMWWZS/network-journal">network-journal</a></sub>
 
 </div>
 
@@ -42,7 +42,7 @@
 | [`tools/`](tools/) | Ghidra 启动/同步脚本、GhidraScript 与反编译辅助 | 脚本 |
 | [`resources.md`](resources.md) | 书单、靶场、社区，以及法律与授权边界 | 清单 |
 
-> **第一次来？** 先读 [`docs/00-roadmap.md`](docs/00-roadmap.md) 看 12 周路线，跑一遍 [`labs/01-struct-layout`](labs/01-struct-layout/)，再用 [`notes/_TEMPLATE.md`](notes/_TEMPLATE.md) 写下第一条记录。
+> **第一次来？** 先读 [`docs/00-roadmap.md`](docs/00-roadmap.md) 看 24 周路线，跑一遍 [`labs/01-struct-layout`](labs/01-struct-layout/)，再用 [`notes/_TEMPLATE.md`](notes/_TEMPLATE.md) 写下第一条记录。
 >
 > **想知道"网络和操作系统"长什么样？** 直接跑 [`labs/07-net-os`](labs/07-net-os/)：一个真掉血的联机靶场 + 真 socket + 真抓包 + 真反编译。
 
@@ -50,48 +50,42 @@
 
 ```text
 $ ./status.sh
-phase    topic                                state    progress
-01-02    cpp-memory / x86-64-asm              RUNNING  [>---------]   labs/01 done
-03-04    pe-format / toolchain                TODO     [----------]
-05-06    memory-analysis / struct-rebuild     TODO     [----------]
-07-08    engine-specialty / unity / unreal    TODO     [----------]
-09-10    network-protocol / os                RUNNING  [######>---]   labs/07 done
-11-12    anticheat / defense-design           TODO     [----------]
-----------------------------------------------------------------------------------
-summary  phases 2/6 started   |   labs 3/5 done   |   writeups 1
+phase   topic                                state    note
+R1      cpp-memory / struct-rebuild          RUNNING  labs/01 done
+R2      x86-64-asm / debugger                RUNNING  labs/06 done, docs 10-13 pending
+R3      pe-format / injection-surface        DONE     IAT parse -> patch -> inject
+R4      external / overlay                   DONE     2D ortho projection + layered window
+R5      internal / hook                      DONE     IAT / shared-vtable / inline
+R6      engine / unity-il2cpp                DONE     il2cpp metadata v29 end-to-end
+R7      network / authority-boundary         TODO
+R8      protection / ac-taxonomy             TODO
+---------------------------------------------------------------------------------
+summary  phases 6/8 started   |   labs 3/5 done   |   writeups 1
 ```
 
-| 周次 | 主题 | 产出 | 状态 |
-|:---:|---|---|:---:|
-| 1–2 | C++ 内存模型 + x86-64 汇编 | [`labs/01-struct-layout`](labs/01-struct-layout/) ✅ | 🟡 进行中 |\n| 13–15 | 栈帧 · 寄存器 · 标志位 · 操作系统 · 网络 | [`docs/13`](docs/13-stack-frame.md) / [`docs/14`](docs/14-operating-system.md) / [`docs/15`](docs/15-network.md) ✅ | 🟢 已完成 |
-| 3–4 | PE 结构 + 逆向工具熟练 | 3 篇 crackme 题解 | ⬜ 未开始 |
-| 5–6 | 单机游戏内存分析与结构重建 | 实体结构重建 | ⬜ 未开始 |
-| 7–8 | 引擎专项（Unity / Unreal） | 定位一个具体属性字段 | ⬜ 未开始 |
-| 9–10 | 网络协议分析 | [`labs/07-net-os`](labs/07-net-os/) ✅ 一次完整请求的结构图 | 🟡 进行中 |
-| 11–12 | 反作弊机制研究与防护设计 | 一份防护方案文档 | ⬜ 未开始 |
+| 阶段 | 周次 | 主题 | 产出 | 状态 |
+|:---:|:---:|---|---|:---:|
+| R1 | 1–3 | 内存模型与结构重建 | [`labs/01-struct-layout`](labs/01-struct-layout/) | 🟡 缺一条跨重启指针链 |
+| R2 | 4–6 | 汇编与调试器 | [`labs/06-crackme01`](labs/06-crackme01/) + 寄存器级分析 | 🟡 文档 10–13 未过 |
+| R3 | 7–9 | PE 与注入面 | 解析导入表 → 覆写 IAT 槽 → 注入 DLL | 🟢 已完成 |
+| R4 | 10–12 | external 与覆盖层 | 2D 正交投影 + 分层窗口覆盖层 | 🟢 已完成 |
+| R5 | 13–15 | internal 与 hook | 共享 vtable 原位改 + 跨线程死锁定位 | 🟢 已完成 |
+| R6 | 16–18 | 引擎专项 | IL2CPP 转储 + 运行时按名解析 + 实体表 | 🟢 Unity / ⬜ UE |
+| R7 | 19–21 | 联网：权威边界与改包 | opcode 表 + 一次字段篡改 | ⬜ 未开始 |
+| R8 | 22–24 | 保护对抗与综合 | 全链分析报告 | ⬜ 未开始 |
 
-> 详细拆解见 [`docs/00-roadmap.md`](docs/00-roadmap.md)。
+> 阶段划分、判据与三线并行调度以 [`docs/00-roadmap.md`](docs/00-roadmap.md) 为准。
 
 ## ▍ 能力模型
 
 四块地基，缺一块都会卡住：
 
-| 模块 | 必须掌握 | 为什么防护需要 |
+| 模块 | 必须掌握 | 缺了会卡在哪 |
 |:---:|---|---|
-| **C / C++** | 指针、内存布局、结构体对齐、虚函数表 | 逆向产物最终要还原成 C++ 语义 |
-| **汇编** | x86-64 为主、ARM64 为辅；调用约定、栈帧 | 读反汇编是核心技能 |
-| **操作系统** | 进程/线程、虚拟内存、PE 格式、句柄、DLL 加载 | 检测点就布在这些层面 |
-| **编译链接** | 导入导出表、重定位、RTTI、异常表 | 定位函数、识别编译器与运行时 |
-
-```mermaid
-flowchart LR
-    A["C / C++<br>内存布局 · 虚表"] --> E["逆向能力<br>地址 → 结构 → 语义"]
-    B["x86-64 汇编<br>栈帧 · 调用约定"] --> E
-    C["Windows / PE<br>导入表 · 加载器"] --> E
-    D["编译链接<br>RTTI · 异常表"] --> E
-    E --> F["防护设计<br>攻击面 · 检测点 · 服务端权威"]
-```
-
+| **C / C++** | 指针算术、内存布局、结构体对齐、union、虚表、编译成 DLL | 看不懂 `// 0x60` 这种偏移，也不知道指针链为什么加 8 |
+| **汇编** | x86-64 为主、ARM64 为辅；调用约定、栈帧、结构体返回 | 断点打下去，不知道哪个寄存器是 `this` |
+| **操作系统** | 进程/线程、虚拟内存、PE 格式、句柄、DLL 加载 | 读写自己进程可以，跨进程就被拒 |
+| **编译链接** | 导入导出表、重定位、RTTI、异常表 | 定位不到函数，也认不出运行时 |
 ## ▍ 姊妹仓库
 
 这套东西不放在一个仓库里。**同一批实验，三种视角**：

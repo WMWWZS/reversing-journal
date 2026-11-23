@@ -1,6 +1,6 @@
 # Lab 06 · crackme 01：定位并读懂校验逻辑
 
-对应阶段：[第 3–4 周 · PE 结构与工具熟练](../../docs/00-roadmap.md)
+对应阶段：[R3 · 第 7–9 周 · PE 与注入面](../../docs/00-roadmap.md)
 产出目标：`writeups/` 里的第 1 篇 crackme 题解
 
 ## 目的
