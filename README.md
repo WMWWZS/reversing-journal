@@ -51,31 +51,31 @@
 ```text
 $ ./status.sh
 phase   topic                                state    note
-R1      cpp-memory / struct-rebuild          RUNNING  labs/01 done
-R2      x86-64-asm / debugger                RUNNING  labs/06 done, docs 10-13 pending
-R3      pe-format / injection-surface        DONE     IAT parse -> patch -> inject
-R4      external / overlay                   DONE     2D ortho projection + layered window
-R5      internal / hook                      DONE     IAT / shared-vtable / inline
-R6      engine / unity-il2cpp                DONE     il2cpp metadata v29 end-to-end
+R1      cpp-memory / struct-rebuild          RUNNING  started
+R2      x86-64-asm / debugger                TODO
+R3      pe-format / injection-surface        TODO
+R4      external / overlay                   TODO
+R5      internal / hook                      TODO
+R6      engine / unity-il2cpp                TODO
 R7      network / authority-boundary         TODO
 R8      protection / ac-taxonomy             TODO
 ---------------------------------------------------------------------------------
-summary  phases 6/8 started   |   labs 3/5 done   |   writeups 1
+summary  phases 1/8 started   |   参考案例 1 份（见 labs/ 与 notes/）
 ```
 
-| 阶段 | 周次 | 主题 | 产出 | 状态 |
-|:---:|:---:|---|---|:---:|
-| R1 | 1–3 | 内存模型与结构重建 | [`labs/01-struct-layout`](labs/01-struct-layout/) | 🟡 缺一条跨重启指针链 |
-| R2 | 4–6 | 汇编与调试器 | [`labs/06-crackme01`](labs/06-crackme01/) + 寄存器级分析 | 🟡 文档 10–13 未过 |
-| R3 | 7–9 | PE 与注入面 | 解析导入表 → 覆写 IAT 槽 → 注入 DLL | 🟢 已完成 |
-| R4 | 10–12 | external 与覆盖层 | 2D 正交投影 + 分层窗口覆盖层 | 🟢 已完成 |
-| R5 | 13–15 | internal 与 hook | 共享 vtable 原位改 + 跨线程死锁定位 | 🟢 已完成 |
-| R6 | 16–18 | 引擎专项 | IL2CPP 转储 + 运行时按名解析 + 实体表 | 🟢 Unity / ⬜ UE |
-| R7 | 19–21 | 联网：权威边界与改包 | opcode 表 + 一次字段篡改 | ⬜ 未开始 |
-| R8 | 22–24 | 保护对抗与综合 | 全链分析报告 | ⬜ 未开始 |
+| 阶段 | 周次 | 主题 | 状态 |
+|:---:|:---:|---|:---:|
+| R1 | 1–3 | 内存模型与结构重建 | 🟡 进行中 |
+| R2 | 4–6 | 汇编与调试器 | ⬜ 未开始 |
+| R3 | 7–9 | PE 与注入面 | ⬜ 未开始（`labs/` 内有参考案例） |
+| R4 | 10–12 | external 与覆盖层 | ⬜ 未开始（同上） |
+| R5 | 13–15 | internal 与 hook | ⬜ 未开始（同上） |
+| R6 | 16–18 | 引擎专项 | ⬜ 未开始（同上） |
+| R7 | 19–21 | 联网：权威边界与改包 | ⬜ 未开始 |
+| R8 | 22–24 | 保护对抗与综合 | ⬜ 未开始 |
 
-> 阶段划分、判据与三线并行调度以 [`docs/00-roadmap.md`](docs/00-roadmap.md) 为准。
-
+> 仓库里已有的完整记录是**参考案例**，不是学习进度。判定「会了」的标准：合上文档能自己重做一遍。
+> 阶段划分与判据见 [`docs/00-roadmap.md`](docs/00-roadmap.md)。
 ## ▍ 能力模型
 
 四块地基，缺一块都会卡住：
