@@ -1,0 +1,12 @@
+# build artifacts -- rebuild with build.bat / run.bat
+*.exe
+*.o
+*.obj
+
+# runtime scratch files produced by the labs
+where.txt
+find.txt
+*.out
+
+# local agent notes (not part of the journal)
+.workbuddy/
