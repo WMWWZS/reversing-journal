@@ -30,3 +30,9 @@ Desktop.ini
 *.tmp
 *.log
 *.bak
+
+# 本次新增的 labs 00-06 的运行残留
+.workbuddy/
+where.txt
+find.txt
+*.out
