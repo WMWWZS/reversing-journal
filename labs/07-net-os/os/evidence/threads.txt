@@ -1,0 +1,33 @@
+﻿
+========== run1 : threads of PID 49328 (snapshot inside --hold 4000) ==========
+PS> Get-Process -Id 49328 | Select-Object -ExpandProperty Threads | Select-Object Id,ThreadState,WaitReason,TotalProcessorTime
+
+   Id ThreadState     WaitReason TotalProcessorTime
+   -- -----------     ---------- ------------------
+51956        Wait ExecutionDelay 00:00:00.2500000  
+52792        Wait   EventPairLow 00:00:00          
+42308        Wait    UserRequest 00:00:00
+  (main thread id and worker thread id are printed by osprobe itself: see C4/D3/D5 in run1.txt)
+  (any other thread here was NOT created by osprobe: Windows lets another process create a thread inside yours)
+
+========== run2 : threads of PID 5352 (snapshot inside --hold 4000) ==========
+PS> Get-Process -Id 5352 | Select-Object -ExpandProperty Threads | Select-Object Id,ThreadState,WaitReason,TotalProcessorTime
+
+   Id ThreadState     WaitReason TotalProcessorTime
+   -- -----------     ---------- ------------------
+24148        Wait ExecutionDelay 00:00:00.2187500  
+49700        Wait   EventPairLow 00:00:00          
+32700        Wait    UserRequest 00:00:00.0156250
+  (main thread id and worker thread id are printed by osprobe itself: see C4/D3/D5 in run2.txt)
+  (any other thread here was NOT created by osprobe: Windows lets another process create a thread inside yours)
+
+========== run3 : threads of PID 52496 (snapshot inside --hold 4000) ==========
+PS> Get-Process -Id 52496 | Select-Object -ExpandProperty Threads | Select-Object Id,ThreadState,WaitReason,TotalProcessorTime
+
+   Id ThreadState     WaitReason TotalProcessorTime
+   -- -----------     ---------- ------------------
+49712        Wait ExecutionDelay 00:00:00.3437500  
+34660        Wait   EventPairLow 00:00:00          
+27976        Wait    UserRequest 00:00:00
+  (main thread id and worker thread id are printed by osprobe itself: see C4/D3/D5 in run3.txt)
+  (any other thread here was NOT created by osprobe: Windows lets another process create a thread inside yours)

@@ -1,0 +1,36 @@
+﻿# 自测：16006 字节 SNAPSHOT 帧被拆成两个 TCP 段（8000 + 8006），验证 zombie.lua 的 desegmentation
+# 生成器：python selftest-snapshot.py（合成 SNAPSHOT 内容，只用来测跨段重组，不是协议语义证据）
+
+# 命令 1：tshark -r selftest-snapshot.pcapng -X lua_script:zombie.lua
+    1 0.000000000    127.0.0.1 → 127.0.0.1    TCP 54 52341 → 4001 [SYN] Seq=0 Win=65535 Len=0
+    2 0.000001000    127.0.0.1 → 127.0.0.1    TCP 54 4001 → 52341 [SYN, ACK] Seq=0 Ack=1 Win=65535 Len=0
+    3 0.000002000    127.0.0.1 → 127.0.0.1    TCP 54 52341 → 4001 [ACK] Seq=1 Ack=1 Win=65535 Len=0
+    4 0.000003000    127.0.0.1 → 127.0.0.1    ZOMBIE 66 HELLO client_id=1 version=1
+    5 0.000004000    127.0.0.1 → 127.0.0.1    TCP 8054 4001 → 52341 [PSH, ACK] Seq=1 Ack=13 Win=65535 Len=8000 [TCP segment of a reassembled PDU]
+    6 0.000005000    127.0.0.1 → 127.0.0.1    ZOMBIE 8060 SNAPSHOT count=1000
+    7 0.000006000    127.0.0.1 → 127.0.0.1    ZOMBIE 58 BYE
+    8 0.000007000    127.0.0.1 → 127.0.0.1    TCP 54 52341 → 4001 [FIN, ACK] Seq=17 Ack=16007 Win=65535 Len=0
+    9 0.000008000    127.0.0.1 → 127.0.0.1    TCP 54 4001 → 52341 [FIN, ACK] Seq=16007 Ack=18 Win=65535 Len=0
+   10 0.000009000    127.0.0.1 → 127.0.0.1    TCP 54 52341 → 4001 [ACK] Seq=18 Ack=16008 Win=65535 Len=0
+
+# 命令 2：tshark -r selftest-snapshot.pcapng -X lua_script:zombie.lua -Y zombie.count -T fields -e frame.number -e zombie.count
+6	1000
+
+# 命令 3：数一数解析出了多少个 zombie.snapshot.id 字段（count=1000 应该有 1000 个）
+字段个数 = 1000
+
+# 命令 4：-V 里看 SNAPSHOT 帧的字段（只截前几行，1000 个子项太长不贴）
+    [Stream index: 0]
+ZOMBIE SNAPSHOT, 16006 bytes on the wire
+    Entity[0]
+        Entity ID: 0
+        X: 0
+        Y: -0
+        HP: 100
+    Entity[1]
+        Entity ID: 1
+        X: 1
+        Y: -1
+        HP: 99.9
+        Entity ID: 2
+        X: 2

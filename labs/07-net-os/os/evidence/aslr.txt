@@ -1,0 +1,59 @@
+﻿================================================================================================
+ ASLR evidence -- same osprobe.exe x3, then a byte-identical copy under another file name
+================================================================================================
+
+run1: started 2026-11-23 00:03:51   raw output -> evidence\run1.txt
+run2: started a few seconds later     raw output -> evidence\run2.txt
+run3: started a few seconds later     raw output -> evidence\run3.txt
+run4: osprobe_copy.exe (same bytes)   raw output -> evidence\run4_copy.txt
+      osprobe.exe      sha256 = 6e7f30841335c7c3b3c99c8b64a7f6ce92626b451ca8ea40d5da059b87917304
+      osprobe_copy.exe sha256 = 6e7f30841335c7c3b3c99c8b64a7f6ce92626b451ca8ea40d5da059b87917304
+PE preferred ImageBase (objdump -p, what the .exe asks for) = 0x0000000140000000
+
+--- table 1: the SAME osprobe.exe, 3 runs, same boot (no reboot in between) ---
+
+  #  what                                       run1                 run2                 run3                 same?
+  ----------------------------------------------------------------------------------------------------------
+  A1  module base       GetModuleHandle(NULL)    0x00007ff6ec840000   0x00007ff6ec840000   0x00007ff6ec840000   SAME
+  A5  kernel32.dll base GetModuleHandle("kernel32.dll") 0x00007ff8772c0000   0x00007ff8772c0000   0x00007ff8772c0000   SAME
+  A6  ntdll.dll base    GetModuleHandle("ntdll.dll") 0x00007ff877d90000   0x00007ff877d90000   0x00007ff877d90000   SAME
+  A3  heap block        HeapAlloc(GetProcessHeap()) 0x000001cf565f13e0   0x0000021b7aa91110   0x000001f5a1a61110   DIFFERENT
+  A4  stack local       &local_marker (in main)  0x000000b03a1ff677   0x000000ac38bffda7   0x0000004d993ffd07   DIFFERENT
+  D1  main   StackBase  (TEB+0x08)               0x000000b03a200000   0x000000ac38c00000   0x0000004d99400000   DIFFERENT
+  D2  main   StackLimit (TEB+0x10)               0x000000b03a1fa000   0x000000ac38bfa000   0x0000004d993fa000   DIFFERENT
+  D3  worker StackBase  (TEB+0x08)               0x000000b03a600000   0x000000ac39000000   0x0000004d99800000   DIFFERENT
+  D4  worker StackLimit (TEB+0x10)               0x000000b03a5fd000   0x000000ac38ffd000   0x0000004d997fd000   DIFFERENT
+  Z   main stack size = D1-D2 (KB)               24 KB                24 KB                24 KB                SAME
+
+--- table 2: osprobe.exe vs osprobe_copy.exe (identical bytes, different file name) ---
+
+  #  what                                       osprobe.exe (run1)   osprobe_copy.exe (run4) changed?
+  -----------------------------------------------------------------------------------------------
+  A1  module base       GetModuleHandle(NULL)    0x00007ff6ec840000   0x00007ff79f940000   CHANGED
+  A5  kernel32.dll base GetModuleHandle("kernel32.dll") 0x00007ff8772c0000   0x00007ff8772c0000   SAME
+  A6  ntdll.dll base    GetModuleHandle("ntdll.dll") 0x00007ff877d90000   0x00007ff877d90000   SAME
+  A4  stack local       &local_marker (in main)  0x000000b03a1ff677   0x000000d4d8fff6e7   CHANGED
+
+
+结论 / verdict（本机实测；同一次开机，中间没有重启）
+  1) 同一个 osprobe.exe 连续跑 3 次：
+       模块基址 A1            = SAME
+       系统 DLL 基址 A5/A6    = SAME / SAME
+       堆块 A3                = DIFFERENT
+       栈局部变量 A4          = DIFFERENT
+       主线程栈范围 D1/D2     = DIFFERENT / DIFFERENT
+     也就是说：镜像（exe/DLL）的基址在"同一个文件 + 同一次开机"里是固定的；
+     而栈、堆的地址是每个进程创建时现抽的，所以每次都不同。
+     原因：Windows 给镜像挑随机基址时，是按「镜像文件本身 + 本次开机的随机种子」
+     算出来的，同一个文件在同一次开机里每次加载都用同一个基址（DLL 还要和其他
+     进程共享同一份物理内存，也必须用同一个基址）。栈/堆不共享，所以逐进程随机。
+  2) A5 kernel32 / A6 ntdll 三次完全一样：系统 DLL 是共享映射，整个开机期间所有
+     进程的基址相同 —— 这就是为什么调试器里 ntdll/kernel32 的地址看起来"很稳"。
+  3) 第 4 次用的是字节完全相同的 osprobe_copy.exe（sha256 见上，和 osprobe.exe 一样）：
+     模块基址 A1 这一行 table 2 的结果 = DIFFERENT。
+     说明镜像基址确实被随机化过，只是"随机结果对同一个文件固定"。
+  4) 一句话：文件不变 + 开机不变 -> 镜像基址固定；换文件 -> 基址变；栈/堆逐进程随机。
+  5) 对逆向的意义：PE 头里写的 ImageBase 是 0x0000000140000000。Ghidra 里显示的 0x140001450
+     就是「ImageBase + RVA 0x1450」；x64dbg 里实际加载地址是「随机基址 + 同一个 RVA」。
+     同一个文件里 RVA/文件偏移永远不变，所以硬编码偏移、特征码扫描一直能用；
+     绝对地址（0x140001450、0x7FF7...）不能写死。

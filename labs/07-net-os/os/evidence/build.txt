@@ -1,0 +1,36 @@
+PS> gcc --version
+gcc.exe (x86_64-win32-seh-rev2, Built by MinGW-Builds project) 14.2.0
+
+PS> gcc -O0 -g -Wall -Wextra -o osprobe.exe osprobe.c
+gcc exit code = 0
+
+PS> Get-Item .\osprobe.exe | Select-Object Name,Length,LastWriteTime
+
+Name        Length LastWriteTime     
+----        ------ -------------     
+osprobe.exe 104022 2026/11/23 0:03:49
+
+PS> objdump -p .\osprobe.exe | Select-String 'ImageBase|SizeOfImage|DllCharacteristics'
+ImageBase		0000000140000000
+SizeOfImage		0001b000
+DllCharacteristics	00000160
+
+  (ImageBase is what the PE *asks* for, DllCharacteristics bit 0x40 =
+   DYNAMIC_BASE = the loader is allowed to relocate the image, which is
+   what ASLR does. The real base at run time is printed by osprobe.exe [A].)
+
+PS> objdump -p .\osprobe.exe | Select-String 'DLL Name'
+	DLL Name: KERNEL32.dll
+	DLL Name: api-ms-win-crt-convert-l1-1-0.dll
+	DLL Name: api-ms-win-crt-environment-l1-1-0.dll
+	DLL Name: api-ms-win-crt-heap-l1-1-0.dll
+	DLL Name: api-ms-win-crt-math-l1-1-0.dll
+	DLL Name: api-ms-win-crt-private-l1-1-0.dll
+	DLL Name: api-ms-win-crt-runtime-l1-1-0.dll
+	DLL Name: api-ms-win-crt-stdio-l1-1-0.dll
+	DLL Name: api-ms-win-crt-string-l1-1-0.dll
+	DLL Name: api-ms-win-crt-time-l1-1-0.dll
+
+  (only KERNEL32 + the C runtime that gcc links: no ws2_32, no advapi32)
+
+

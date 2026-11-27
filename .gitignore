@@ -1,12 +1,32 @@
-# build artifacts -- rebuild with build.bat / run.bat
+# 编译产物
 *.exe
 *.o
 *.obj
+*.dll
+*.lib
+*.pdb
+*.ilk
+*.exp
+*.map
 
-# runtime scratch files produced by the labs
-where.txt
-find.txt
-*.out
+# 调试产物
+*.core
+*.dmp
+core.*
 
-# local agent notes (not part of the journal)
-.workbuddy/
+# IDE / 编辑器（.vscode/ 故意保留：里面的构建与调试配置要跟着仓库走）
+.vs/
+.idea/
+*.user
+*.swp
+*.swo
+
+# 系统
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# 临时文件
+*.tmp
+*.log
+*.bak

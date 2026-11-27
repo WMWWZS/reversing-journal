@@ -1,0 +1,115 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "构建当前实验",
+            "detail": "运行当前文件所在目录的 build.ps1",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${fileDirname}\\build.ps1"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "编译当前文件 (-O0 -g)",
+            "detail": "未优化，汇编最适合入门",
+            "type": "shell",
+            "command": "gcc",
+            "args": [
+                "-O0",
+                "-g",
+                "-fno-asynchronous-unwind-tables",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}_O0.exe",
+                "${file}"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "编译当前文件 (-O2)",
+            "detail": "优化后，真实游戏形态",
+            "type": "shell",
+            "command": "gcc",
+            "args": [
+                "-O2",
+                "-fno-asynchronous-unwind-tables",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}_O2.exe",
+                "${file}"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "objdump 反汇编 (当前文件 -O0)",
+            "detail": "在输出面板看当前文件对应的反汇编",
+            "type": "shell",
+            "command": "objdump",
+            "args": [
+                "-d",
+                "-M",
+                "intel",
+                "--no-show-raw-insn",
+                "${fileDirname}\\${fileBasenameNoExtension}_O0.exe"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "同步到 GitHub",
+            "detail": "git add -A -> commit -> push",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${workspaceFolder}\\tools\\sync.ps1"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "启动 Ghidra",
+            "detail": "打开逆向分析主界面",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${workspaceFolder}\\tools\\ghidra.ps1"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": []
+        }
+    ]
+}

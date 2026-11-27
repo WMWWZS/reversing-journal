@@ -1,0 +1,106 @@
+### live-capture.txt - a REAL loopback capture of this lab (this box: no admin needed)
+### host: DESKTOP-QE8M0K4   generated: 2026-11-23 00:30:01
+### Every block below is the raw stdout of one command, copied unedited.
+### The pcap itself (capture\evidence\zombie.pcapng) is NOT committed: .gitignore
+### ignores *.pcap / *.pcapng. Re-create it with capture.ps1, or by hand with the
+### dumpcap line below.
+###
+### window: ordinary (non-admin) PowerShell; whoami reports
+###         "Mandatory Label\Medium Mandatory Level" and IsInRole(Administrator) = False.
+###
+### capture (dumpcap 4.0.17):
+###   E:\Wireshark\dumpcap.exe -i \Device\NPF_Loopback -f "tcp port 47000 or tcp port 47001" -a duration:25 -w evidence\zombie.pcapng
+### lab, in another window:
+###   src\bin\zombie_srv_O2s.exe --port 47001 --bind 127.0.0.1 --authoritative
+###   py -u src\tap.py --listen-port 47000 --target-port 47001 --target-host 127.0.0.1
+###   src\bin\zombie_cli_O2s.exe --host 127.0.0.1 --port 47000 --attacks 5 --dmg 5
+
+===== capinfos evidence\zombie.pcapng =====
+File name:           E:\harness\network-journal\labs\06-zombie-protocol\capture\evidence\zombie.pcapng
+File type:           Wireshark/... - pcapng
+File encapsulation:  NULL/Loopback
+File timestamp precision:  nanoseconds (9)
+Packet size limit:   file hdr: (not set)
+Number of packets:   62
+File size:           5668 bytes
+Data size:           3208 bytes
+Capture duration:    1.421944300 seconds
+First packet time:   2026-11-23 00:29:18.353740900
+Last packet time:    2026-11-23 00:29:19.775685200
+Data byte rate:      2256 bytes/s
+Data bit rate:       18 kbps
+Average packet size: 51.74 bytes
+Average packet rate: 43 packets/s
+SHA256:              070722f2598a5bd08e799662d60d87fda9b1c54deffd1f467092c101e0ba006f
+RIPEMD160:           21b09df9eb6e479d52b93616158644fe10ec1a61
+SHA1:                0aa6ea3b79ac0f1fde04b5cd7ab557a5e77c6c0d
+Strict time order:   True
+Capture hardware:    13th Gen Intel(R) Core(TM) i7-13650HX (with SSE4.2)
+Capture oper-sys:    64-bit Windows 11 (25H2), build 26200
+Capture application: Dumpcap (Wireshark) 4.0.17 (v4.0.17-0-g882448bcf104)
+Number of interfaces in file: 1
+Interface #0 info:
+                     Name = \Device\NPF_Loopback
+                     Description = Adapter for loopback traffic capture
+                     Encapsulation = NULL/Loopback (15 - null)
+                     Capture length = 262144
+                     Time precision = nanoseconds (9)
+                     Time ticks per second = 1000000000
+                     Time resolution = 0x09
+                     Filter string = tcp port 47000 or tcp port 47001
+                     Operating system = 64-bit Windows 11 (25H2), build 26200
+                     Number of stat entries = 1
+                     Number of packets = 62
+
+===== tshark -Y zombie -T fields -e frame.number -e frame.len -e tcp.len -e ip.src -e tcp.srcport -e tcp.dstport -e zombie.opcode -e zombie.total_len =====
+4	56	12	127.0.0.1	65528	47000	0x01	10
+9	56	12	127.0.0.1	65529	47001	0x01	10
+11	60	16	127.0.0.1	65528	47000	0x02	14
+13	60	16	127.0.0.1	65529	47001	0x02	14
+15	68	24	127.0.0.1	47001	65529	0x03	22
+17	68	24	127.0.0.1	47000	65528	0x03	22
+19	60	16	127.0.0.1	65528	47000	0x02	14
+21	60	16	127.0.0.1	65529	47001	0x02	14
+23	68	24	127.0.0.1	47001	65529	0x03	22
+25	68	24	127.0.0.1	47000	65528	0x03	22
+27	60	16	127.0.0.1	65528	47000	0x02	14
+29	60	16	127.0.0.1	65529	47001	0x02	14
+31	68	24	127.0.0.1	47001	65529	0x03	22
+33	68	24	127.0.0.1	47000	65528	0x03	22
+35	60	16	127.0.0.1	65528	47000	0x02	14
+37	60	16	127.0.0.1	65529	47001	0x02	14
+39	68	24	127.0.0.1	47001	65529	0x03	22
+41	68	24	127.0.0.1	47000	65528	0x03	22
+43	60	16	127.0.0.1	65528	47000	0x02	14
+45	60	16	127.0.0.1	65529	47001	0x02	14
+47	68	24	127.0.0.1	47001	65529	0x03	22
+49	68	24	127.0.0.1	47000	65528	0x03	22
+51	48	4	127.0.0.1	65528	47000	0x05	2
+53	48	4	127.0.0.1	65529	47001	0x05	2
+
+===== tshark -Y zombie   (default columns; the Info column is what zombie.lua returns) =====
+    4 0.000224400    127.0.0.1 → 127.0.0.1    ZOMBIE 56 HELLO client_id=1 version=1
+    9 0.022104700    127.0.0.1 → 127.0.0.1    ZOMBIE 56 HELLO client_id=1 version=1
+   11 0.407103900    127.0.0.1 → 127.0.0.1    ZOMBIE 60 ATTACK damage=5.00 seq=1 claimed_hp=95.00
+   13 0.408108300    127.0.0.1 → 127.0.0.1    ZOMBIE 60 ATTACK damage=5.00 seq=1 claimed_hp=95.00
+   15 0.408787000    127.0.0.1 → 127.0.0.1    ZOMBIE 68 HP_SYNC player_id=1 hp=95.00/100.00 tick=1 alive=1
+   17 0.409206100    127.0.0.1 → 127.0.0.1    ZOMBIE 68 HP_SYNC player_id=1 hp=95.00/100.00 tick=1 alive=1
+   19 0.609685600    127.0.0.1 → 127.0.0.1    ZOMBIE 60 ATTACK damage=5.00 seq=2 claimed_hp=90.00
+   21 0.612923400    127.0.0.1 → 127.0.0.1    ZOMBIE 60 ATTACK damage=5.00 seq=2 claimed_hp=90.00
+   23 0.613513500    127.0.0.1 → 127.0.0.1    ZOMBIE 68 HP_SYNC player_id=1 hp=90.00/100.00 tick=2 alive=1
+   25 0.613861000    127.0.0.1 → 127.0.0.1    ZOMBIE 68 HP_SYNC player_id=1 hp=90.00/100.00 tick=2 alive=1
+   27 0.811637800    127.0.0.1 → 127.0.0.1    ZOMBIE 60 ATTACK damage=5.00 seq=3 claimed_hp=85.00
+   29 0.812560800    127.0.0.1 → 127.0.0.1    ZOMBIE 60 ATTACK damage=5.00 seq=3 claimed_hp=85.00
+   31 0.813049100    127.0.0.1 → 127.0.0.1    ZOMBIE 68 HP_SYNC player_id=1 hp=85.00/100.00 tick=3 alive=1
+   33 0.813383000    127.0.0.1 → 127.0.0.1    ZOMBIE 68 HP_SYNC player_id=1 hp=85.00/100.00 tick=3 alive=1
+   35 1.013853500    127.0.0.1 → 127.0.0.1    ZOMBIE 60 ATTACK damage=5.00 seq=4 claimed_hp=80.00
+   37 1.014664000    127.0.0.1 → 127.0.0.1    ZOMBIE 60 ATTACK damage=5.00 seq=4 claimed_hp=80.00
+   39 1.015752400    127.0.0.1 → 127.0.0.1    ZOMBIE 68 HP_SYNC player_id=1 hp=80.00/100.00 tick=4 alive=1
+   41 1.016282900    127.0.0.1 → 127.0.0.1    ZOMBIE 68 HP_SYNC player_id=1 hp=80.00/100.00 tick=4 alive=1
+   43 1.216877800    127.0.0.1 → 127.0.0.1    ZOMBIE 60 ATTACK damage=5.00 seq=5 claimed_hp=75.00
+   45 1.217754200    127.0.0.1 → 127.0.0.1    ZOMBIE 60 ATTACK damage=5.00 seq=5 claimed_hp=75.00
+   47 1.218696500    127.0.0.1 → 127.0.0.1    ZOMBIE 68 HP_SYNC player_id=1 hp=75.00/100.00 tick=5 alive=1
+   49 1.219117500    127.0.0.1 → 127.0.0.1    ZOMBIE 68 HP_SYNC player_id=1 hp=75.00/100.00 tick=5 alive=1
+   51 1.419816600    127.0.0.1 → 127.0.0.1    ZOMBIE 48 BYE
+   53 1.420622000    127.0.0.1 → 127.0.0.1    ZOMBIE 48 BYE
+

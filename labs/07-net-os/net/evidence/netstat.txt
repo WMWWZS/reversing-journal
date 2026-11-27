@@ -1,0 +1,415 @@
+### netstat.txt - LISTENING / ESTABLISHED + PIDs while the lab is running
+### host: DESKTOP-QE8M0K4   generated: 2026-11-23 00:10:38
+### Every block below is the raw stdout/stderr of one process, copied unedited.
+
+===== what this is =====
+Captured while server(47001) + tap(47000) + client were all alive.
+The client was started with --attacks 30 so it stays connected while we look.
+known PIDs: server=7772  tap=5640  client=38344
+
+===== netstat -ano | findstr 47000 =====
+  TCP    127.0.0.1:47000        0.0.0.0:0              LISTENING       5640
+  TCP    127.0.0.1:47000        127.0.0.1:49762        TIME_WAIT       0
+  TCP    127.0.0.1:47000        127.0.0.1:49770        TIME_WAIT       0
+  TCP    127.0.0.1:47000        127.0.0.1:49772        ESTABLISHED     5640
+  TCP    127.0.0.1:47000        127.0.0.1:50748        TIME_WAIT       0
+  TCP    127.0.0.1:47000        127.0.0.1:50752        TIME_WAIT       0
+  TCP    127.0.0.1:47000        127.0.0.1:50766        TIME_WAIT       0
+  TCP    127.0.0.1:47000        127.0.0.1:50771        TIME_WAIT       0
+  TCP    127.0.0.1:47000        127.0.0.1:54440        TIME_WAIT       0
+  TCP    127.0.0.1:47000        127.0.0.1:54443        TIME_WAIT       0
+  TCP    127.0.0.1:47000        127.0.0.1:54450        TIME_WAIT       0
+  TCP    127.0.0.1:47000        127.0.0.1:54455        TIME_WAIT       0
+  TCP    127.0.0.1:47000        127.0.0.1:54457        TIME_WAIT       0
+  TCP    127.0.0.1:47000        127.0.0.1:56317        TIME_WAIT       0
+  TCP    127.0.0.1:47000        127.0.0.1:56319        TIME_WAIT       0
+  TCP    127.0.0.1:47000        127.0.0.1:56322        TIME_WAIT       0
+  TCP    127.0.0.1:47000        127.0.0.1:59729        TIME_WAIT       0
+  TCP    127.0.0.1:47000        127.0.0.1:59734        TIME_WAIT       0
+  TCP    127.0.0.1:47000        127.0.0.1:59736        TIME_WAIT       0
+  TCP    127.0.0.1:47000        127.0.0.1:63540        TIME_WAIT       0
+  TCP    127.0.0.1:47000        127.0.0.1:63544        TIME_WAIT       0
+  TCP    127.0.0.1:47000        127.0.0.1:63546        TIME_WAIT       0
+  TCP    127.0.0.1:47000        127.0.0.1:63549        TIME_WAIT       0
+  TCP    127.0.0.1:47000        127.0.0.1:64792        TIME_WAIT       0
+  TCP    127.0.0.1:47000        127.0.0.1:64833        TIME_WAIT       0
+  TCP    127.0.0.1:47000        127.0.0.1:64839        TIME_WAIT       0
+  TCP    127.0.0.1:47000        127.0.0.1:64843        TIME_WAIT       0
+  TCP    127.0.0.1:47000        127.0.0.1:64845        TIME_WAIT       0
+  TCP    127.0.0.1:49772        127.0.0.1:47000        ESTABLISHED     38344
+
+===== netstat -ano | findstr 47001 =====
+  TCP    127.0.0.1:47001        0.0.0.0:0              LISTENING       7772
+  TCP    127.0.0.1:47001        127.0.0.1:49763        TIME_WAIT       0
+  TCP    127.0.0.1:47001        127.0.0.1:49764        TIME_WAIT       0
+  TCP    127.0.0.1:47001        127.0.0.1:49771        TIME_WAIT       0
+  TCP    127.0.0.1:47001        127.0.0.1:49773        ESTABLISHED     7772
+  TCP    127.0.0.1:47001        127.0.0.1:50749        TIME_WAIT       0
+  TCP    127.0.0.1:47001        127.0.0.1:50751        TIME_WAIT       0
+  TCP    127.0.0.1:47001        127.0.0.1:50753        TIME_WAIT       0
+  TCP    127.0.0.1:47001        127.0.0.1:50767        TIME_WAIT       0
+  TCP    127.0.0.1:47001        127.0.0.1:50772        TIME_WAIT       0
+  TCP    127.0.0.1:47001        127.0.0.1:54441        TIME_WAIT       0
+  TCP    127.0.0.1:47001        127.0.0.1:54444        TIME_WAIT       0
+  TCP    127.0.0.1:47001        127.0.0.1:54451        TIME_WAIT       0
+  TCP    127.0.0.1:47001        127.0.0.1:54454        TIME_WAIT       0
+  TCP    127.0.0.1:47001        127.0.0.1:54456        TIME_WAIT       0
+  TCP    127.0.0.1:47001        127.0.0.1:54458        TIME_WAIT       0
+  TCP    127.0.0.1:47001        127.0.0.1:56318        TIME_WAIT       0
+  TCP    127.0.0.1:47001        127.0.0.1:56320        TIME_WAIT       0
+  TCP    127.0.0.1:47001        127.0.0.1:56323        TIME_WAIT       0
+  TCP    127.0.0.1:47001        127.0.0.1:59730        TIME_WAIT       0
+  TCP    127.0.0.1:47001        127.0.0.1:59733        TIME_WAIT       0
+  TCP    127.0.0.1:47001        127.0.0.1:59735        TIME_WAIT       0
+  TCP    127.0.0.1:47001        127.0.0.1:59737        TIME_WAIT       0
+  TCP    127.0.0.1:47001        127.0.0.1:63541        TIME_WAIT       0
+  TCP    127.0.0.1:47001        127.0.0.1:63545        TIME_WAIT       0
+  TCP    127.0.0.1:47001        127.0.0.1:63547        TIME_WAIT       0
+  TCP    127.0.0.1:47001        127.0.0.1:63550        TIME_WAIT       0
+  TCP    127.0.0.1:47001        127.0.0.1:64793        TIME_WAIT       0
+  TCP    127.0.0.1:47001        127.0.0.1:64835        TIME_WAIT       0
+  TCP    127.0.0.1:47001        127.0.0.1:64840        TIME_WAIT       0
+  TCP    127.0.0.1:47001        127.0.0.1:64844        TIME_WAIT       0
+  TCP    127.0.0.1:47001        127.0.0.1:64846        TIME_WAIT       0
+  TCP    127.0.0.1:49773        127.0.0.1:47001        ESTABLISHED     5640
+
+===== Get-NetTCPConnection -LocalPort 47000,47001 (LocalAddress,LocalPort,RemoteAddress,RemotePort,State,OwningProcess) =====
+
+LocalAddress LocalPort RemoteAddress RemotePort       State OwningProcess
+------------ --------- ------------- ----------       ----- -------------
+127.0.0.1        47000 0.0.0.0                0      Listen          5640
+127.0.0.1        47000 127.0.0.1          49772 Established          5640
+127.0.0.1        47000 127.0.0.1          63549    TimeWait             0
+127.0.0.1        47000 127.0.0.1          63546    TimeWait             0
+127.0.0.1        47000 127.0.0.1          64792    TimeWait             0
+127.0.0.1        47000 127.0.0.1          59734    TimeWait             0
+127.0.0.1        47000 127.0.0.1          63540    TimeWait             0
+127.0.0.1        47000 127.0.0.1          63544    TimeWait             0
+127.0.0.1        47000 127.0.0.1          64833    TimeWait             0
+127.0.0.1        47000 127.0.0.1          56317    TimeWait             0
+127.0.0.1        47000 127.0.0.1          59736    TimeWait             0
+127.0.0.1        47000 127.0.0.1          50748    TimeWait             0
+127.0.0.1        47000 127.0.0.1          64839    TimeWait             0
+127.0.0.1        47000 127.0.0.1          64843    TimeWait             0
+127.0.0.1        47000 127.0.0.1          64845    TimeWait             0
+127.0.0.1        47000 127.0.0.1          59729    TimeWait             0
+127.0.0.1        47000 127.0.0.1          50766    TimeWait             0
+127.0.0.1        47000 127.0.0.1          50771    TimeWait             0
+127.0.0.1        47000 127.0.0.1          54440    TimeWait             0
+127.0.0.1        47000 127.0.0.1          49762    TimeWait             0
+127.0.0.1        47000 127.0.0.1          49770    TimeWait             0
+127.0.0.1        47000 127.0.0.1          50752    TimeWait             0
+127.0.0.1        47000 127.0.0.1          54457    TimeWait             0
+127.0.0.1        47000 127.0.0.1          56319    TimeWait             0
+127.0.0.1        47000 127.0.0.1          56322    TimeWait             0
+127.0.0.1        47000 127.0.0.1          54443    TimeWait             0
+127.0.0.1        47000 127.0.0.1          54450    TimeWait             0
+127.0.0.1        47000 127.0.0.1          54455    TimeWait             0
+127.0.0.1        47001 0.0.0.0                0      Listen          7772
+127.0.0.1        47001 127.0.0.1          49773 Established          7772
+127.0.0.1        47001 127.0.0.1          50749    TimeWait             0
+127.0.0.1        47001 127.0.0.1          50772    TimeWait             0
+127.0.0.1        47001 127.0.0.1          54441    TimeWait             0
+127.0.0.1        47001 127.0.0.1          56320    TimeWait             0
+127.0.0.1        47001 127.0.0.1          64846    TimeWait             0
+127.0.0.1        47001 127.0.0.1          64793    TimeWait             0
+127.0.0.1        47001 127.0.0.1          64840    TimeWait             0
+127.0.0.1        47001 127.0.0.1          64844    TimeWait             0
+127.0.0.1        47001 127.0.0.1          49763    TimeWait             0
+127.0.0.1        47001 127.0.0.1          59733    TimeWait             0
+127.0.0.1        47001 127.0.0.1          50767    TimeWait             0
+127.0.0.1        47001 127.0.0.1          54444    TimeWait             0
+127.0.0.1        47001 127.0.0.1          63550    TimeWait             0
+127.0.0.1        47001 127.0.0.1          59730    TimeWait             0
+127.0.0.1        47001 127.0.0.1          64835    TimeWait             0
+127.0.0.1        47001 127.0.0.1          63547    TimeWait             0
+127.0.0.1        47001 127.0.0.1          54451    TimeWait             0
+127.0.0.1        47001 127.0.0.1          54454    TimeWait             0
+127.0.0.1        47001 127.0.0.1          54456    TimeWait             0
+127.0.0.1        47001 127.0.0.1          50753    TimeWait             0
+127.0.0.1        47001 127.0.0.1          49764    TimeWait             0
+127.0.0.1        47001 127.0.0.1          49771    TimeWait             0
+127.0.0.1        47001 127.0.0.1          50751    TimeWait             0
+127.0.0.1        47001 127.0.0.1          59737    TimeWait             0
+127.0.0.1        47001 127.0.0.1          63541    TimeWait             0
+127.0.0.1        47001 127.0.0.1          63545    TimeWait             0
+127.0.0.1        47001 127.0.0.1          59735    TimeWait             0
+127.0.0.1        47001 127.0.0.1          54458    TimeWait             0
+127.0.0.1        47001 127.0.0.1          56318    TimeWait             0
+127.0.0.1        47001 127.0.0.1          56323    TimeWait             0
+
+
+
+
+===== Get-Process -Id server,tap,client (Id,ProcessName,StartTime) =====
+
+   Id ProcessName    StartTime         
+   -- -----------    ---------         
+ 5640 python         2026/11/23 0:10:22
+38344 zombie_cli_O2s 2026/11/23 0:10:22
+ 7772 zombie_srv_O2s 2026/11/23 0:10:22
+
+
+
+
+===== client stdout captured during the same run =====
+[+  0.001s] zombie_cli pid=38344 recv_buf=8192 hex_bytes=32 attacks=30 dmg=5.00 max_hp=100.00
+[+  0.002s] zombie_cli pid=38344 connect 127.0.0.1:47000 ok  local=127.0.0.1:49772  (this local port is the one you see in netstat)
+[+  0.003s] TX  12B 0a 00 01 00 01 00 00 00 01 00 00 00  HELLO client_id=1 version=1
+[+  0.409s] TX  16B 0e 00 02 00 00 00 a0 40 01 00 00 00 00 00 be 42  ATTACK dmg=5.00 seq=1 claimed=95.00
+[+  0.610s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 be 42 00 00 c8 42 01 00 00 00 01 00 00 00 
+[+  0.611s] RX     24B 16 00 03 00 01 00 00 00 00 00 be 42 00 00 c8 42 01 00 00 00 01 00 00 00  HP_SYNC player=1 hp=95.00 max=100.00 tick=1 alive=1 recv_chunks=1
+[+  0.611s]       HP check tick=1  my_prediction=95.00  server=95.00  OK
+[+  0.611s] TX  16B 0e 00 02 00 00 00 a0 40 02 00 00 00 00 00 b4 42  ATTACK dmg=5.00 seq=2 claimed=90.00
+[+  0.813s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 b4 42 00 00 c8 42 02 00 00 00 01 00 00 00 
+[+  0.814s] RX     24B 16 00 03 00 01 00 00 00 00 00 b4 42 00 00 c8 42 02 00 00 00 01 00 00 00  HP_SYNC player=1 hp=90.00 max=100.00 tick=2 alive=1 recv_chunks=1
+[+  0.814s]       HP check tick=2  my_prediction=90.00  server=90.00  OK
+[+  0.814s] TX  16B 0e 00 02 00 00 00 a0 40 03 00 00 00 00 00 aa 42  ATTACK dmg=5.00 seq=3 claimed=85.00
+[+  1.030s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 aa 42 00 00 c8 42 03 00 00 00 01 00 00 00 
+[+  1.030s] RX     24B 16 00 03 00 01 00 00 00 00 00 aa 42 00 00 c8 42 03 00 00 00 01 00 00 00  HP_SYNC player=1 hp=85.00 max=100.00 tick=3 alive=1 recv_chunks=1
+[+  1.030s]       HP check tick=3  my_prediction=85.00  server=85.00  OK
+[+  1.031s] TX  16B 0e 00 02 00 00 00 a0 40 04 00 00 00 00 00 a0 42  ATTACK dmg=5.00 seq=4 claimed=80.00
+[+  1.232s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 a0 42 00 00 c8 42 04 00 00 00 01 00 00 00 
+[+  1.232s] RX     24B 16 00 03 00 01 00 00 00 00 00 a0 42 00 00 c8 42 04 00 00 00 01 00 00 00  HP_SYNC player=1 hp=80.00 max=100.00 tick=4 alive=1 recv_chunks=1
+[+  1.232s]       HP check tick=4  my_prediction=80.00  server=80.00  OK
+[+  1.232s] TX  16B 0e 00 02 00 00 00 a0 40 05 00 00 00 00 00 96 42  ATTACK dmg=5.00 seq=5 claimed=75.00
+[+  1.434s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 96 42 00 00 c8 42 05 00 00 00 01 00 00 00 
+[+  1.435s] RX     24B 16 00 03 00 01 00 00 00 00 00 96 42 00 00 c8 42 05 00 00 00 01 00 00 00  HP_SYNC player=1 hp=75.00 max=100.00 tick=5 alive=1 recv_chunks=1
+[+  1.435s]       HP check tick=5  my_prediction=75.00  server=75.00  OK
+[+  1.435s] TX  16B 0e 00 02 00 00 00 a0 40 06 00 00 00 00 00 8c 42  ATTACK dmg=5.00 seq=6 claimed=70.00
+[+  1.636s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 8c 42 00 00 c8 42 06 00 00 00 01 00 00 00 
+[+  1.637s] RX     24B 16 00 03 00 01 00 00 00 00 00 8c 42 00 00 c8 42 06 00 00 00 01 00 00 00  HP_SYNC player=1 hp=70.00 max=100.00 tick=6 alive=1 recv_chunks=1
+[+  1.637s]       HP check tick=6  my_prediction=70.00  server=70.00  OK
+[+  1.637s] TX  16B 0e 00 02 00 00 00 a0 40 07 00 00 00 00 00 82 42  ATTACK dmg=5.00 seq=7 claimed=65.00
+[+  1.839s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 82 42 00 00 c8 42 07 00 00 00 01 00 00 00 
+[+  1.839s] RX     24B 16 00 03 00 01 00 00 00 00 00 82 42 00 00 c8 42 07 00 00 00 01 00 00 00  HP_SYNC player=1 hp=65.00 max=100.00 tick=7 alive=1 recv_chunks=1
+[+  1.839s]       HP check tick=7  my_prediction=65.00  server=65.00  OK
+[+  1.839s] TX  16B 0e 00 02 00 00 00 a0 40 08 00 00 00 00 00 70 42  ATTACK dmg=5.00 seq=8 claimed=60.00
+[+  2.041s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 70 42 00 00 c8 42 08 00 00 00 01 00 00 00 
+[+  2.042s] RX     24B 16 00 03 00 01 00 00 00 00 00 70 42 00 00 c8 42 08 00 00 00 01 00 00 00  HP_SYNC player=1 hp=60.00 max=100.00 tick=8 alive=1 recv_chunks=1
+[+  2.042s]       HP check tick=8  my_prediction=60.00  server=60.00  OK
+[+  2.042s] TX  16B 0e 00 02 00 00 00 a0 40 09 00 00 00 00 00 5c 42  ATTACK dmg=5.00 seq=9 claimed=55.00
+[+  2.243s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 5c 42 00 00 c8 42 09 00 00 00 01 00 00 00 
+[+  2.244s] RX     24B 16 00 03 00 01 00 00 00 00 00 5c 42 00 00 c8 42 09 00 00 00 01 00 00 00  HP_SYNC player=1 hp=55.00 max=100.00 tick=9 alive=1 recv_chunks=1
+[+  2.244s]       HP check tick=9  my_prediction=55.00  server=55.00  OK
+[+  2.244s] TX  16B 0e 00 02 00 00 00 a0 40 0a 00 00 00 00 00 48 42  ATTACK dmg=5.00 seq=10 claimed=50.00
+[+  2.459s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 48 42 00 00 c8 42 0a 00 00 00 01 00 00 00 
+[+  2.460s] RX     24B 16 00 03 00 01 00 00 00 00 00 48 42 00 00 c8 42 0a 00 00 00 01 00 00 00  HP_SYNC player=1 hp=50.00 max=100.00 tick=10 alive=1 recv_chunks=1
+[+  2.460s]       HP check tick=10  my_prediction=50.00  server=50.00  OK
+[+  2.460s] TX  16B 0e 00 02 00 00 00 a0 40 0b 00 00 00 00 00 34 42  ATTACK dmg=5.00 seq=11 claimed=45.00
+[+  2.662s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 34 42 00 00 c8 42 0b 00 00 00 01 00 00 00 
+[+  2.663s] RX     24B 16 00 03 00 01 00 00 00 00 00 34 42 00 00 c8 42 0b 00 00 00 01 00 00 00  HP_SYNC player=1 hp=45.00 max=100.00 tick=11 alive=1 recv_chunks=1
+[+  2.663s]       HP check tick=11  my_prediction=45.00  server=45.00  OK
+[+  2.663s] TX  16B 0e 00 02 00 00 00 a0 40 0c 00 00 00 00 00 20 42  ATTACK dmg=5.00 seq=12 claimed=40.00
+[+  2.866s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 20 42 00 00 c8 42 0c 00 00 00 01 00 00 00 
+[+  2.866s] RX     24B 16 00 03 00 01 00 00 00 00 00 20 42 00 00 c8 42 0c 00 00 00 01 00 00 00  HP_SYNC player=1 hp=40.00 max=100.00 tick=12 alive=1 recv_chunks=1
+[+  2.866s]       HP check tick=12  my_prediction=40.00  server=40.00  OK
+[+  2.866s] TX  16B 0e 00 02 00 00 00 a0 40 0d 00 00 00 00 00 0c 42  ATTACK dmg=5.00 seq=13 claimed=35.00
+[+  3.081s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 0c 42 00 00 c8 42 0d 00 00 00 01 00 00 00 
+[+  3.084s] RX     24B 16 00 03 00 01 00 00 00 00 00 0c 42 00 00 c8 42 0d 00 00 00 01 00 00 00  HP_SYNC player=1 hp=35.00 max=100.00 tick=13 alive=1 recv_chunks=1
+[+  3.084s]       HP check tick=13  my_prediction=35.00  server=35.00  OK
+[+  3.084s] TX  16B 0e 00 02 00 00 00 a0 40 0e 00 00 00 00 00 f0 41  ATTACK dmg=5.00 seq=14 claimed=30.00
+[+  3.296s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 f0 41 00 00 c8 42 0e 00 00 00 01 00 00 00 
+[+  3.297s] RX     24B 16 00 03 00 01 00 00 00 00 00 f0 41 00 00 c8 42 0e 00 00 00 01 00 00 00  HP_SYNC player=1 hp=30.00 max=100.00 tick=14 alive=1 recv_chunks=1
+[+  3.297s]       HP check tick=14  my_prediction=30.00  server=30.00  OK
+[+  3.297s] TX  16B 0e 00 02 00 00 00 a0 40 0f 00 00 00 00 00 c8 41  ATTACK dmg=5.00 seq=15 claimed=25.00
+[+  3.500s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 c8 41 00 00 c8 42 0f 00 00 00 01 00 00 00 
+[+  3.501s] RX     24B 16 00 03 00 01 00 00 00 00 00 c8 41 00 00 c8 42 0f 00 00 00 01 00 00 00  HP_SYNC player=1 hp=25.00 max=100.00 tick=15 alive=1 recv_chunks=1
+[+  3.501s]       HP check tick=15  my_prediction=25.00  server=25.00  OK
+[+  3.501s] TX  16B 0e 00 02 00 00 00 a0 40 10 00 00 00 00 00 a0 41  ATTACK dmg=5.00 seq=16 claimed=20.00
+[+  3.702s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 a0 41 00 00 c8 42 10 00 00 00 01 00 00 00 
+[+  3.703s] RX     24B 16 00 03 00 01 00 00 00 00 00 a0 41 00 00 c8 42 10 00 00 00 01 00 00 00  HP_SYNC player=1 hp=20.00 max=100.00 tick=16 alive=1 recv_chunks=1
+[+  3.703s]       HP check tick=16  my_prediction=20.00  server=20.00  OK
+[+  3.703s] TX  16B 0e 00 02 00 00 00 a0 40 11 00 00 00 00 00 70 41  ATTACK dmg=5.00 seq=17 claimed=15.00
+[+  3.918s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 70 41 00 00 c8 42 11 00 00 00 01 00 00 00 
+[+  3.918s] RX     24B 16 00 03 00 01 00 00 00 00 00 70 41 00 00 c8 42 11 00 00 00 01 00 00 00  HP_SYNC player=1 hp=15.00 max=100.00 tick=17 alive=1 recv_chunks=1
+[+  3.919s]       HP check tick=17  my_prediction=15.00  server=15.00  OK
+[+  3.919s] TX  16B 0e 00 02 00 00 00 a0 40 12 00 00 00 00 00 20 41  ATTACK dmg=5.00 seq=18 claimed=10.00
+[+  4.121s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 20 41 00 00 c8 42 12 00 00 00 01 00 00 00 
+[+  4.121s] RX     24B 16 00 03 00 01 00 00 00 00 00 20 41 00 00 c8 42 12 00 00 00 01 00 00 00  HP_SYNC player=1 hp=10.00 max=100.00 tick=18 alive=1 recv_chunks=1
+[+  4.121s]       HP check tick=18  my_prediction=10.00  server=10.00  OK
+[+  4.121s] TX  16B 0e 00 02 00 00 00 a0 40 13 00 00 00 00 00 a0 40  ATTACK dmg=5.00 seq=19 claimed=5.00
+[+  4.336s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 a0 40 00 00 c8 42 13 00 00 00 01 00 00 00 
+[+  4.338s] RX     24B 16 00 03 00 01 00 00 00 00 00 a0 40 00 00 c8 42 13 00 00 00 01 00 00 00  HP_SYNC player=1 hp=5.00 max=100.00 tick=19 alive=1 recv_chunks=1
+[+  4.338s]       HP check tick=19  my_prediction=5.00  server=5.00  OK
+[+  4.339s] TX  16B 0e 00 02 00 00 00 a0 40 14 00 00 00 00 00 00 00  ATTACK dmg=5.00 seq=20 claimed=0.00
+[+  4.551s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 00 00 00 00 c8 42 14 00 00 00 00 00 00 00 
+[+  4.552s] RX     24B 16 00 03 00 01 00 00 00 00 00 00 00 00 00 c8 42 14 00 00 00 00 00 00 00  HP_SYNC player=1 hp=0.00 max=100.00 tick=20 alive=0 recv_chunks=1
+[+  4.552s]       HP check tick=20  my_prediction=0.00  server=0.00  OK
+[+  4.552s] TX  16B 0e 00 02 00 00 00 a0 40 15 00 00 00 00 00 00 00  ATTACK dmg=5.00 seq=21 claimed=0.00
+[+  4.753s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 00 00 00 00 c8 42 15 00 00 00 00 00 00 00 
+[+  4.754s] RX     24B 16 00 03 00 01 00 00 00 00 00 00 00 00 00 c8 42 15 00 00 00 00 00 00 00  HP_SYNC player=1 hp=0.00 max=100.00 tick=21 alive=0 recv_chunks=1
+[+  4.754s]       HP check tick=21  my_prediction=0.00  server=0.00  OK
+[+  4.755s] TX  16B 0e 00 02 00 00 00 a0 40 16 00 00 00 00 00 00 00  ATTACK dmg=5.00 seq=22 claimed=0.00
+[+  4.970s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 00 00 00 00 c8 42 16 00 00 00 00 00 00 00 
+[+  4.973s] RX     24B 16 00 03 00 01 00 00 00 00 00 00 00 00 00 c8 42 16 00 00 00 00 00 00 00  HP_SYNC player=1 hp=0.00 max=100.00 tick=22 alive=0 recv_chunks=1
+[+  4.973s]       HP check tick=22  my_prediction=0.00  server=0.00  OK
+[+  4.973s] TX  16B 0e 00 02 00 00 00 a0 40 17 00 00 00 00 00 00 00  ATTACK dmg=5.00 seq=23 claimed=0.00
+[+  5.185s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 00 00 00 00 c8 42 17 00 00 00 00 00 00 00 
+[+  5.185s] RX     24B 16 00 03 00 01 00 00 00 00 00 00 00 00 00 c8 42 17 00 00 00 00 00 00 00  HP_SYNC player=1 hp=0.00 max=100.00 tick=23 alive=0 recv_chunks=1
+[+  5.185s]       HP check tick=23  my_prediction=0.00  server=0.00  OK
+[+  5.185s] TX  16B 0e 00 02 00 00 00 a0 40 18 00 00 00 00 00 00 00  ATTACK dmg=5.00 seq=24 claimed=0.00
+[+  5.400s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 00 00 00 00 c8 42 18 00 00 00 00 00 00 00 
+[+  5.403s] RX     24B 16 00 03 00 01 00 00 00 00 00 00 00 00 00 c8 42 18 00 00 00 00 00 00 00  HP_SYNC player=1 hp=0.00 max=100.00 tick=24 alive=0 recv_chunks=1
+[+  5.403s]       HP check tick=24  my_prediction=0.00  server=0.00  OK
+[+  5.403s] TX  16B 0e 00 02 00 00 00 a0 40 19 00 00 00 00 00 00 00  ATTACK dmg=5.00 seq=25 claimed=0.00
+[+  5.615s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 00 00 00 00 c8 42 19 00 00 00 00 00 00 00 
+[+  5.616s] RX     24B 16 00 03 00 01 00 00 00 00 00 00 00 00 00 c8 42 19 00 00 00 00 00 00 00  HP_SYNC player=1 hp=0.00 max=100.00 tick=25 alive=0 recv_chunks=1
+[+  5.616s]       HP check tick=25  my_prediction=0.00  server=0.00  OK
+[+  5.616s] TX  16B 0e 00 02 00 00 00 a0 40 1a 00 00 00 00 00 00 00  ATTACK dmg=5.00 seq=26 claimed=0.00
+[+  5.831s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 00 00 00 00 c8 42 1a 00 00 00 00 00 00 00 
+[+  5.832s] RX     24B 16 00 03 00 01 00 00 00 00 00 00 00 00 00 c8 42 1a 00 00 00 00 00 00 00  HP_SYNC player=1 hp=0.00 max=100.00 tick=26 alive=0 recv_chunks=1
+[+  5.832s]       HP check tick=26  my_prediction=0.00  server=0.00  OK
+[+  5.832s] TX  16B 0e 00 02 00 00 00 a0 40 1b 00 00 00 00 00 00 00  ATTACK dmg=5.00 seq=27 claimed=0.00
+[+  6.048s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 00 00 00 00 c8 42 1b 00 00 00 00 00 00 00 
+[+  6.048s] RX     24B 16 00 03 00 01 00 00 00 00 00 00 00 00 00 c8 42 1b 00 00 00 00 00 00 00  HP_SYNC player=1 hp=0.00 max=100.00 tick=27 alive=0 recv_chunks=1
+[+  6.048s]       HP check tick=27  my_prediction=0.00  server=0.00  OK
+[+  6.048s] TX  16B 0e 00 02 00 00 00 a0 40 1c 00 00 00 00 00 00 00  ATTACK dmg=5.00 seq=28 claimed=0.00
+[+  6.263s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 00 00 00 00 c8 42 1c 00 00 00 00 00 00 00 
+[+  6.266s] RX     24B 16 00 03 00 01 00 00 00 00 00 00 00 00 00 c8 42 1c 00 00 00 00 00 00 00  HP_SYNC player=1 hp=0.00 max=100.00 tick=28 alive=0 recv_chunks=1
+[+  6.266s]       HP check tick=28  my_prediction=0.00  server=0.00  OK
+[+  6.266s] TX  16B 0e 00 02 00 00 00 a0 40 1d 00 00 00 00 00 00 00  ATTACK dmg=5.00 seq=29 claimed=0.00
+[+  6.466s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 00 00 00 00 c8 42 1d 00 00 00 00 00 00 00 
+[+  6.467s] RX     24B 16 00 03 00 01 00 00 00 00 00 00 00 00 00 c8 42 1d 00 00 00 00 00 00 00  HP_SYNC player=1 hp=0.00 max=100.00 tick=29 alive=0 recv_chunks=1
+[+  6.467s]       HP check tick=29  my_prediction=0.00  server=0.00  OK
+[+  6.467s] TX  16B 0e 00 02 00 00 00 a0 40 1e 00 00 00 00 00 00 00  ATTACK dmg=5.00 seq=30 claimed=0.00
+[+  6.669s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 00 00 00 00 c8 42 1e 00 00 00 00 00 00 00 
+[+  6.670s] RX     24B 16 00 03 00 01 00 00 00 00 00 00 00 00 00 c8 42 1e 00 00 00 00 00 00 00  HP_SYNC player=1 hp=0.00 max=100.00 tick=30 alive=0 recv_chunks=1
+[+  6.670s]       HP check tick=30  my_prediction=0.00  server=0.00  OK
+[+  6.670s] TX   4B 02 00 05 00  BYE
+[+  6.673s] RX recv() = 0 (WSA error 0) -> peer closed
+[+  6.673s] SUMMARY attacks=30 hp_sync=30 predicted=0.00 server_hp=0.00 match=YES
+[+  6.673s] SUMMARY snapshot_frames=0 snapshot_bytes=0 reconcile=0 recv_calls=30 bytes_left_in_buffer=0
+[+  6.673s] client exit rc=0
+
+===== server stdout captured during the same run =====
+[+  0.002s] zombie_srv pid=7772  mode=authoritative  max_hp=100.00  snapshot_count=0  send_chunk=0
+[+  0.002s] listen 127.0.0.1:47001 ok, waiting for client (Ctrl+C to stop)
+[+  0.182s] accept ok: peer=127.0.0.1:49773  (this peer is the tap, or the client if you bypass the tap)
+[+  0.185s] RX recv n=12
+[+  0.185s] RX  12B 0a 00 01 00 01 00 00 00 01 00 00 00  HELLO client_id=1 version=1
+[+  0.586s] RX recv n=16
+[+  0.586s] RX  16B 0e 00 02 00 00 00 a0 40 01 00 00 00 00 00 be 42  ATTACK seq=1 dmg=5.00 claimed=95.00
+[+  0.587s] HP   100.00 -> 95.00  (authoritative: claimed says 95.00, diff=0.00)
+[+  0.587s] TX  24B 16 00 03 00 01 00 00 00 00 00 be 42 00 00 c8 42 01 00 00 00 01 00 00 00  HP_SYNC hp=95.00 max=100.00 tick=1 alive=1
+[+  0.787s] RX recv n=16
+[+  0.787s] RX  16B 0e 00 02 00 00 00 a0 40 02 00 00 00 00 00 b4 42  ATTACK seq=2 dmg=5.00 claimed=90.00
+[+  0.788s] HP   95.00 -> 90.00  (authoritative: claimed says 90.00, diff=0.00)
+[+  0.788s] TX  24B 16 00 03 00 01 00 00 00 00 00 b4 42 00 00 c8 42 02 00 00 00 01 00 00 00  HP_SYNC hp=90.00 max=100.00 tick=2 alive=1
+[+  0.991s] RX recv n=16
+[+  0.991s] RX  16B 0e 00 02 00 00 00 a0 40 03 00 00 00 00 00 aa 42  ATTACK seq=3 dmg=5.00 claimed=85.00
+[+  0.991s] HP   90.00 -> 85.00  (authoritative: claimed says 85.00, diff=0.00)
+[+  0.991s] TX  24B 16 00 03 00 01 00 00 00 00 00 aa 42 00 00 c8 42 03 00 00 00 01 00 00 00  HP_SYNC hp=85.00 max=100.00 tick=3 alive=1
+[+  1.207s] RX recv n=16
+[+  1.207s] RX  16B 0e 00 02 00 00 00 a0 40 04 00 00 00 00 00 a0 42  ATTACK seq=4 dmg=5.00 claimed=80.00
+[+  1.207s] HP   85.00 -> 80.00  (authoritative: claimed says 80.00, diff=0.00)
+[+  1.208s] TX  24B 16 00 03 00 01 00 00 00 00 00 a0 42 00 00 c8 42 04 00 00 00 01 00 00 00  HP_SYNC hp=80.00 max=100.00 tick=4 alive=1
+[+  1.409s] RX recv n=16
+[+  1.409s] RX  16B 0e 00 02 00 00 00 a0 40 05 00 00 00 00 00 96 42  ATTACK seq=5 dmg=5.00 claimed=75.00
+[+  1.409s] HP   80.00 -> 75.00  (authoritative: claimed says 75.00, diff=0.00)
+[+  1.410s] TX  24B 16 00 03 00 01 00 00 00 00 00 96 42 00 00 c8 42 05 00 00 00 01 00 00 00  HP_SYNC hp=75.00 max=100.00 tick=5 alive=1
+[+  1.611s] RX recv n=16
+[+  1.611s] RX  16B 0e 00 02 00 00 00 a0 40 06 00 00 00 00 00 8c 42  ATTACK seq=6 dmg=5.00 claimed=70.00
+[+  1.611s] HP   75.00 -> 70.00  (authoritative: claimed says 70.00, diff=0.00)
+[+  1.611s] TX  24B 16 00 03 00 01 00 00 00 00 00 8c 42 00 00 c8 42 06 00 00 00 01 00 00 00  HP_SYNC hp=70.00 max=100.00 tick=6 alive=1
+[+  1.813s] RX recv n=16
+[+  1.814s] RX  16B 0e 00 02 00 00 00 a0 40 07 00 00 00 00 00 82 42  ATTACK seq=7 dmg=5.00 claimed=65.00
+[+  1.814s] HP   70.00 -> 65.00  (authoritative: claimed says 65.00, diff=0.00)
+[+  1.814s] TX  24B 16 00 03 00 01 00 00 00 00 00 82 42 00 00 c8 42 07 00 00 00 01 00 00 00  HP_SYNC hp=65.00 max=100.00 tick=7 alive=1
+[+  2.015s] RX recv n=16
+[+  2.016s] RX  16B 0e 00 02 00 00 00 a0 40 08 00 00 00 00 00 70 42  ATTACK seq=8 dmg=5.00 claimed=60.00
+[+  2.016s] HP   65.00 -> 60.00  (authoritative: claimed says 60.00, diff=0.00)
+[+  2.016s] TX  24B 16 00 03 00 01 00 00 00 00 00 70 42 00 00 c8 42 08 00 00 00 01 00 00 00  HP_SYNC hp=60.00 max=100.00 tick=8 alive=1
+[+  2.219s] RX recv n=16
+[+  2.219s] RX  16B 0e 00 02 00 00 00 a0 40 09 00 00 00 00 00 5c 42  ATTACK seq=9 dmg=5.00 claimed=55.00
+[+  2.219s] HP   60.00 -> 55.00  (authoritative: claimed says 55.00, diff=0.00)
+[+  2.219s] TX  24B 16 00 03 00 01 00 00 00 00 00 5c 42 00 00 c8 42 09 00 00 00 01 00 00 00  HP_SYNC hp=55.00 max=100.00 tick=9 alive=1
+[+  2.421s] RX recv n=16
+[+  2.421s] RX  16B 0e 00 02 00 00 00 a0 40 0a 00 00 00 00 00 48 42  ATTACK seq=10 dmg=5.00 claimed=50.00
+[+  2.421s] HP   55.00 -> 50.00  (authoritative: claimed says 50.00, diff=0.00)
+[+  2.421s] TX  24B 16 00 03 00 01 00 00 00 00 00 48 42 00 00 c8 42 0a 00 00 00 01 00 00 00  HP_SYNC hp=50.00 max=100.00 tick=10 alive=1
+[+  2.636s] RX recv n=16
+[+  2.637s] RX  16B 0e 00 02 00 00 00 a0 40 0b 00 00 00 00 00 34 42  ATTACK seq=11 dmg=5.00 claimed=45.00
+[+  2.637s] HP   50.00 -> 45.00  (authoritative: claimed says 45.00, diff=0.00)
+[+  2.637s] TX  24B 16 00 03 00 01 00 00 00 00 00 34 42 00 00 c8 42 0b 00 00 00 01 00 00 00  HP_SYNC hp=45.00 max=100.00 tick=11 alive=1
+[+  2.839s] RX recv n=16
+[+  2.839s] RX  16B 0e 00 02 00 00 00 a0 40 0c 00 00 00 00 00 20 42  ATTACK seq=12 dmg=5.00 claimed=40.00
+[+  2.839s] HP   45.00 -> 40.00  (authoritative: claimed says 40.00, diff=0.00)
+[+  2.839s] TX  24B 16 00 03 00 01 00 00 00 00 00 20 42 00 00 c8 42 0c 00 00 00 01 00 00 00  HP_SYNC hp=40.00 max=100.00 tick=12 alive=1
+[+  3.042s] RX recv n=16
+[+  3.042s] RX  16B 0e 00 02 00 00 00 a0 40 0d 00 00 00 00 00 0c 42  ATTACK seq=13 dmg=5.00 claimed=35.00
+[+  3.042s] HP   40.00 -> 35.00  (authoritative: claimed says 35.00, diff=0.00)
+[+  3.043s] TX  24B 16 00 03 00 01 00 00 00 00 00 0c 42 00 00 c8 42 0d 00 00 00 01 00 00 00  HP_SYNC hp=35.00 max=100.00 tick=13 alive=1
+[+  3.260s] RX recv n=16
+[+  3.260s] RX  16B 0e 00 02 00 00 00 a0 40 0e 00 00 00 00 00 f0 41  ATTACK seq=14 dmg=5.00 claimed=30.00
+[+  3.260s] HP   35.00 -> 30.00  (authoritative: claimed says 30.00, diff=0.00)
+[+  3.260s] TX  24B 16 00 03 00 01 00 00 00 00 00 f0 41 00 00 c8 42 0e 00 00 00 01 00 00 00  HP_SYNC hp=30.00 max=100.00 tick=14 alive=1
+[+  3.473s] RX recv n=16
+[+  3.473s] RX  16B 0e 00 02 00 00 00 a0 40 0f 00 00 00 00 00 c8 41  ATTACK seq=15 dmg=5.00 claimed=25.00
+[+  3.474s] HP   30.00 -> 25.00  (authoritative: claimed says 25.00, diff=0.00)
+[+  3.474s] TX  24B 16 00 03 00 01 00 00 00 00 00 c8 41 00 00 c8 42 0f 00 00 00 01 00 00 00  HP_SYNC hp=25.00 max=100.00 tick=15 alive=1
+[+  3.677s] RX recv n=16
+[+  3.677s] RX  16B 0e 00 02 00 00 00 a0 40 10 00 00 00 00 00 a0 41  ATTACK seq=16 dmg=5.00 claimed=20.00
+[+  3.677s] HP   25.00 -> 20.00  (authoritative: claimed says 20.00, diff=0.00)
+[+  3.677s] TX  24B 16 00 03 00 01 00 00 00 00 00 a0 41 00 00 c8 42 10 00 00 00 01 00 00 00  HP_SYNC hp=20.00 max=100.00 tick=16 alive=1
+[+  3.879s] RX recv n=16
+[+  3.880s] RX  16B 0e 00 02 00 00 00 a0 40 11 00 00 00 00 00 70 41  ATTACK seq=17 dmg=5.00 claimed=15.00
+[+  3.880s] HP   20.00 -> 15.00  (authoritative: claimed says 15.00, diff=0.00)
+[+  3.880s] TX  24B 16 00 03 00 01 00 00 00 00 00 70 41 00 00 c8 42 11 00 00 00 01 00 00 00  HP_SYNC hp=15.00 max=100.00 tick=17 alive=1
+[+  4.096s] RX recv n=16
+[+  4.096s] RX  16B 0e 00 02 00 00 00 a0 40 12 00 00 00 00 00 20 41  ATTACK seq=18 dmg=5.00 claimed=10.00
+[+  4.096s] HP   15.00 -> 10.00  (authoritative: claimed says 10.00, diff=0.00)
+[+  4.096s] TX  24B 16 00 03 00 01 00 00 00 00 00 20 41 00 00 c8 42 12 00 00 00 01 00 00 00  HP_SYNC hp=10.00 max=100.00 tick=18 alive=1
+[+  4.298s] RX recv n=16
+[+  4.298s] RX  16B 0e 00 02 00 00 00 a0 40 13 00 00 00 00 00 a0 40  ATTACK seq=19 dmg=5.00 claimed=5.00
+[+  4.298s] HP   10.00 -> 5.00  (authoritative: claimed says 5.00, diff=0.00)
+[+  4.298s] TX  24B 16 00 03 00 01 00 00 00 00 00 a0 40 00 00 c8 42 13 00 00 00 01 00 00 00  HP_SYNC hp=5.00 max=100.00 tick=19 alive=1
+[+  4.515s] RX recv n=16
+[+  4.515s] RX  16B 0e 00 02 00 00 00 a0 40 14 00 00 00 00 00 00 00  ATTACK seq=20 dmg=5.00 claimed=0.00
+[+  4.515s] HP   5.00 -> 0.00  (authoritative: claimed says 0.00, diff=0.00)
+[+  4.515s] TX  24B 16 00 03 00 01 00 00 00 00 00 00 00 00 00 c8 42 14 00 00 00 00 00 00 00  HP_SYNC hp=0.00 max=100.00 tick=20 alive=0
+[+  4.729s] RX recv n=16
+[+  4.729s] RX  16B 0e 00 02 00 00 00 a0 40 15 00 00 00 00 00 00 00  ATTACK seq=21 dmg=5.00 claimed=0.00
+[+  4.729s] HP   0.00 -> 0.00  (authoritative: claimed says 0.00, diff=0.00)
+[+  4.729s] TX  24B 16 00 03 00 01 00 00 00 00 00 00 00 00 00 c8 42 15 00 00 00 00 00 00 00  HP_SYNC hp=0.00 max=100.00 tick=21 alive=0
+[+  4.931s] RX recv n=16
+[+  4.931s] RX  16B 0e 00 02 00 00 00 a0 40 16 00 00 00 00 00 00 00  ATTACK seq=22 dmg=5.00 claimed=0.00
+[+  4.931s] HP   0.00 -> 0.00  (authoritative: claimed says 0.00, diff=0.00)
+[+  4.931s] TX  24B 16 00 03 00 01 00 00 00 00 00 00 00 00 00 c8 42 16 00 00 00 00 00 00 00  HP_SYNC hp=0.00 max=100.00 tick=22 alive=0
+[+  5.149s] RX recv n=16
+[+  5.149s] RX  16B 0e 00 02 00 00 00 a0 40 17 00 00 00 00 00 00 00  ATTACK seq=23 dmg=5.00 claimed=0.00
+[+  5.149s] HP   0.00 -> 0.00  (authoritative: claimed says 0.00, diff=0.00)
+[+  5.149s] TX  24B 16 00 03 00 01 00 00 00 00 00 00 00 00 00 c8 42 17 00 00 00 00 00 00 00  HP_SYNC hp=0.00 max=100.00 tick=23 alive=0
+[+  5.361s] RX recv n=16
+[+  5.361s] RX  16B 0e 00 02 00 00 00 a0 40 18 00 00 00 00 00 00 00  ATTACK seq=24 dmg=5.00 claimed=0.00
+[+  5.361s] HP   0.00 -> 0.00  (authoritative: claimed says 0.00, diff=0.00)
+[+  5.361s] TX  24B 16 00 03 00 01 00 00 00 00 00 00 00 00 00 c8 42 18 00 00 00 00 00 00 00  HP_SYNC hp=0.00 max=100.00 tick=24 alive=0
+[+  5.579s] RX recv n=16
+[+  5.579s] RX  16B 0e 00 02 00 00 00 a0 40 19 00 00 00 00 00 00 00  ATTACK seq=25 dmg=5.00 claimed=0.00
+[+  5.580s] HP   0.00 -> 0.00  (authoritative: claimed says 0.00, diff=0.00)
+[+  5.580s] TX  24B 16 00 03 00 01 00 00 00 00 00 00 00 00 00 c8 42 19 00 00 00 00 00 00 00  HP_SYNC hp=0.00 max=100.00 tick=25 alive=0
+[+  5.792s] RX recv n=16
+[+  5.792s] RX  16B 0e 00 02 00 00 00 a0 40 1a 00 00 00 00 00 00 00  ATTACK seq=26 dmg=5.00 claimed=0.00
+[+  5.792s] HP   0.00 -> 0.00  (authoritative: claimed says 0.00, diff=0.00)
+[+  5.792s] TX  24B 16 00 03 00 01 00 00 00 00 00 00 00 00 00 c8 42 1a 00 00 00 00 00 00 00  HP_SYNC hp=0.00 max=100.00 tick=26 alive=0
+[+  6.008s] RX recv n=16
+[+  6.008s] RX  16B 0e 00 02 00 00 00 a0 40 1b 00 00 00 00 00 00 00  ATTACK seq=27 dmg=5.00 claimed=0.00
+[+  6.008s] HP   0.00 -> 0.00  (authoritative: claimed says 0.00, diff=0.00)
+[+  6.008s] TX  24B 16 00 03 00 01 00 00 00 00 00 00 00 00 00 c8 42 1b 00 00 00 00 00 00 00  HP_SYNC hp=0.00 max=100.00 tick=27 alive=0
+[+  6.224s] RX recv n=16
+[+  6.225s] RX  16B 0e 00 02 00 00 00 a0 40 1c 00 00 00 00 00 00 00  ATTACK seq=28 dmg=5.00 claimed=0.00
+[+  6.225s] HP   0.00 -> 0.00  (authoritative: claimed says 0.00, diff=0.00)
+[+  6.225s] TX  24B 16 00 03 00 01 00 00 00 00 00 00 00 00 00 c8 42 1c 00 00 00 00 00 00 00  HP_SYNC hp=0.00 max=100.00 tick=28 alive=0
+[+  6.442s] RX recv n=16
+[+  6.442s] RX  16B 0e 00 02 00 00 00 a0 40 1d 00 00 00 00 00 00 00  ATTACK seq=29 dmg=5.00 claimed=0.00
+[+  6.442s] HP   0.00 -> 0.00  (authoritative: claimed says 0.00, diff=0.00)
+[+  6.442s] TX  24B 16 00 03 00 01 00 00 00 00 00 00 00 00 00 c8 42 1d 00 00 00 00 00 00 00  HP_SYNC hp=0.00 max=100.00 tick=29 alive=0
+[+  6.643s] RX recv n=16
+[+  6.643s] RX  16B 0e 00 02 00 00 00 a0 40 1e 00 00 00 00 00 00 00  ATTACK seq=30 dmg=5.00 claimed=0.00
+[+  6.643s] HP   0.00 -> 0.00  (authoritative: claimed says 0.00, diff=0.00)
+[+  6.644s] TX  24B 16 00 03 00 01 00 00 00 00 00 00 00 00 00 c8 42 1e 00 00 00 00 00 00 00  HP_SYNC hp=0.00 max=100.00 tick=30 alive=0
+[+  6.847s] RX recv n=4
+[+  6.847s] RX   4B 02 00 05 00  BYE
+[+  6.847s] FINAL hp=0.00 max_hp=100.00 alive=0  frames=32 hello=1 attack=30 reject=0 bye=1 unknown=0
+[+  6.847s] server exit
+

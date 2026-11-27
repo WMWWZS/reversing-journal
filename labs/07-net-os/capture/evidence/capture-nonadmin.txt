@@ -1,0 +1,13 @@
+﻿# 命令：powershell -NoProfile -ExecutionPolicy Bypass -File .\capture.ps1   （普通权限窗口）
+# 预期：检测到不是管理员，打印中文提示后退出（exit code 1），不会调用 dumpcap。
+
+== 检查管理员权限 ==
+
+这个脚本要在【管理员】PowerShell 里跑，因为 dumpcap 抓网卡需要管理员权限。
+当前不是管理员。请这样做：
+  1) 右键“开始”按钮 -> 终端(管理员)；或者 Win+X -> Windows PowerShell (管理员)
+  2) cd E:\harness\reversing-journal\labs\07-net-os\capture
+  3) powershell -ExecutionPolicy Bypass -File .\capture.ps1
+
+如果你只是想用已有的 pcapng 生成解析文本，那个不需要管理员：
+  powershell -ExecutionPolicy Bypass -File .\capture.ps1 -ExistingPcap .\demo.pcapng
