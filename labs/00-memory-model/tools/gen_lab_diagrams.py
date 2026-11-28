@@ -44,7 +44,7 @@ def box(d, x, y, w, h, lines, fill=(255, 255, 255), fonts=None, colors=None):
 
 # ======================================================= 02
 W, H = 1520, 900
-img = Image.new("RGB", (W, H), (252, 252, 250))
+img = Image.new("RGB", (W, 800), (252, 252, 250))
 d = ImageDraw.Draw(img)
 h1, h2, body, small, mono, tin = f(F_B, 36), f(F_B, 23), f(F_R, 19), f(F_R, 17), f(F_M, 17), f(F_R, 15)
 
