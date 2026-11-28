@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="340" viewBox="0 0 1280 340" role="img" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, &quot;Liberation Mono&quot;, monospace">
+  <title>os-journal banner (light)</title>
+  <desc>Terminal-window banner: title bar with traffic-light dots, OS JOURNAL wordmark, a stack status line, a prompt with a block cursor and an aligned x86-64 syscall-entry hex dump; static 1280x340 artwork, light palette.</desc>
+  <rect id="bg" width="1280" height="340" fill="#ffffff"/>
+  <rect id="win" x="40" y="36" width="1200" height="268" rx="12" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1"/>
+  <path id="bar" d="M52 36 H1228 A12 12 0 0 1 1240 48 V70 H40 V48 A12 12 0 0 1 52 36 Z" fill="#eef1f4"/>
+  <path d="M40 70 H1240" stroke="#d0d7de" stroke-width="1"/>
+  <circle id="dot-r" cx="66" cy="53" r="5" fill="#cf222e"/>
+  <circle id="dot-y" cx="86" cy="53" r="5" fill="#9a6700"/>
+  <circle id="dot-g" cx="106" cy="53" r="5" fill="#1a7f37"/>
+  <text id="t-wintitle" x="640" y="57" text-anchor="middle" font-size="12" fill="#57606a">os-journal - 0x7FFE0000 kernel</text>
+  <text id="t-whoami" x="84" y="118" font-size="13.5"><tspan fill="#1a7f37">$</tspan><tspan fill="#1f2328" dx="8">whoami</tspan></text>
+  <text id="t-title" x="84" y="168" font-size="46" font-weight="700" letter-spacing="3" fill="#1f2328">OS JOURNAL</text>
+  <text id="t-comment" x="84" y="198" font-size="13.5" fill="#57606a">// every API call has a kernel story</text>
+  <text id="t-stack" x="84" y="226" font-size="13.5"><tspan fill="#1a7f37">[ok]</tspan><tspan fill="#57606a" dx="8">syscall / paging / scheduler / VFS / locks / observability</tspan></text>
+  <text id="t-prompt" x="84" y="258" font-size="14" fill="#1a7f37">$</text>
+  <rect id="cursor" x="101" y="244" width="8.5" height="16" fill="#1a7f37"/>
+  <text id="hd0a" x="728" y="112" font-size="13" fill="#0969da">0x0000</text>
+  <text id="hd0b" x="834" y="112" font-size="13" fill="#1b7c83">E8 1C 00 00 00</text>
+  <text id="hd0m" x="968" y="112" font-size="13" fill="#1f2328">CALL NtReadFile</text>
+  <text id="hd0n" x="1126" y="112" font-size="13" fill="#57606a">; user</text>
+  <text id="hd1a" x="728" y="138" font-size="13" fill="#0969da">0x0005</text>
+  <text id="hd1b" x="834" y="138" font-size="13" fill="#1b7c83">0F 05</text>
+  <text id="hd1m" x="968" y="138" font-size="13" fill="#1f2328">SYSCALL</text>
+  <text id="hd1n" x="1126" y="138" font-size="13" fill="#57606a">; ring3</text>
+  <text id="hd2a" x="728" y="164" font-size="13" fill="#0969da">0x0007</text>
+  <text id="hd2b" x="834" y="164" font-size="13" fill="#1b7c83">48 8B 44 24 08</text>
+  <text id="hd2m" x="968" y="164" font-size="13" fill="#1f2328">MOV RAX,[RSP+8]</text>
+  <text id="hd2n" x="1126" y="164" font-size="13" fill="#57606a">; nr</text>
+  <text id="hd3a" x="728" y="190" font-size="13" fill="#0969da">0x0010</text>
+  <text id="hd3b" x="834" y="190" font-size="13" fill="#1b7c83">65 48 8B 04 25</text>
+  <text id="hd3m" x="968" y="190" font-size="13" fill="#1f2328">GS:[0] -&gt; KTHREAD</text>
+  <text id="hd3n" x="1126" y="190" font-size="13" fill="#57606a">; kpcr</text>
+  <text id="hd4a" x="728" y="216" font-size="13" fill="#0969da">0x0018</text>
+  <text id="hd4b" x="834" y="216" font-size="13" fill="#1b7c83">48 89 E5</text>
+  <text id="hd4m" x="968" y="216" font-size="13" fill="#1f2328">MOV RBP,RSP</text>
+  <text id="hd4n" x="1126" y="216" font-size="13" fill="#57606a">; frame</text>
+  <text id="hd5a" x="728" y="242" font-size="13" fill="#0969da">0x0020</text>
+  <text id="hd5b" x="834" y="242" font-size="13" fill="#1b7c83">0F 22 E0</text>
+  <text id="hd5m" x="968" y="242" font-size="13" fill="#1f2328">MOV CR3,RAX</text>
+  <text id="hd5n" x="1126" y="242" font-size="13" fill="#57606a">; pgdir</text>
+  <text id="hd6a" x="728" y="268" font-size="13" fill="#0969da">0x0028</text>
+  <text id="hd6b" x="834" y="268" font-size="13" fill="#1b7c83">C3</text>
+  <text id="hd6m" x="968" y="268" font-size="13" fill="#1f2328">RET</text>
+  <text id="hd6n" x="1126" y="268" font-size="13" fill="#57606a">; back</text>
+  <text id="t-footer" x="84" y="288" font-size="13"><tspan fill="#57606a">[</tspan><tspan fill="#1a7f37">&gt;</tspan><tspan fill="#57606a">---------</tspan><tspan fill="#57606a">]</tspan><tspan fill="#57606a" dx="16">week 01-02</tspan><tspan fill="#57606a" dx="16">|</tspan><tspan fill="#9a6700" dx="16">running</tspan></text>
+</svg>
