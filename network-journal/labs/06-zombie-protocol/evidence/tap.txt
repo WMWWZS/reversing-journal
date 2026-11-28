@@ -1,0 +1,40 @@
+### tap.txt - every chunk the tap saw: time, direction, length, first 32 bytes hex
+### host: DESKTOP-QE8M0K4   generated: 2026-11-23 00:25:46
+### Every block below is the raw stdout/stderr of one process, copied unedited.
+
+===== command =====
+python -u tap.py --listen-port 47000 --target-port 47001 --target-host 127.0.0.1
+started for scenario A (5 attacks of 5.0)
+
+===== tap stdout (scenario A) =====
+[+  0.009s] tap pid=34840 listen 127.0.0.1:47000 -> 127.0.0.1:47001  hex_bytes=32
+[+  0.095s] tap accept client 127.0.0.1:64459
+[+  0.099s] tap connected upstream 127.0.0.1:47001 (tap's local port 64460)
+[+  0.100s] C>S    12B  0a 00 01 00 01 00 00 00 01 00 00 00
+[+  0.100s] C>S frame #1     12B  HELLO client_id=1 version=1  hex=0a 00 01 00 01 00 00 00 01 00 00 00
+[+  0.503s] C>S    16B  0e 00 02 00 00 00 a0 40 01 00 00 00 00 00 be 42
+[+  0.504s] C>S frame #2     16B  ATTACK dmg=5.00 seq=1 claimed=95.00  hex=0e 00 02 00 00 00 a0 40 01 00 00 00 00 00 be 42
+[+  0.505s] S>C    24B  16 00 03 00 01 00 00 00 00 00 be 42 00 00 c8 42 01 00 00 00 01 00 00 00
+[+  0.506s] S>C frame #1     24B  HP_SYNC player=1 hp=95.00 max=100.00 tick=1 alive=1  hex=16 00 03 00 01 00 00 00 00 00 be 42 00 00 c8 42 01 00 00 00 01 00 00 00
+[+  0.705s] C>S    16B  0e 00 02 00 00 00 a0 40 02 00 00 00 00 00 b4 42
+[+  0.705s] C>S frame #3     16B  ATTACK dmg=5.00 seq=2 claimed=90.00  hex=0e 00 02 00 00 00 a0 40 02 00 00 00 00 00 b4 42
+[+  0.706s] S>C    24B  16 00 03 00 01 00 00 00 00 00 b4 42 00 00 c8 42 02 00 00 00 01 00 00 00
+[+  0.706s] S>C frame #2     24B  HP_SYNC player=1 hp=90.00 max=100.00 tick=2 alive=1  hex=16 00 03 00 01 00 00 00 00 00 b4 42 00 00 c8 42 02 00 00 00 01 00 00 00
+[+  0.908s] C>S    16B  0e 00 02 00 00 00 a0 40 03 00 00 00 00 00 aa 42
+[+  0.908s] C>S frame #4     16B  ATTACK dmg=5.00 seq=3 claimed=85.00  hex=0e 00 02 00 00 00 a0 40 03 00 00 00 00 00 aa 42
+[+  0.909s] S>C    24B  16 00 03 00 01 00 00 00 00 00 aa 42 00 00 c8 42 03 00 00 00 01 00 00 00
+[+  0.909s] S>C frame #3     24B  HP_SYNC player=1 hp=85.00 max=100.00 tick=3 alive=1  hex=16 00 03 00 01 00 00 00 00 00 aa 42 00 00 c8 42 03 00 00 00 01 00 00 00
+[+  1.124s] C>S    16B  0e 00 02 00 00 00 a0 40 04 00 00 00 00 00 a0 42
+[+  1.124s] C>S frame #5     16B  ATTACK dmg=5.00 seq=4 claimed=80.00  hex=0e 00 02 00 00 00 a0 40 04 00 00 00 00 00 a0 42
+[+  1.124s] S>C    24B  16 00 03 00 01 00 00 00 00 00 a0 42 00 00 c8 42 04 00 00 00 01 00 00 00
+[+  1.124s] S>C frame #4     24B  HP_SYNC player=1 hp=80.00 max=100.00 tick=4 alive=1  hex=16 00 03 00 01 00 00 00 00 00 a0 42 00 00 c8 42 04 00 00 00 01 00 00 00
+[+  1.341s] C>S    16B  0e 00 02 00 00 00 a0 40 05 00 00 00 00 00 96 42
+[+  1.341s] C>S frame #6     16B  ATTACK dmg=5.00 seq=5 claimed=75.00  hex=0e 00 02 00 00 00 a0 40 05 00 00 00 00 00 96 42
+[+  1.342s] S>C    24B  16 00 03 00 01 00 00 00 00 00 96 42 00 00 c8 42 05 00 00 00 01 00 00 00
+[+  1.342s] S>C frame #5     24B  HP_SYNC player=1 hp=75.00 max=100.00 tick=5 alive=1  hex=16 00 03 00 01 00 00 00 00 00 96 42 00 00 c8 42 05 00 00 00 01 00 00 00
+[+  1.555s] C>S     4B  02 00 05 00
+[+  1.555s] C>S frame #7      4B  BYE  hex=02 00 05 00
+[+  1.556s] S>C EOF (peer closed)
+[+  1.556s] C>S EOF (peer closed)
+[+  1.557s] tap summary  C>S chunks=7 bytes=96 frames=7 | S>C chunks=5 bytes=120 frames=5
+

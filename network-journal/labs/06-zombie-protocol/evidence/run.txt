@@ -1,0 +1,144 @@
+### run.txt - server + client full logs (real TCP, real hex frames)
+### host: DESKTOP-QE8M0K4   generated: 2026-11-23 00:25:46
+### Every block below is the raw stdout/stderr of one process, copied unedited.
+
+===== commands =====
+note: ports are 47000/47001, not 4000/4001: on this host QQ.exe owns 127.0.0.1:4001, so the server got "bind failed, WSA error 10013" there. See labs/06-zombie-protocol/README.md.
+server: zombie_srv_O2s.exe --port 47001 --bind 127.0.0.1 --authoritative
+tap   : python -u tap.py --listen-port 47000 --target-port 47001 --target-host 127.0.0.1
+client: zombie_cli_O2s.exe --host 127.0.0.1 --port 47000 --attacks 5 --dmg 5
+
+===== A. server (zombie_srv_O2s.exe --authoritative)  stdout =====
+[+  0.002s] zombie_srv pid=44636  mode=authoritative  max_hp=100.00  snapshot_count=0  send_chunk=0
+[+  0.003s] listen 127.0.0.1:47001 ok, waiting for client (Ctrl+C to stop)
+[+  0.254s] accept ok: peer=127.0.0.1:64460  (this peer is the tap, or the client if you bypass the tap)
+[+  0.256s] RX recv n=12
+[+  0.256s] RX  12B 0a 00 01 00 01 00 00 00 01 00 00 00  HELLO client_id=1 version=1
+[+  0.659s] RX recv n=16
+[+  0.660s] RX  16B 0e 00 02 00 00 00 a0 40 01 00 00 00 00 00 be 42  ATTACK seq=1 dmg=5.00 claimed=95.00
+[+  0.660s] HP   100.00 -> 95.00  (authoritative: claimed says 95.00, diff=0.00)
+[+  0.660s] TX  24B 16 00 03 00 01 00 00 00 00 00 be 42 00 00 c8 42 01 00 00 00 01 00 00 00  HP_SYNC hp=95.00 max=100.00 tick=1 alive=1
+[+  0.861s] RX recv n=16
+[+  0.861s] RX  16B 0e 00 02 00 00 00 a0 40 02 00 00 00 00 00 b4 42  ATTACK seq=2 dmg=5.00 claimed=90.00
+[+  0.861s] HP   95.00 -> 90.00  (authoritative: claimed says 90.00, diff=0.00)
+[+  0.861s] TX  24B 16 00 03 00 01 00 00 00 00 00 b4 42 00 00 c8 42 02 00 00 00 01 00 00 00  HP_SYNC hp=90.00 max=100.00 tick=2 alive=1
+[+  1.063s] RX recv n=16
+[+  1.063s] RX  16B 0e 00 02 00 00 00 a0 40 03 00 00 00 00 00 aa 42  ATTACK seq=3 dmg=5.00 claimed=85.00
+[+  1.064s] HP   90.00 -> 85.00  (authoritative: claimed says 85.00, diff=0.00)
+[+  1.064s] TX  24B 16 00 03 00 01 00 00 00 00 00 aa 42 00 00 c8 42 03 00 00 00 01 00 00 00  HP_SYNC hp=85.00 max=100.00 tick=3 alive=1
+[+  1.279s] RX recv n=16
+[+  1.279s] RX  16B 0e 00 02 00 00 00 a0 40 04 00 00 00 00 00 a0 42  ATTACK seq=4 dmg=5.00 claimed=80.00
+[+  1.279s] HP   85.00 -> 80.00  (authoritative: claimed says 80.00, diff=0.00)
+[+  1.279s] TX  24B 16 00 03 00 01 00 00 00 00 00 a0 42 00 00 c8 42 04 00 00 00 01 00 00 00  HP_SYNC hp=80.00 max=100.00 tick=4 alive=1
+[+  1.497s] RX recv n=16
+[+  1.497s] RX  16B 0e 00 02 00 00 00 a0 40 05 00 00 00 00 00 96 42  ATTACK seq=5 dmg=5.00 claimed=75.00
+[+  1.497s] HP   80.00 -> 75.00  (authoritative: claimed says 75.00, diff=0.00)
+[+  1.497s] TX  24B 16 00 03 00 01 00 00 00 00 00 96 42 00 00 c8 42 05 00 00 00 01 00 00 00  HP_SYNC hp=75.00 max=100.00 tick=5 alive=1
+[+  1.710s] RX recv n=4
+[+  1.710s] RX   4B 02 00 05 00  BYE
+[+  1.711s] FINAL hp=75.00 max_hp=100.00 alive=1  frames=7 hello=1 attack=5 reject=0 bye=1 unknown=0
+[+  1.711s] server exit
+
+===== A. client (zombie_cli_O2s.exe --attacks 5 --dmg 5, via tap)  stdout =====
+[+  0.001s] zombie_cli pid=47284 recv_buf=8192 hex_bytes=32 attacks=5 dmg=5.00 max_hp=100.00
+[+  0.003s] zombie_cli pid=47284 connect 127.0.0.1:47000 ok  local=127.0.0.1:64459  (this local port is the one you see in netstat)
+[+  0.003s] TX  12B 0a 00 01 00 01 00 00 00 01 00 00 00  HELLO client_id=1 version=1
+[+  0.409s] TX  16B 0e 00 02 00 00 00 a0 40 01 00 00 00 00 00 be 42  ATTACK dmg=5.00 seq=1 claimed=95.00
+[+  0.611s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 be 42 00 00 c8 42 01 00 00 00 01 00 00 00 
+[+  0.612s] RX     24B 16 00 03 00 01 00 00 00 00 00 be 42 00 00 c8 42 01 00 00 00 01 00 00 00  HP_SYNC player=1 hp=95.00 max=100.00 tick=1 alive=1 recv_chunks=1
+[+  0.612s]       HP check tick=1  my_prediction=95.00  server=95.00  OK
+[+  0.612s] TX  16B 0e 00 02 00 00 00 a0 40 02 00 00 00 00 00 b4 42  ATTACK dmg=5.00 seq=2 claimed=90.00
+[+  0.814s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 b4 42 00 00 c8 42 02 00 00 00 01 00 00 00 
+[+  0.815s] RX     24B 16 00 03 00 01 00 00 00 00 00 b4 42 00 00 c8 42 02 00 00 00 01 00 00 00  HP_SYNC player=1 hp=90.00 max=100.00 tick=2 alive=1 recv_chunks=1
+[+  0.815s]       HP check tick=2  my_prediction=90.00  server=90.00  OK
+[+  0.815s] TX  16B 0e 00 02 00 00 00 a0 40 03 00 00 00 00 00 aa 42  ATTACK dmg=5.00 seq=3 claimed=85.00
+[+  1.030s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 aa 42 00 00 c8 42 03 00 00 00 01 00 00 00 
+[+  1.031s] RX     24B 16 00 03 00 01 00 00 00 00 00 aa 42 00 00 c8 42 03 00 00 00 01 00 00 00  HP_SYNC player=1 hp=85.00 max=100.00 tick=3 alive=1 recv_chunks=1
+[+  1.031s]       HP check tick=3  my_prediction=85.00  server=85.00  OK
+[+  1.031s] TX  16B 0e 00 02 00 00 00 a0 40 04 00 00 00 00 00 a0 42  ATTACK dmg=5.00 seq=4 claimed=80.00
+[+  1.244s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 a0 42 00 00 c8 42 04 00 00 00 01 00 00 00 
+[+  1.247s] RX     24B 16 00 03 00 01 00 00 00 00 00 a0 42 00 00 c8 42 04 00 00 00 01 00 00 00  HP_SYNC player=1 hp=80.00 max=100.00 tick=4 alive=1 recv_chunks=1
+[+  1.248s]       HP check tick=4  my_prediction=80.00  server=80.00  OK
+[+  1.248s] TX  16B 0e 00 02 00 00 00 a0 40 05 00 00 00 00 00 96 42  ATTACK dmg=5.00 seq=5 claimed=75.00
+[+  1.461s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 96 42 00 00 c8 42 05 00 00 00 01 00 00 00 
+[+  1.462s] RX     24B 16 00 03 00 01 00 00 00 00 00 96 42 00 00 c8 42 05 00 00 00 01 00 00 00  HP_SYNC player=1 hp=75.00 max=100.00 tick=5 alive=1 recv_chunks=1
+[+  1.462s]       HP check tick=5  my_prediction=75.00  server=75.00  OK
+[+  1.462s] TX   4B 02 00 05 00  BYE
+[+  1.463s] RX recv() = 0 (WSA error 0) -> peer closed
+[+  1.463s] SUMMARY attacks=5 hp_sync=5 predicted=75.00 server_hp=75.00 match=YES
+[+  1.463s] SUMMARY snapshot_frames=0 snapshot_bytes=0 reconcile=0 recv_calls=5 bytes_left_in_buffer=0
+[+  1.463s] client exit rc=0
+
+===== A0. commands =====
+server: zombie_srv_O0.exe --port 47001 --bind 127.0.0.1 --authoritative
+client: zombie_cli_O0.exe --host 127.0.0.1 --port 47001 --attacks 2 --dmg 5
+
+===== A0. server (-O0 -g build, 2 attacks)  stdout =====
+[+  0.001s] zombie_srv pid=52616  mode=authoritative  max_hp=100.00  snapshot_count=0  send_chunk=0
+[+  0.002s] listen 127.0.0.1:47001 ok, waiting for client (Ctrl+C to stop)
+[+  0.100s] accept ok: peer=127.0.0.1:64462  (this peer is the tap, or the client if you bypass the tap)
+[+  0.101s] RX recv n=12
+[+  0.101s] RX  12B 0a 00 01 00 01 00 00 00 01 00 00 00  HELLO client_id=1 version=1
+[+  0.538s] RX recv n=16
+[+  0.538s] RX  16B 0e 00 02 00 00 00 a0 40 01 00 00 00 00 00 be 42  ATTACK seq=1 dmg=5.00 claimed=95.00
+[+  0.539s] HP   100.00 -> 95.00  (authoritative: claimed says 95.00, diff=0.00)
+[+  0.539s] TX  24B 16 00 03 00 01 00 00 00 00 00 be 42 00 00 c8 42 01 00 00 00 01 00 00 00  HP_SYNC hp=95.00 max=100.00 tick=1 alive=1
+[+  0.752s] RX recv n=16
+[+  0.753s] RX  16B 0e 00 02 00 00 00 a0 40 02 00 00 00 00 00 b4 42  ATTACK seq=2 dmg=5.00 claimed=90.00
+[+  0.753s] HP   95.00 -> 90.00  (authoritative: claimed says 90.00, diff=0.00)
+[+  0.753s] TX  24B 16 00 03 00 01 00 00 00 00 00 b4 42 00 00 c8 42 02 00 00 00 01 00 00 00  HP_SYNC hp=90.00 max=100.00 tick=2 alive=1
+[+  0.968s] RX recv n=4
+[+  0.968s] RX   4B 02 00 05 00  BYE
+[+  0.968s] FINAL hp=90.00 max_hp=100.00 alive=1  frames=4 hello=1 attack=2 reject=0 bye=1 unknown=0
+[+  0.968s] server exit
+
+===== A0. client (-O0 -g build, direct to 47001, 2 attacks)  stdout =====
+[+  0.001s] zombie_cli pid=41032 recv_buf=8192 hex_bytes=32 attacks=2 dmg=5.00 max_hp=100.00
+[+  0.006s] zombie_cli pid=41032 connect 127.0.0.1:47001 ok  local=127.0.0.1:64462  (this local port is the one you see in netstat)
+[+  0.007s] TX  12B 0a 00 01 00 01 00 00 00 01 00 00 00  HELLO client_id=1 version=1
+[+  0.409s] TX  16B 0e 00 02 00 00 00 a0 40 01 00 00 00 00 00 be 42  ATTACK dmg=5.00 seq=1 claimed=95.00
+[+  0.658s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 be 42 00 00 c8 42 01 00 00 00 01 00 00 00 
+[+  0.659s] RX     24B 16 00 03 00 01 00 00 00 00 00 be 42 00 00 c8 42 01 00 00 00 01 00 00 00  HP_SYNC player=1 hp=95.00 max=100.00 tick=1 alive=1 recv_chunks=1
+[+  0.659s]       HP check tick=1  my_prediction=95.00  server=95.00  OK
+[+  0.659s] TX  16B 0e 00 02 00 00 00 a0 40 02 00 00 00 00 00 b4 42  ATTACK dmg=5.00 seq=2 claimed=90.00
+[+  0.874s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 b4 42 00 00 c8 42 02 00 00 00 01 00 00 00 
+[+  0.874s] RX     24B 16 00 03 00 01 00 00 00 00 00 b4 42 00 00 c8 42 02 00 00 00 01 00 00 00  HP_SYNC player=1 hp=90.00 max=100.00 tick=2 alive=1 recv_chunks=1
+[+  0.875s]       HP check tick=2  my_prediction=90.00  server=90.00  OK
+[+  0.875s] TX   4B 02 00 05 00  BYE
+[+  0.875s] RX recv() = 0 (WSA error 0) -> peer closed
+[+  0.875s] SUMMARY attacks=2 hp_sync=2 predicted=90.00 server_hp=90.00 match=YES
+[+  0.876s] SUMMARY snapshot_frames=0 snapshot_bytes=0 reconcile=0 recv_calls=2 bytes_left_in_buffer=0
+[+  0.876s] client exit rc=0
+
+===== REJECT. command =====
+client: zombie_cli_O2s.exe --host 127.0.0.1 --port 47000 --attacks 1 --dmg 30
+
+===== REJECT. server (--authoritative, damage 30 is out of range)  stdout =====
+[+  0.003s] zombie_srv pid=50388  mode=authoritative  max_hp=100.00  snapshot_count=0  send_chunk=0
+[+  0.003s] listen 127.0.0.1:47001 ok, waiting for client (Ctrl+C to stop)
+[+  0.264s] accept ok: peer=127.0.0.1:64465  (this peer is the tap, or the client if you bypass the tap)
+[+  0.278s] RX recv n=12
+[+  0.278s] RX  12B 0a 00 01 00 01 00 00 00 01 00 00 00  HELLO client_id=1 version=1
+[+  0.666s] RX recv n=16
+[+  0.666s] RX  16B 0e 00 02 00 00 00 f0 41 01 00 00 00 00 00 8c 42  ATTACK seq=1 dmg=30.00 claimed=70.00
+[+  0.666s] REJECT seq=1 dmg=30.00 out of range (0 < dmg <= 25); hp stays 100.00
+[+  0.667s] TX  24B 16 00 03 00 01 00 00 00 00 00 c8 42 00 00 c8 42 01 00 00 00 01 00 00 00  HP_SYNC hp=100.00 max=100.00 tick=1 alive=1
+[+  0.867s] RX recv n=4
+[+  0.867s] RX   4B 02 00 05 00  BYE
+[+  0.868s] FINAL hp=100.00 max_hp=100.00 alive=1  frames=3 hello=1 attack=1 reject=1 bye=1 unknown=0
+[+  0.868s] server exit
+
+===== REJECT. client  stdout =====
+[+  0.001s] zombie_cli pid=48600 recv_buf=8192 hex_bytes=32 attacks=1 dmg=30.00 max_hp=100.00
+[+  0.002s] zombie_cli pid=48600 connect 127.0.0.1:47000 ok  local=127.0.0.1:64464  (this local port is the one you see in netstat)
+[+  0.003s] TX  12B 0a 00 01 00 01 00 00 00 01 00 00 00  HELLO client_id=1 version=1
+[+  0.408s] TX  16B 0e 00 02 00 00 00 f0 41 01 00 00 00 00 00 8c 42  ATTACK dmg=30.00 seq=1 claimed=70.00
+[+  0.609s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 c8 42 00 00 c8 42 01 00 00 00 01 00 00 00 
+[+  0.610s] RX     24B 16 00 03 00 01 00 00 00 00 00 c8 42 00 00 c8 42 01 00 00 00 01 00 00 00  HP_SYNC player=1 hp=100.00 max=100.00 tick=1 alive=1 recv_chunks=1
+[+  0.610s]       RECONCILE tick=1  my_prediction=70.00  server=100.00  delta=+30.00  (server is authoritative, my prediction is wrong)
+[+  0.610s] TX   4B 02 00 05 00  BYE
+[+  0.611s] RX recv() = 0 (WSA error 0) -> peer closed
+[+  0.612s] SUMMARY attacks=1 hp_sync=1 predicted=70.00 server_hp=100.00 match=NO
+[+  0.612s] SUMMARY snapshot_frames=0 snapshot_bytes=0 reconcile=1 recv_calls=1 bytes_left_in_buffer=0
+[+  0.612s] client exit rc=3
+

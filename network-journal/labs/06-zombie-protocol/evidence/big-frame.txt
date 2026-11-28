@@ -1,0 +1,133 @@
+### big-frame.txt - one 16006-byte frame, and how recv() splits it
+### host: DESKTOP-QE8M0K4   generated: 2026-11-23 00:25:46
+### Every block below is the raw stdout/stderr of one process, copied unedited.
+
+===== what to look at =====
+SNAPSHOT count=1000 is ONE frame of 16006 bytes (6-byte header + 16002-byte payload).
+D1: the server writes it with 4 send() calls (4096,4096,4096,3718). The client recv buffer
+    is 8192, so recv() has to be called several times to assemble that one frame.
+D2: the server writes it with ONE send(); the client recv buffer is 65536, so one recv()
+    returns all 16006 bytes at once.
+Both are legal: TCP gives you a byte stream, not messages. That is why the parser keeps a
+buffer and only cuts a frame once total_len bytes have arrived.
+
+===== D1 command =====
+server: zombie_srv_O2s.exe --port 47001 --bind 127.0.0.1 --authoritative --snapshot-count 1000 --send-chunk 4096
+tap   : python -u tap.py --listen-port 47000 --target-port 47001 --target-host 127.0.0.1
+client: zombie_cli_O2s.exe --host 127.0.0.1 --port 47000 --attacks 1 --recv-buf 8192
+
+===== D1. server (4 send() calls)  stdout =====
+[+  0.002s] zombie_srv pid=24040  mode=authoritative  max_hp=100.00  snapshot_count=1000  send_chunk=4096
+[+  0.002s] listen 127.0.0.1:47001 ok, waiting for client (Ctrl+C to stop)
+[+  0.222s] accept ok: peer=127.0.0.1:60156  (this peer is the tap, or the client if you bypass the tap)
+[+  0.245s] RX recv n=12
+[+  0.245s] RX  12B 0a 00 01 00 01 00 00 00 01 00 00 00  HELLO client_id=1 version=1
+[+  0.245s] TX  16006B 84 3e 04 00 e8 03 00 00 00 00 00 00 00 00 00 00 00 00 00 00 c8 42 01 00 00 00 00 00 c0 3f 00 00 ... SNAPSHOT count=1000 payload=16002 (split into 4 send() calls of <=4096 bytes)
+[+  0.246s] TX    send() #1/4   4096 bytes  offset=    0  first8=84 3e 04 00 e8 03 00 00  ...
+[+  0.246s] TX    send() #2/4   4096 bytes  offset= 4096  first8=ff 42 00 00 34 42 00 01  ...
+[+  0.246s] TX    send() #3/4   4096 bytes  offset= 8192  first8=7f 43 00 00 b2 42 00 02  ...
+[+  0.246s] TX    send() #4/4   3718 bytes  offset=12288  first8=bf 43 00 00 04 42 00 03  ...
+[+  0.661s] RX recv n=16
+[+  0.661s] RX  16B 0e 00 02 00 00 00 a0 40 01 00 00 00 00 00 be 42  ATTACK seq=1 dmg=5.00 claimed=95.00
+[+  0.661s] HP   100.00 -> 95.00  (authoritative: claimed says 95.00, diff=0.00)
+[+  0.661s] TX  24B 16 00 03 00 01 00 00 00 00 00 be 42 00 00 c8 42 01 00 00 00 01 00 00 00  HP_SYNC hp=95.00 max=100.00 tick=1 alive=1
+[+  0.864s] RX recv n=4
+[+  0.864s] RX   4B 02 00 05 00  BYE
+[+  0.864s] FINAL hp=95.00 max_hp=100.00 alive=1  frames=3 hello=1 attack=1 reject=0 bye=1 unknown=0
+[+  0.865s] server exit
+
+===== D1. client (recv-buf 8192: how many recv() does the frame take?)  stdout =====
+[+  0.001s] zombie_cli pid=45536 recv_buf=8192 hex_bytes=32 attacks=1 dmg=5.00 max_hp=100.00
+[+  0.002s] zombie_cli pid=45536 connect 127.0.0.1:47000 ok  local=127.0.0.1:60155  (this local port is the one you see in netstat)
+[+  0.003s] TX  12B 0a 00 01 00 01 00 00 00 01 00 00 00  HELLO client_id=1 version=1
+[+  0.030s] RX recv n= 4096  84 3e 04 00 e8 03 00 00 00 00 00 00 00 00 00 00 00 00 00 00 c8 42 01 00 00 00 00 00 c0 3f 00 00 ...
+[+  0.031s] RX recv n= 8192  ff 42 00 00 34 42 00 01 00 00 00 00 c0 43 00 00 00 43 00 00 30 42 01 01 00 00 00 c0 c0 43 00 80 ...
+[+  0.031s] RX recv n= 3718  bf 43 00 00 04 42 00 03 00 00 00 00 90 44 00 00 c0 43 00 00 00 42 01 03 00 00 00 30 90 44 00 40 ...
+[+  0.032s] RX  16006B 84 3e 04 00 e8 03 00 00 00 00 00 00 00 00 00 00 00 00 00 00 c8 42 01 00 00 00 00 00 c0 3f 00 00 ... SNAPSHOT count=1000 payload=16002 (payload should be 16002) recv_chunks=3
+[+  0.032s]       SNAPSHOT first={id=0 x=0.00 y=0.00 hp=100.00} last={id=999 x=1498.50 y=499.50 hp=1.00}
+[+  0.444s] TX  16B 0e 00 02 00 00 00 a0 40 01 00 00 00 00 00 be 42  ATTACK dmg=5.00 seq=1 claimed=95.00
+[+  0.647s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 be 42 00 00 c8 42 01 00 00 00 01 00 00 00 
+[+  0.648s] RX     24B 16 00 03 00 01 00 00 00 00 00 be 42 00 00 c8 42 01 00 00 00 01 00 00 00  HP_SYNC player=1 hp=95.00 max=100.00 tick=1 alive=1 recv_chunks=1
+[+  0.648s]       HP check tick=1  my_prediction=95.00  server=95.00  OK
+[+  0.648s] TX   4B 02 00 05 00  BYE
+[+  0.649s] RX recv() = 0 (WSA error 0) -> peer closed
+[+  0.649s] SUMMARY attacks=1 hp_sync=1 predicted=95.00 server_hp=95.00 match=YES
+[+  0.649s] SUMMARY snapshot_frames=1 snapshot_bytes=16006 reconcile=0 recv_calls=4 bytes_left_in_buffer=0
+[+  0.650s] client exit rc=0
+
+===== D1. tap (how many chunks did it see?)  stdout =====
+[+  0.009s] tap pid=14032 listen 127.0.0.1:47000 -> 127.0.0.1:47001  hex_bytes=32
+[+  0.101s] tap accept client 127.0.0.1:60155
+[+  0.125s] tap connected upstream 127.0.0.1:47001 (tap's local port 60156)
+[+  0.127s] C>S    12B  0a 00 01 00 01 00 00 00 01 00 00 00
+[+  0.127s] C>S frame #1     12B  HELLO client_id=1 version=1  hex=0a 00 01 00 01 00 00 00 01 00 00 00
+[+  0.128s] S>C  4096B  84 3e 04 00 e8 03 00 00 00 00 00 00 00 00 00 00 00 00 00 00 c8 42 01 00 00 00 00 00 c0 3f 00 00
+[+  0.129s] S>C  8192B  ff 42 00 00 34 42 00 01 00 00 00 00 c0 43 00 00 00 43 00 00 30 42 01 01 00 00 00 c0 c0 43 00 80
+[+  0.130s] S>C  3718B  bf 43 00 00 04 42 00 03 00 00 00 00 90 44 00 00 c0 43 00 00 00 42 01 03 00 00 00 30 90 44 00 40
+[+  0.130s] S>C frame #1  16006B  SNAPSHOT count=1000 payload=16002  hex=84 3e 04 00 e8 03 00 00 00 00 00 00 00 00 00 00 00 00 00 00 c8 42 01 00 00 00 00 00 c0 3f 00 00
+[+  0.543s] C>S    16B  0e 00 02 00 00 00 a0 40 01 00 00 00 00 00 be 42
+[+  0.544s] C>S frame #2     16B  ATTACK dmg=5.00 seq=1 claimed=95.00  hex=0e 00 02 00 00 00 a0 40 01 00 00 00 00 00 be 42
+[+  0.544s] S>C    24B  16 00 03 00 01 00 00 00 00 00 be 42 00 00 c8 42 01 00 00 00 01 00 00 00
+[+  0.544s] S>C frame #2     24B  HP_SYNC player=1 hp=95.00 max=100.00 tick=1 alive=1  hex=16 00 03 00 01 00 00 00 00 00 be 42 00 00 c8 42 01 00 00 00 01 00 00 00
+[+  0.747s] C>S     4B  02 00 05 00
+[+  0.747s] C>S frame #3      4B  BYE  hex=02 00 05 00
+[+  0.748s] S>C EOF (peer closed)
+[+  0.749s] C>S EOF (peer closed)
+[+  0.749s] tap summary  C>S chunks=3 bytes=32 frames=3 | S>C chunks=4 bytes=16030 frames=2
+
+===== D2 command =====
+server: zombie_srv_O2s.exe --port 47001 --bind 127.0.0.1 --authoritative --snapshot-count 1000
+tap   : python -u tap.py --listen-port 47000 --target-port 47001 --target-host 127.0.0.1
+client: zombie_cli_O2s.exe --host 127.0.0.1 --port 47000 --attacks 1 --recv-buf 65536
+
+===== D2. server (one send() call)  stdout =====
+[+  0.002s] zombie_srv pid=36932  mode=authoritative  max_hp=100.00  snapshot_count=1000  send_chunk=0
+[+  0.002s] listen 127.0.0.1:47001 ok, waiting for client (Ctrl+C to stop)
+[+  0.224s] accept ok: peer=127.0.0.1:60158  (this peer is the tap, or the client if you bypass the tap)
+[+  0.226s] RX recv n=12
+[+  0.226s] RX  12B 0a 00 01 00 01 00 00 00 01 00 00 00  HELLO client_id=1 version=1
+[+  0.227s] TX  16006B 84 3e 04 00 e8 03 00 00 00 00 00 00 00 00 00 00 00 00 00 00 c8 42 01 00 00 00 00 00 c0 3f 00 00 ... SNAPSHOT count=1000 payload=16002 (one send() call, frame=15.63 KB)
+[+  0.636s] RX recv n=16
+[+  0.636s] RX  16B 0e 00 02 00 00 00 a0 40 01 00 00 00 00 00 be 42  ATTACK seq=1 dmg=5.00 claimed=95.00
+[+  0.636s] HP   100.00 -> 95.00  (authoritative: claimed says 95.00, diff=0.00)
+[+  0.636s] TX  24B 16 00 03 00 01 00 00 00 00 00 be 42 00 00 c8 42 01 00 00 00 01 00 00 00  HP_SYNC hp=95.00 max=100.00 tick=1 alive=1
+[+  0.839s] RX recv n=4
+[+  0.839s] RX   4B 02 00 05 00  BYE
+[+  0.839s] FINAL hp=95.00 max_hp=100.00 alive=1  frames=3 hello=1 attack=1 reject=0 bye=1 unknown=0
+[+  0.839s] server exit
+
+===== D2. client (recv-buf 65536: one recv() gets 16006 bytes)  stdout =====
+[+  0.001s] zombie_cli pid=50372 recv_buf=65536 hex_bytes=32 attacks=1 dmg=5.00 max_hp=100.00
+[+  0.003s] zombie_cli pid=50372 connect 127.0.0.1:47000 ok  local=127.0.0.1:60157  (this local port is the one you see in netstat)
+[+  0.003s] TX  12B 0a 00 01 00 01 00 00 00 01 00 00 00  HELLO client_id=1 version=1
+[+  0.010s] RX recv n=16006  84 3e 04 00 e8 03 00 00 00 00 00 00 00 00 00 00 00 00 00 00 c8 42 01 00 00 00 00 00 c0 3f 00 00 ...
+[+  0.010s] RX  16006B 84 3e 04 00 e8 03 00 00 00 00 00 00 00 00 00 00 00 00 00 00 c8 42 01 00 00 00 00 00 c0 3f 00 00 ... SNAPSHOT count=1000 payload=16002 (payload should be 16002) recv_chunks=1
+[+  0.010s]       SNAPSHOT first={id=0 x=0.00 y=0.00 hp=100.00} last={id=999 x=1498.50 y=499.50 hp=1.00}
+[+  0.417s] TX  16B 0e 00 02 00 00 00 a0 40 01 00 00 00 00 00 be 42  ATTACK dmg=5.00 seq=1 claimed=95.00
+[+  0.620s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 be 42 00 00 c8 42 01 00 00 00 01 00 00 00 
+[+  0.621s] RX     24B 16 00 03 00 01 00 00 00 00 00 be 42 00 00 c8 42 01 00 00 00 01 00 00 00  HP_SYNC player=1 hp=95.00 max=100.00 tick=1 alive=1 recv_chunks=1
+[+  0.621s]       HP check tick=1  my_prediction=95.00  server=95.00  OK
+[+  0.621s] TX   4B 02 00 05 00  BYE
+[+  0.622s] RX recv() = 0 (WSA error 0) -> peer closed
+[+  0.622s] SUMMARY attacks=1 hp_sync=1 predicted=95.00 server_hp=95.00 match=YES
+[+  0.622s] SUMMARY snapshot_frames=1 snapshot_bytes=16006 reconcile=0 recv_calls=2 bytes_left_in_buffer=0
+[+  0.622s] client exit rc=0
+
+===== D2. tap  stdout =====
+[+  0.009s] tap pid=26948 listen 127.0.0.1:47000 -> 127.0.0.1:47001  hex_bytes=32
+[+  0.102s] tap accept client 127.0.0.1:60157
+[+  0.106s] tap connected upstream 127.0.0.1:47001 (tap's local port 60158)
+[+  0.107s] C>S    12B  0a 00 01 00 01 00 00 00 01 00 00 00
+[+  0.107s] C>S frame #1     12B  HELLO client_id=1 version=1  hex=0a 00 01 00 01 00 00 00 01 00 00 00
+[+  0.108s] S>C 16006B  84 3e 04 00 e8 03 00 00 00 00 00 00 00 00 00 00 00 00 00 00 c8 42 01 00 00 00 00 00 c0 3f 00 00
+[+  0.109s] S>C frame #1  16006B  SNAPSHOT count=1000 payload=16002  hex=84 3e 04 00 e8 03 00 00 00 00 00 00 00 00 00 00 00 00 00 00 c8 42 01 00 00 00 00 00 c0 3f 00 00
+[+  0.517s] C>S    16B  0e 00 02 00 00 00 a0 40 01 00 00 00 00 00 be 42
+[+  0.517s] C>S frame #2     16B  ATTACK dmg=5.00 seq=1 claimed=95.00  hex=0e 00 02 00 00 00 a0 40 01 00 00 00 00 00 be 42
+[+  0.517s] S>C    24B  16 00 03 00 01 00 00 00 00 00 be 42 00 00 c8 42 01 00 00 00 01 00 00 00
+[+  0.518s] S>C frame #2     24B  HP_SYNC player=1 hp=95.00 max=100.00 tick=1 alive=1  hex=16 00 03 00 01 00 00 00 00 00 be 42 00 00 c8 42 01 00 00 00 01 00 00 00
+[+  0.720s] C>S     4B  02 00 05 00
+[+  0.720s] C>S frame #3      4B  BYE  hex=02 00 05 00
+[+  0.720s] S>C EOF (peer closed)
+[+  0.721s] C>S EOF (peer closed)
+[+  0.721s] tap summary  C>S chunks=3 bytes=32 frames=3 | S>C chunks=2 bytes=16030 frames=2
+

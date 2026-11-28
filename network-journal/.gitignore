@@ -1,0 +1,41 @@
+# 编译产物
+*.exe
+*.o
+*.obj
+*.dll
+*.lib
+*.pdb
+*.ilk
+*.exp
+*.map
+
+# Python 产物
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# 抓包文件（体积大，只放本地）
+*.pcap
+*.pcapng
+*.cap
+
+# IDE / 编辑器（.vscode/ 故意保留：里面的构建与调试配置要跟着仓库走）
+.vs/
+.idea/
+*.user
+*.swp
+*.swo
+
+# 系统
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# 临时文件
+*.tmp
+*.log
+*.bak
+
+# lab 运行时的中间目录 / 产物（脚本会自己清理，这里兜底）
+_runtmp/
+expanded/

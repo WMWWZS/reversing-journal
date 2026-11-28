@@ -1,0 +1,74 @@
+### big-frame-variance.txt - the same 16006-byte SNAPSHOT frame, cut differently
+### host: DESKTOP-QE8M0K4   generated: 2026-11-23 00:26:12
+### Why this file: run.ps1 scenario D1 (evidence\big-frame.txt) got 4096 / 8192 / 3718.
+### These three manual repeats used the exact same command line and got another cut.
+### Every block below is the raw stdout of one client process, copied unedited.
+
+### command (three windows, or the equivalent from a script):
+###   server: src\bin\zombie_srv_O2s.exe --port 47001 --bind 127.0.0.1 --authoritative --snapshot-count 1000 --send-chunk 4096
+###   tap   : py -u src\tap.py --listen-port 47000 --target-port 47001 --target-host 127.0.0.1
+###   client: src\bin\zombie_cli_O2s.exe --host 127.0.0.1 --port 47000 --attacks 1 --recv-buf 8192
+
+===== manual D1 repeat #1 - client stdout =====
+[+  0.001s] zombie_cli pid=42232 recv_buf=8192 hex_bytes=32 attacks=1 dmg=5.00 max_hp=100.00
+[+  0.003s] zombie_cli pid=42232 connect 127.0.0.1:47000 ok  local=127.0.0.1:61455  (this local port is the one you see in netstat)
+[+  0.003s] TX  12B 0a 00 01 00 01 00 00 00 01 00 00 00  HELLO client_id=1 version=1
+[+  0.010s] RX recv n= 4096  84 3e 04 00 e8 03 00 00 00 00 00 00 00 00 00 00 00 00 00 00 c8 42 01 00 00 00 00 00 c0 3f 00 00 ...
+[+  0.011s] RX recv n= 4096  ff 42 00 00 34 42 00 01 00 00 00 00 c0 43 00 00 00 43 00 00 30 42 01 01 00 00 00 c0 c0 43 00 80 ...
+[+  0.011s] RX recv n= 4096  7f 43 00 00 b2 42 00 02 00 00 00 00 40 44 00 00 80 43 00 00 b0 42 01 02 00 00 00 60 40 44 00 40 ...
+[+  0.011s] RX recv n= 3718  bf 43 00 00 04 42 00 03 00 00 00 00 90 44 00 00 c0 43 00 00 00 42 01 03 00 00 00 30 90 44 00 40 ...
+[+  0.012s] RX  16006B 84 3e 04 00 e8 03 00 00 00 00 00 00 00 00 00 00 00 00 00 00 c8 42 01 00 00 00 00 00 c0 3f 00 00 ... SNAPSHOT count=1000 payload=16002 (payload should be 16002) recv_chunks=4
+[+  0.012s]       SNAPSHOT first={id=0 x=0.00 y=0.00 hp=100.00} last={id=999 x=1498.50 y=499.50 hp=1.00}
+[+  0.413s] TX  16B 0e 00 02 00 00 00 a0 40 01 00 00 00 00 00 be 42  ATTACK dmg=5.00 seq=1 claimed=95.00
+[+  0.615s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 be 42 00 00 c8 42 01 00 00 00 01 00 00 00 
+[+  0.616s] RX     24B 16 00 03 00 01 00 00 00 00 00 be 42 00 00 c8 42 01 00 00 00 01 00 00 00  HP_SYNC player=1 hp=95.00 max=100.00 tick=1 alive=1 recv_chunks=1
+[+  0.616s]       HP check tick=1  my_prediction=95.00  server=95.00  OK
+[+  0.616s] TX   4B 02 00 05 00  BYE
+[+  0.617s] RX recv() = 0 (WSA error 0) -> peer closed
+[+  0.618s] SUMMARY attacks=1 hp_sync=1 predicted=95.00 server_hp=95.00 match=YES
+[+  0.618s] SUMMARY snapshot_frames=1 snapshot_bytes=16006 reconcile=0 recv_calls=5 bytes_left_in_buffer=0
+[+  0.618s] client exit rc=0
+
+===== manual D1 repeat #2 - client stdout =====
+[+  0.001s] zombie_cli pid=52424 recv_buf=8192 hex_bytes=32 attacks=1 dmg=5.00 max_hp=100.00
+[+  0.002s] zombie_cli pid=52424 connect 127.0.0.1:47000 ok  local=127.0.0.1:64969  (this local port is the one you see in netstat)
+[+  0.002s] TX  12B 0a 00 01 00 01 00 00 00 01 00 00 00  HELLO client_id=1 version=1
+[+  0.008s] RX recv n= 4096  84 3e 04 00 e8 03 00 00 00 00 00 00 00 00 00 00 00 00 00 00 c8 42 01 00 00 00 00 00 c0 3f 00 00 ...
+[+  0.008s] RX recv n= 4096  ff 42 00 00 34 42 00 01 00 00 00 00 c0 43 00 00 00 43 00 00 30 42 01 01 00 00 00 c0 c0 43 00 80 ...
+[+  0.009s] RX recv n= 7814  7f 43 00 00 b2 42 00 02 00 00 00 00 40 44 00 00 80 43 00 00 b0 42 01 02 00 00 00 60 40 44 00 40 ...
+[+  0.009s] RX  16006B 84 3e 04 00 e8 03 00 00 00 00 00 00 00 00 00 00 00 00 00 00 c8 42 01 00 00 00 00 00 c0 3f 00 00 ... SNAPSHOT count=1000 payload=16002 (payload should be 16002) recv_chunks=3
+[+  0.009s]       SNAPSHOT first={id=0 x=0.00 y=0.00 hp=100.00} last={id=999 x=1498.50 y=499.50 hp=1.00}
+[+  0.413s] TX  16B 0e 00 02 00 00 00 a0 40 01 00 00 00 00 00 be 42  ATTACK dmg=5.00 seq=1 claimed=95.00
+[+  0.660s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 be 42 00 00 c8 42 01 00 00 00 01 00 00 00 
+[+  0.661s] RX     24B 16 00 03 00 01 00 00 00 00 00 be 42 00 00 c8 42 01 00 00 00 01 00 00 00  HP_SYNC player=1 hp=95.00 max=100.00 tick=1 alive=1 recv_chunks=1
+[+  0.661s]       HP check tick=1  my_prediction=95.00  server=95.00  OK
+[+  0.661s] TX   4B 02 00 05 00  BYE
+[+  0.662s] RX recv() = 0 (WSA error 0) -> peer closed
+[+  0.662s] SUMMARY attacks=1 hp_sync=1 predicted=95.00 server_hp=95.00 match=YES
+[+  0.662s] SUMMARY snapshot_frames=1 snapshot_bytes=16006 reconcile=0 recv_calls=4 bytes_left_in_buffer=0
+[+  0.662s] client exit rc=0
+
+===== manual D1 repeat #3 - client stdout =====
+[+  0.001s] zombie_cli pid=49028 recv_buf=8192 hex_bytes=32 attacks=1 dmg=5.00 max_hp=100.00
+[+  0.003s] zombie_cli pid=49028 connect 127.0.0.1:47000 ok  local=127.0.0.1:56468  (this local port is the one you see in netstat)
+[+  0.003s] TX  12B 0a 00 01 00 01 00 00 00 01 00 00 00  HELLO client_id=1 version=1
+[+  0.010s] RX recv n= 4096  84 3e 04 00 e8 03 00 00 00 00 00 00 00 00 00 00 00 00 00 00 c8 42 01 00 00 00 00 00 c0 3f 00 00 ...
+[+  0.010s] RX recv n= 4096  ff 42 00 00 34 42 00 01 00 00 00 00 c0 43 00 00 00 43 00 00 30 42 01 01 00 00 00 c0 c0 43 00 80 ...
+[+  0.010s] RX recv n= 4096  7f 43 00 00 b2 42 00 02 00 00 00 00 40 44 00 00 80 43 00 00 b0 42 01 02 00 00 00 60 40 44 00 40 ...
+[+  0.011s] RX recv n= 3718  bf 43 00 00 04 42 00 03 00 00 00 00 90 44 00 00 c0 43 00 00 00 42 01 03 00 00 00 30 90 44 00 40 ...
+[+  0.011s] RX  16006B 84 3e 04 00 e8 03 00 00 00 00 00 00 00 00 00 00 00 00 00 00 c8 42 01 00 00 00 00 00 c0 3f 00 00 ... SNAPSHOT count=1000 payload=16002 (payload should be 16002) recv_chunks=4
+[+  0.011s]       SNAPSHOT first={id=0 x=0.00 y=0.00 hp=100.00} last={id=999 x=1498.50 y=499.50 hp=1.00}
+[+  0.418s] TX  16B 0e 00 02 00 00 00 a0 40 01 00 00 00 00 00 be 42  ATTACK dmg=5.00 seq=1 claimed=95.00
+[+  0.621s] RX recv n=   24  16 00 03 00 01 00 00 00 00 00 be 42 00 00 c8 42 01 00 00 00 01 00 00 00 
+[+  0.621s] RX     24B 16 00 03 00 01 00 00 00 00 00 be 42 00 00 c8 42 01 00 00 00 01 00 00 00  HP_SYNC player=1 hp=95.00 max=100.00 tick=1 alive=1 recv_chunks=1
+[+  0.621s]       HP check tick=1  my_prediction=95.00  server=95.00  OK
+[+  0.621s] TX   4B 02 00 05 00  BYE
+[+  0.623s] RX recv() = 0 (WSA error 0) -> peer closed
+[+  0.623s] SUMMARY attacks=1 hp_sync=1 predicted=95.00 server_hp=95.00 match=YES
+[+  0.623s] SUMMARY snapshot_frames=1 snapshot_bytes=16006 reconcile=0 recv_calls=5 bytes_left_in_buffer=0
+[+  0.624s] client exit rc=0
+
+### Read it as: the server still wrote 4 send() calls (4096,4096,4096,3718),
+### but the client recv() returned 4096 / 4096 / 7814 this time. Same bytes,
+### same total (16006), different cut points. TCP is a byte stream: the
+### receiver must keep a buffer and cut frames with total_len, never with recv().

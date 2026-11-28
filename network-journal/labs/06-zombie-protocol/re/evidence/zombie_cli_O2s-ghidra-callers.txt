@@ -1,0 +1,379 @@
+INFO  Using log config file: jar:file:/D:/tools/ghidra/ghidra_12.2_PUBLIC/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)  
+INFO  Using log file: C:\Users\风林火山\AppData\Roaming\ghidra\ghidra_12.2_PUBLIC\application.log (LoggingInitialization)  
+INFO  Loading user preferences: C:\Users\风林火山\AppData\Roaming\ghidra\ghidra_12.2_PUBLIC\preferences (Preferences)  
+INFO  Searching for classes... (ClassSearcher)  
+INFO  Class search complete (752 ms) (ClassSearcher)  
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)  
+INFO  Initializing Random Number Generator... (SecureRandomFactory)  
+INFO  Random Number Generator initialization complete: SHA1PRNG (SecureRandomFactory)  
+INFO  Loaded 79 trusted CA certificates from the OS trust store. (DefaultTrustManagerFactory)  
+INFO  Loaded 118 trusted CA certificates from the Java default trust store. (DefaultTrustManagerFactory)  
+INFO  Headless startup complete (1881 ms) (AnalyzeHeadless)  
+INFO  Class searcher loaded 60 extension points (19 false positives) (ClassSearcher)  
+INFO  HEADLESS Script Paths:
+    D:\tools\ghidra\ghidra_12.2_PUBLIC\Ghidra\Features\SystemEmulation\ghidra_scripts
+    D:\tools\ghidra\ghidra_12.2_PUBLIC\Ghidra\Features\Swift\ghidra_scripts
+    D:\tools\ghidra\ghidra_12.2_PUBLIC\Ghidra\Features\BSim\ghidra_scripts
+    D:\tools\ghidra\ghidra_12.2_PUBLIC\Ghidra\Features\Decompiler\ghidra_scripts
+    D:\tools\ghidra\ghidra_12.2_PUBLIC\Ghidra\Debug\Debugger-rmi-trace\ghidra_scripts
+    D:\tools\ghidra\ghidra_12.2_PUBLIC\Ghidra\Debug\Debugger\ghidra_scripts
+    D:\tools\ghidra\ghidra_12.2_PUBLIC\Ghidra\Processors\8051\ghidra_scripts
+    D:\tools\ghidra\ghidra_12.2_PUBLIC\Ghidra\Features\PyGhidra\ghidra_scripts
+    E:\harness\network-journal\labs\06-zombie-protocol\re
+    D:\tools\ghidra\ghidra_12.2_PUBLIC\Ghidra\Features\FunctionID\ghidra_scripts
+    D:\tools\ghidra\ghidra_12.2_PUBLIC\Ghidra\Features\GnuDemangler\ghidra_scripts
+    D:\tools\ghidra\ghidra_12.2_PUBLIC\Ghidra\Processors\PIC\ghidra_scripts
+    D:\tools\ghidra\ghidra_12.2_PUBLIC\Ghidra\Features\MicrosoftCodeAnalyzer\ghidra_scripts
+    D:\tools\ghidra\ghidra_12.2_PUBLIC\Ghidra\Features\PDB\ghidra_scripts
+    D:\tools\ghidra\ghidra_12.2_PUBLIC\Ghidra\Features\Base\ghidra_scripts
+    D:\tools\ghidra\ghidra_12.2_PUBLIC\Ghidra\Features\BytePatterns\ghidra_scripts
+    D:\tools\ghidra\ghidra_12.2_PUBLIC\Ghidra\Processors\Atmel\ghidra_scripts
+    D:\tools\ghidra\ghidra_12.2_PUBLIC\Ghidra\Processors\JVM\ghidra_scripts
+    D:\tools\ghidra\ghidra_12.2_PUBLIC\Ghidra\Features\DecompilerDependent\ghidra_scripts
+    D:\tools\ghidra\ghidra_12.2_PUBLIC\Ghidra\Features\VersionTracking\ghidra_scripts
+    D:\tools\ghidra\ghidra_12.2_PUBLIC\Ghidra\Processors\DATA\ghidra_scripts
+    D:\tools\ghidra\ghidra_12.2_PUBLIC\Ghidra\Features\FileFormats\ghidra_scripts
+    D:\tools\ghidra\ghidra_12.2_PUBLIC\Ghidra\Features\WildcardAssembler\ghidra_scripts (HeadlessAnalyzer)  
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)  
+INFO  Creating project: D:\tools\ghidra-projects\network-journal-lab06 (HeadlessAnalyzer)  
+INFO  Creating project: D:\tools\ghidra-projects\network-journal-lab06 (DefaultProject)  
+INFO  REPORT: Processing input files:  (HeadlessAnalyzer)  
+INFO       project: D:\tools\ghidra-projects\network-journal-lab06 (HeadlessAnalyzer)  
+INFO  IMPORTING: file:///E:/harness/network-journal/labs/06-zombie-protocol/src/bin/zombie_cli_O2s.exe (HeadlessAnalyzer)  
+INFO  Using Loader: Portable Executable (PE) (ProgramLoader)  
+INFO  Using Language/Compiler: x86:LE:64:default:windows (ProgramLoader)  
+INFO  Using Library Search Path: [., C:\WINDOWS\SysWOW64, D:\tools\jdk-25\jdk-25.0.5+8\bin, C:\WINDOWS\Sun\Java\bin, C:\WINDOWS\system32, C:\WINDOWS, C:\Program Files\Eclipse Adoptium\jdk-21.0.12.101-hotspot\bin, C:\Program Files (x86)\Razer\ChromaBroadcast\bin, C:\Program Files\Razer\ChromaBroadcast\bin, C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler, C:\Program Files (x86)\Common Files\Oracle\Java\java8path, C:\Program Files (x86)\Common Files\Oracle\Java\javapath, C:\WINDOWS\System32\Wbem, C:\WINDOWS\System32\WindowsPowerShell\v1.0\, C:\WINDOWS\System32\OpenSSH\, E:\QT\6.10.1\mingw_64\bin, C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps, C:\Recovery\OEM\Backup\, C:\Program Files\dotnet\, C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common, C:\Program Files\NVIDIA Corporation\NVIDIA App\NvDLISR, C:\Program Files\TortoiseGit\bin, C:\mingw64\bin, D:\cursor\resources\app\bin, C:\WINDOWS\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps, C:\Program Files (x86)\Razer Chroma SDK\bin, C:\Program Files\Razer Chroma SDK\bin, C:\Users\风林火山\AppData\Local\Microsoft\WindowsApps, rogram Files\JetBrains\PyCharm Community Edition 2019.2.3\bin, C:\Microsoft VS Code\bin, C:\Program Files\nodejs\, C:\Program Files\Git\cmd, E:\Windows Kits\10\Windows Performance Toolkit\, C:\Users\风林火山\AppData\Roaming\npm, C:\Program Files\WSL\, C:\Users\风林火山\AppData\Local\Programs\DockerDesktop\resources\bin, C:\Users\风林火山\AppData\Local\GitHubDesktop\bin, C:\Program Files\MySQL\MySQL Server 5.7\bin] (ProgramLoader)  
+INFO  TLS callbacks at 140006d90 (TLSDirectory)  
+WARN  Invalid or missing function at 180060384 (ExportDataDirectory)  
+INFO  Additional info:
+Loading file:///E:/harness/network-journal/labs/06-zombie-protocol/src/bin/zombie_cli_O2s.exe?MD5=968a245e8300c22c87284a148885c321...
+------------------------------------------------
+
+Searching 28 paths for library API-MS-WIN-CRT-CONVERT-L1-1-0.DLL...
+Loading file:///D:/tools/jdk-25/jdk-25.0.5+8/bin/api-ms-win-crt-convert-l1-1-0.dll?MD5=3560176d0cdbe2f5d33f543348e0a027...
+Using existing exports file: C:\Users\风林火山\AppData\Roaming\ghidra\ghidra_12.2_PUBLIC\symbols\win64\api-ms-win-crt-convert-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 28 paths for library API-MS-WIN-CRT-ENVIRONMENT-L1-1-0.DLL...
+Loading file:///D:/tools/jdk-25/jdk-25.0.5+8/bin/api-ms-win-crt-environment-l1-1-0.dll?MD5=e93c7f013493b12ad40229b19db02ce6...
+Using existing exports file: C:\Users\风林火山\AppData\Roaming\ghidra\ghidra_12.2_PUBLIC\symbols\win64\api-ms-win-crt-environment-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 28 paths for library API-MS-WIN-CRT-HEAP-L1-1-0.DLL...
+Loading file:///D:/tools/jdk-25/jdk-25.0.5+8/bin/api-ms-win-crt-heap-l1-1-0.dll?MD5=527bbbfded529ea77ee798d94ce0f243...
+Using existing exports file: C:\Users\风林火山\AppData\Roaming\ghidra\ghidra_12.2_PUBLIC\symbols\win64\api-ms-win-crt-heap-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 28 paths for library API-MS-WIN-CRT-MATH-L1-1-0.DLL...
+Loading file:///D:/tools/jdk-25/jdk-25.0.5+8/bin/api-ms-win-crt-math-l1-1-0.dll?MD5=aa9624cb27cc50a3fbbd3b223a617b1c...
+Using existing exports file: C:\Users\风林火山\AppData\Roaming\ghidra\ghidra_12.2_PUBLIC\symbols\win64\api-ms-win-crt-math-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 28 paths for library API-MS-WIN-CRT-PRIVATE-L1-1-0.DLL...
+Loading file:///D:/tools/jdk-25/jdk-25.0.5+8/bin/api-ms-win-crt-private-l1-1-0.dll?MD5=c830c6447e6de3d6a611702c591831e3...
+Using existing exports file: C:\Users\风林火山\AppData\Roaming\ghidra\ghidra_12.2_PUBLIC\symbols\win64\api-ms-win-crt-private-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 28 paths for library API-MS-WIN-CRT-RUNTIME-L1-1-0.DLL...
+Loading file:///D:/tools/jdk-25/jdk-25.0.5+8/bin/api-ms-win-crt-runtime-l1-1-0.dll?MD5=bbaa58e9e1abdf7d8c4c69652d29d789...
+Using existing exports file: C:\Users\风林火山\AppData\Roaming\ghidra\ghidra_12.2_PUBLIC\symbols\win64\api-ms-win-crt-runtime-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 28 paths for library API-MS-WIN-CRT-STDIO-L1-1-0.DLL...
+Loading file:///D:/tools/jdk-25/jdk-25.0.5+8/bin/api-ms-win-crt-stdio-l1-1-0.dll?MD5=ef37235fc43157a4c93241d5e49e304b...
+Using existing exports file: C:\Users\风林火山\AppData\Roaming\ghidra\ghidra_12.2_PUBLIC\symbols\win64\api-ms-win-crt-stdio-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 28 paths for library API-MS-WIN-CRT-STRING-L1-1-0.DLL...
+Loading file:///D:/tools/jdk-25/jdk-25.0.5+8/bin/api-ms-win-crt-string-l1-1-0.dll?MD5=639b1fb35cb61ba633eb1791b750631f...
+Using existing exports file: C:\Users\风林火山\AppData\Roaming\ghidra\ghidra_12.2_PUBLIC\symbols\win64\api-ms-win-crt-string-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 28 paths for library API-MS-WIN-CRT-TIME-L1-1-0.DLL...
+Loading file:///D:/tools/jdk-25/jdk-25.0.5+8/bin/api-ms-win-crt-time-l1-1-0.dll?MD5=fccce207a34c947f01d3f23a7dd09569...
+Using existing exports file: C:\Users\风林火山\AppData\Roaming\ghidra\ghidra_12.2_PUBLIC\symbols\win64\api-ms-win-crt-time-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 28 paths for library KERNEL32.DLL...
+Skipping library which is the wrong architecture: file:///C:/Windows/SysWOW64/kernel32.dll
+Loading file:///C:/Windows/System32/kernel32.dll?MD5=a87115f2b32e0bdca676b0c029bf125e...
+Using existing exports file: C:\Users\风林火山\AppData\Roaming\ghidra\ghidra_12.2_PUBLIC\symbols\win64\kernel32.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 28 paths for library WS2_32.DLL...
+Skipping library which is the wrong architecture: file:///C:/Windows/SysWOW64/ws2_32.dll
+Loading file:///C:/Windows/System32/ws2_32.dll?MD5=ca63522853695950d08df7f68040a9db...
+[ws2_32.dll]: failed to create WEVTResource at 18006b4b8: Failed to resolve data length for WEVTResource
+Using existing exports file: C:\Users\风林火山\AppData\Roaming\ghidra\ghidra_12.2_PUBLIC\symbols\win64\ws2_32.exports
+Library not saved to project.
+------------------------------------------------
+
+Applying C:\Users\风林火山\AppData\Roaming\ghidra\ghidra_12.2_PUBLIC\symbols\win64\kernel32.exports
+Applying C:\Users\风林火山\AppData\Roaming\ghidra\ghidra_12.2_PUBLIC\symbols\win64\api-ms-win-crt-convert-l1-1-0.exports
+Applying C:\Users\风林火山\AppData\Roaming\ghidra\ghidra_12.2_PUBLIC\symbols\win64\api-ms-win-crt-environment-l1-1-0.exports
+Applying C:\Users\风林火山\AppData\Roaming\ghidra\ghidra_12.2_PUBLIC\symbols\win64\api-ms-win-crt-heap-l1-1-0.exports
+Applying C:\Users\风林火山\AppData\Roaming\ghidra\ghidra_12.2_PUBLIC\symbols\win64\api-ms-win-crt-math-l1-1-0.exports
+Applying C:\Users\风林火山\AppData\Roaming\ghidra\ghidra_12.2_PUBLIC\symbols\win64\api-ms-win-crt-private-l1-1-0.exports
+Applying C:\Users\风林火山\AppData\Roaming\ghidra\ghidra_12.2_PUBLIC\symbols\win64\api-ms-win-crt-runtime-l1-1-0.exports
+Applying C:\Users\风林火山\AppData\Roaming\ghidra\ghidra_12.2_PUBLIC\symbols\win64\api-ms-win-crt-stdio-l1-1-0.exports
+Applying C:\Users\风林火山\AppData\Roaming\ghidra\ghidra_12.2_PUBLIC\symbols\win64\api-ms-win-crt-string-l1-1-0.exports
+Applying C:\Users\风林火山\AppData\Roaming\ghidra\ghidra_12.2_PUBLIC\symbols\win64\api-ms-win-crt-time-l1-1-0.exports
+Applying C:\Users\风林火山\AppData\Roaming\ghidra\ghidra_12.2_PUBLIC\symbols\win64\ws2_32.exports
+Linking the External Programs of 'zombie_cli_O2s.exe' to imported libraries...
+  [KERNEL32.DLL] -> not found in project
+  [API-MS-WIN-CRT-CONVERT-L1-1-0.DLL] -> not found in project
+  [API-MS-WIN-CRT-ENVIRONMENT-L1-1-0.DLL] -> not found in project
+  [API-MS-WIN-CRT-HEAP-L1-1-0.DLL] -> not found in project
+  [API-MS-WIN-CRT-MATH-L1-1-0.DLL] -> not found in project
+  [API-MS-WIN-CRT-PRIVATE-L1-1-0.DLL] -> not found in project
+  [API-MS-WIN-CRT-RUNTIME-L1-1-0.DLL] -> not found in project
+  [API-MS-WIN-CRT-STDIO-L1-1-0.DLL] -> not found in project
+  [API-MS-WIN-CRT-STRING-L1-1-0.DLL] -> not found in project
+  [API-MS-WIN-CRT-TIME-L1-1-0.DLL] -> not found in project
+  [WS2_32.DLL] -> not found in project
+------------------------------------------------
+
+ (ProgramLoader)  
+INFO  IMPORTING: Loaded 0 additional files (HeadlessAnalyzer)  
+INFO  ANALYZING all memory and code: file:///E:/harness/network-journal/labs/06-zombie-protocol/src/bin/zombie_cli_O2s.exe (HeadlessAnalyzer)  
+ERROR MinGW pseudo-relocation list not found (MingwRelocationAnalyzer)  
+WARN  Ignoring leading '_' chars on no-return name '___raise_securityfailure' specified in file: D:\tools\ghidra\ghidra_12.2_PUBLIC\Ghidra\Features\Base\data\PEFunctionsThatDoNotReturn (NoReturnFunctionAnalyzer)  
+WARN  Ignoring leading '_' chars on no-return name '___report_rangecheckfailure' specified in file: D:\tools\ghidra\ghidra_12.2_PUBLIC\Ghidra\Features\Base\data\PEFunctionsThatDoNotReturn (NoReturnFunctionAnalyzer)  
+INFO  Unable to find DWARF information, skipping DWARF analysis (DWARFAnalyzer)  
+INFO  Skipping PDB processing: missing PDB information in program metadata (PdbUniversalAnalyzer)  
+INFO  hit non-returning function, restarting decompiler switch analyzer later (DecompilerSwitchAnalyzer)  
+INFO  Packed database cache: C:\Users\风林火山\AppData\Local\ghidra\packed-db-cache (PackedDatabaseCache)  
+INFO  Applied data type archive: windows_vs12_64 (ApplyDataArchiveAnalyzer)  
+INFO  Applied data type archive: windows_vs12_64 (ApplyDataArchiveAnalyzer)  
+INFO  No functions detected that make variadic function calls with format strings containing format specifiers (FormatStringAnalyzer)  
+INFO  -----------------------------------------------------
+    ASCII Strings                              0.307 secs
+    Apply Data Archives                        0.848 secs
+    Call Convention ID                         0.002 secs
+    Call-Fixup Installer                       0.044 secs
+    Create Address Tables                      0.044 secs
+    Create Address Tables - One Time           0.007 secs
+    Create Function                            0.015 secs
+    DWARF                                      0.003 secs
+    Data Reference                             0.021 secs
+    Decompiler Parameter ID                    2.836 secs
+    Decompiler Switch Analysis                 0.289 secs
+    Decompiler Switch Analysis - One Time      0.789 secs
+    Demangler GNU                              0.040 secs
+    Demangler Microsoft                        0.010 secs
+    Disassemble                                0.001 secs
+    Disassemble Entry Points                   0.209 secs
+    Embedded Media                             0.005 secs
+    External Entry References                  0.000 secs
+    Function ID                                0.141 secs
+    Function Start Search                      0.011 secs
+    MinGW Relocations                          0.003 secs
+    Non-Returning Functions - Discovered       0.032 secs
+    Non-Returning Functions - Known            0.004 secs
+    PDB Universal                              0.000 secs
+    Reference                                  0.029 secs
+    Scalar Operand References                  0.034 secs
+    Shared Return Calls                        0.010 secs
+    Source Language Support                    0.002 secs
+    Stack                                      0.128 secs
+    Subroutine References                      0.013 secs
+    Subroutine References - One Time           0.001 secs
+    Variadic Function Signature Override       0.018 secs
+    WindowsResourceReference                   0.427 secs
+    x86 Constant Reference Analyzer            0.195 secs
+-----------------------------------------------------
+     Total Time   6 secs
+-----------------------------------------------------
+ (AutoAnalysisManager)  
+INFO  REPORT: Analysis succeeded for file: file:///E:/harness/network-journal/labs/06-zombie-protocol/src/bin/zombie_cli_O2s.exe (HeadlessAnalyzer)  
+INFO  REPORT: Execute script: DecompileCallersOf.java 'send' 'recv'  (HeadlessAnalyzer)  
+INFO  SCRIPT: E:\harness\network-journal\labs\06-zombie-protocol\re\DecompileCallersOf.java (HeadlessAnalyzer)  
+INFO  DecompileCallersOf.java> ================================================================ (GhidraScript)  
+INFO  DecompileCallersOf.java> 外部函数: send (GhidraScript)  
+INFO  DecompileCallersOf.java> ---------------------------------------------------------------- (GhidraScript)  
+INFO  DecompileCallersOf.java>   符号: send  地址: EXTERNAL:00000047 (GhidraScript)  
+INFO  DecompileCallersOf.java>     被引用 @ 14000a608  (DATA) (GhidraScript)  
+INFO  DecompileCallersOf.java>     被引用 @ 140001c6a  (COMPUTED_CALL) (GhidraScript)  
+INFO  DecompileCallersOf.java>  (GhidraScript)  
+INFO  DecompileCallersOf.java>   >>> 调用者函数: FUN_140001be0  入口: 140001be0 (GhidraScript)  
+INFO  DecompileCallersOf.java> 
+uint FUN_140001be0(SOCKET param_1,undefined1 param_2,longlong param_3,uint param_4,
+                  undefined8 param_5)
+
+{
+  int iVar1;
+  uint uVar2;
+  ulonglong uVar3;
+  int iVar4;
+  uint uVar5;
+  undefined8 uVar6;
+  uint local_16c;
+  byte local_168 [4];
+  undefined8 local_164 [7];
+  undefined1 local_128 [256];
+  
+  local_168[0] = (char)param_4 + 2;
+  local_168[1] = 0;
+  uVar5 = param_4 + 4;
+  local_168[3] = 0;
+  local_168[2] = param_2;
+  if (param_4 != 0) {
+    *(undefined8 *)(local_168 + ((ulonglong)param_4 - 4)) =
+         *(undefined8 *)(param_3 + -8 + (ulonglong)param_4);
+    if (7 < param_4 - 1) {
+      uVar2 = 0;
+      do {
+        uVar3 = (ulonglong)uVar2;
+        uVar2 = uVar2 + 8;
+        *(undefined8 *)((longlong)local_164 + uVar3) = *(undefined8 *)(param_3 + uVar3);
+      } while (uVar2 < (param_4 - 1 & 0xfffffff8));
+    }
+  }
+  FUN_1400014b0(local_128,local_168,uVar5,0x20);
+  iVar4 = 0;
+  FUN_140001570("TX  %2dB %s %s",(ulonglong)uVar5,local_128,param_5);
+  while( true ) {
+    uVar6 = 0;
+    uVar3 = (ulonglong)(uVar5 - iVar4);
+    iVar1 = send(param_1,(char *)(local_168 + iVar4),uVar5 - iVar4,0);
+    if (iVar1 < 1) break;
+    iVar4 = iVar4 + iVar1;
+    if ((int)uVar5 <= iVar4) {
+      return 0;
+    }
+  }
+  local_16c = 0x2746;
+  if ((iVar1 == 0) || (local_16c = WSAGetLastError(), local_16c != 0)) {
+    FUN_140001570("send() failed, WSA error %d",(ulonglong)local_16c,uVar3,uVar6);
+    return local_16c;
+  }
+  return 0;
+}
+
+ (GhidraScript)  
+INFO  DecompileCallersOf.java>  (GhidraScript)  
+INFO  DecompileCallersOf.java> ================================================================ (GhidraScript)  
+INFO  DecompileCallersOf.java> 外部函数: recv (GhidraScript)  
+INFO  DecompileCallersOf.java> ---------------------------------------------------------------- (GhidraScript)  
+INFO  DecompileCallersOf.java>   符号: recv  地址: EXTERNAL:00000045 (GhidraScript)  
+INFO  DecompileCallersOf.java>     被引用 @ 14000a5f8  (DATA) (GhidraScript)  
+INFO  DecompileCallersOf.java>     被引用 @ 140001abf  (COMPUTED_CALL) (GhidraScript)  
+INFO  DecompileCallersOf.java>  (GhidraScript)  
+INFO  DecompileCallersOf.java>   >>> 调用者函数: FUN_140001a20  入口: 140001a20 (GhidraScript)  
+INFO  DecompileCallersOf.java> 
+undefined4 FUN_140001a20(SOCKET *param_1,int param_2)
+
+{
+  undefined1 *puVar1;
+  fd_set *readfds;
+  SOCKET SVar2;
+  longlong lVar3;
+  int iVar4;
+  uint uVar5;
+  ulonglong uVar6;
+  undefined1 *puVar7;
+  undefined1 *puVar8;
+  undefined8 uVar9;
+  ulonglong uVar10;
+  undefined8 uVar11;
+  ulonglong uVar12;
+  undefined8 auStackX_8 [4];
+  undefined1 uStack0000000000000108;
+  undefined1 uStack0000000000000110;
+  undefined8 uStack_30;
+  
+  uStack_30 = 0x140001a30;
+  uVar6 = FUN_140002fa0();
+  lVar3 = -uVar6;
+  uVar11 = 0;
+  uVar9 = 0;
+  *(SOCKET *)(&uStack0000000000000110 + lVar3) = *param_1;
+  puVar1 = (undefined1 *)((longlong)auStackX_8 + lVar3);
+  *(undefined4 *)(&uStack0000000000000108 + lVar3) = 1;
+  readfds = (fd_set *)(&uStack0000000000000108 + lVar3);
+  *(undefined1 **)((longlong)auStackX_8 + lVar3 + -0x10) = puVar1;
+  *(ulonglong *)((longlong)auStackX_8 + lVar3) = CONCAT44((param_2 % 1000) * 1000,param_2 / 1000);
+  *(undefined8 *)((longlong)auStackX_8 + lVar3 + -0x38) = 0x140001aa4;
+  iVar4 = select(0,readfds,(fd_set *)0x0,(fd_set *)0x0,
+                 *(timeval **)((longlong)auStackX_8 + lVar3 + -0x10));
+  if (iVar4 == 0) {
+    return 0;
+  }
+  if (iVar4 < 0) {
+    *(undefined8 *)((longlong)auStackX_8 + lVar3 + -0x38) = 0x140001b86;
+    uVar5 = WSAGetLastError();
+    *(undefined8 *)((longlong)auStackX_8 + lVar3 + -0x38) = 0x140001b94;
+    FUN_140001570("select() failed, WSA error %d",(ulonglong)uVar5,uVar9,uVar11);
+    return 0xffffffff;
+  }
+  uVar9 = 0;
+  SVar2 = *param_1;
+  iVar4 = *(int *)((longlong)param_1 + 0x24);
+  *(undefined8 *)((longlong)auStackX_8 + lVar3 + -0x38) = 0x140001ac5;
+  uVar5 = recv(SVar2,(char *)readfds,iVar4,0);
+  puVar8 = (undefined1 *)((longlong)auStackX_8 + lVar3 + -0x30);
+  puVar7 = (undefined1 *)((longlong)auStackX_8 + lVar3 + -0x30);
+  uVar6 = (ulonglong)uVar5;
+  if ((int)uVar5 < 1) {
+    uVar10 = 0;
+    if (uVar5 != 0) {
+      *(undefined8 *)((longlong)auStackX_8 + lVar3 + -0x38) = 0x140001bd6;
+      uVar5 = WSAGetLastError();
+      puVar8 = (undefined1 *)((longlong)auStackX_8 + lVar3 + -0x30);
+      uVar10 = (ulonglong)uVar5;
+    }
+    *(undefined8 *)(puVar8 + -8) = 0x140001bc6;
+    FUN_140001570("RX recv() = %d (WSA error %d) -> peer closed",uVar6,uVar10,uVar9);
+    return 0xffffffff;
+  }
+  uVar10 = param_1[2];
+  iVar4 = (int)param_1[5] + 1;
+  *(int *)(param_1 + 5) = iVar4;
+  if (uVar10 == 0) {
+    uVar12 = param_1[3];
+    *(int *)((longlong)param_1 + 0x2c) = iVar4;
+    if ((ulonglong)(longlong)(int)uVar5 <= uVar12) goto LAB_140001af1;
+  }
+  else {
+    uVar12 = param_1[3];
+    puVar7 = (undefined1 *)((longlong)auStackX_8 + lVar3 + -0x30);
+    if (uVar10 + (longlong)(int)uVar5 <= uVar12) goto LAB_140001af1;
+  }
+  *(undefined8 *)((longlong)auStackX_8 + lVar3 + -0x38) = 0x140001b64;
+  FUN_140001570("ERROR receive buffer full (%d + %d > %d), dropping it",uVar10 & 0xffffffff,uVar6,
+                uVar12);
+  puVar7 = (undefined1 *)((longlong)auStackX_8 + lVar3 + -0x30);
+  param_1[2] = 0;
+  uVar10 = 0;
+  *(int *)((longlong)param_1 + 0x2c) = (int)param_1[5];
+LAB_140001af1:
+  SVar2 = param_1[1];
+  *(undefined8 *)(puVar7 + -8) = 0x140001b00;
+  memcpy((void *)(uVar10 + SVar2),readfds,(longlong)(int)uVar5);
+  SVar2 = param_1[4];
+  uVar10 = (ulonglong)(uint)SVar2;
+  param_1[2] = param_1[2] + (longlong)(int)uVar5;
+  *(undefined8 *)(puVar7 + -8) = 0x140001b16;
+  FUN_1400014b0(puVar1,(byte *)readfds,uVar5,(uint)SVar2);
+  *(undefined8 *)(puVar7 + -8) = 0x140001b27;
+  FUN_140001570("RX recv n=%5d  %s",uVar6,puVar1,uVar10);
+  return 1;
+}
+
+ (GhidraScript)  
+INFO  DecompileCallersOf.java>  (GhidraScript)  
+INFO  ANALYZING changes made by post scripts: file:///E:/harness/network-journal/labs/06-zombie-protocol/src/bin/zombie_cli_O2s.exe (HeadlessAnalyzer)  
+INFO  REPORT: Post-analysis succeeded for file: file:///E:/harness/network-journal/labs/06-zombie-protocol/src/bin/zombie_cli_O2s.exe (HeadlessAnalyzer)  
+INFO  /zombie_cli_O2s.exe: file created (风林火山) (LocalFileSystem)  
+INFO  REPORT: Save succeeded for: /zombie_cli_O2s.exe (network-journal-lab06:/zombie_cli_O2s.exe) (HeadlessAnalyzer)  
+INFO  REPORT: Import succeeded (HeadlessAnalyzer)  
