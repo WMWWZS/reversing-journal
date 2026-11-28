@@ -7,6 +7,28 @@
 
 ---
 
+## 0. 前置知识
+
+| 需要会 | 来自 | 用在哪一步 |
+|---|---|---|
+| 读写内存、找地址 | [../03-write-memory](../03-write-memory)、[../04-pointer-chain](../04-pointer-chain) | 拿 hp 地址、写入口 |
+| 寄存器基本概念（rax/rcx/rdx、call） | [docs/10-registers.md](../../docs/10-registers.md) | 看懂那 49 字节机器码 |
+| 页权限、线程概念 | [docs/14-operating-system.md](../../docs/14-operating-system.md) | 为什么用 RWX、为什么能起远程线程 |
+
+**不需要**：会写汇编程序；能抄懂这 10 行就够了。
+
+## 0.5 游戏里这对应什么
+
+| 游戏里 | 进程里 | 具体到字节 |
+|---|---|---|
+| 「我要让血量自己保持住」 | 在目标里起一个线程 | `CreateRemoteThread` |
+| 那个线程干什么 | 每 50ms 写一次 9999 | 机器码里 `mov [rbx], 9999.0f` + `Sleep(50)` |
+| 代码放哪 | 目标进程里新申请的内存 | `VirtualAllocEx(..., PAGE_EXECUTE_READWRITE)` |
+| 为什么你的程序退出它还生效 | 线程活在目标里 | 关掉靶子才消失 |
+
+外部写 = 你在门口递纸条；注入 = 你往游戏里塞了一个自己的 NPC，让它自己动手。
+
+---
 ## 1. 为什么非得进去
 
 外部写：
