@@ -17,7 +17,7 @@
 <img src="https://img.shields.io/badge/platform-Windows_11_x64-0d1117?style=flat-square&amp;labelColor=161b22&amp;logo=windows&amp;logoColor=0078D4" alt="platform">
 <img src="https://img.shields.io/badge/status-week_01--10-d29922?style=flat-square&amp;labelColor=161b22" alt="status">
 
-<sub><a href="docs/00-roadmap.md">24 周路线</a> · <a href="labs/">实验</a> · <a href="writeups/">题解</a> · <a href="resources.md">资源</a> · <a href="notes/_TEMPLATE.md">记录模板</a><br>姊妹仓库：<a href="https://github.com/WMWWZS/os-journal">os-journal</a> · <a href="https://github.com/WMWWZS/network-journal">network-journal</a></sub>
+<sub><a href="docs/00-roadmap.md">24 周路线</a> · <a href="labs/">实验</a> · <a href="writeups/">题解</a> · <a href="resources.md">资源</a> · <a href="notes/_TEMPLATE.md">记录模板</a><br>支线已并入本仓库：<a href="os-journal/">os-journal/</a> · <a href="network-journal/">network-journal/</a>（各自保留完整提交历史）</sub>
 
 </div>
 
@@ -154,3 +154,21 @@ powershell -ExecutionPolicy Bypass -File .\tools\ghidra.ps1
 <sub>不制作、不分发任何作弊工具</sub>
 
 </div>
+
+---
+
+## ▍ 仓库结构（三库合一）
+
+2026-11 起，原来分开的两个支线仓库并入本仓库，**各自保留完整提交历史**（git subtree，不是拷贝文件）：
+
+| 目录 | 内容 | 何时需要 |
+|---|---|---|
+| docs/ labs/ writeups/ 
+otes/ | 主线：逆向 / 内存分析 / 游戏安全 | 一直在用 |
+| [os-journal/](os-journal/) | 支线：操作系统 —— 页表、句柄、内核对象 | 写代码补丁、做叠加层、碰驱动时才要 |
+| [
+etwork-journal/](network-journal/) | 支线：网络 —— 分帧、校验和、权威边界 | 只有换到联机目标才要 |
+
+判断标准与分档见 [docs/16-when-os-and-net.md](docs/16-when-os-and-net.md)。
+原 os-journal / 
+etwork-journal 两个仓库可设为 **Archived（只读）**，避免再出现"两库不同步"。
