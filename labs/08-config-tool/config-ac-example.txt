@@ -1,0 +1,20 @@
+# AssaultCube 配置模板（32 位）
+#
+# 用法：把下面每一项填成你自己扫出来的值，另存为 config-ac.txt
+#   chaincfg.exe read config-ac.txt
+#
+# 这些值必须你自己用 CE 的 pointer scan 得到——不要抄别人的，
+# 版本不同、指针链不同，抄来的数字只会让你怀疑工具。
+
+process=ac_client.exe
+# 静态指针在模块里的偏移（CE 的 pointer scan 会给 base+0x...）
+slot=0x000000
+# AC 是 32 位程序，指针固定 4 字节
+ptr_size=4
+# 从静态指针开始，每一段偏移；最后一段是"到字段的距离"
+# 例：如果链条是 [base+0x00509B74] -> +0x00 -> +0x1A4（血量），就写 0x00,0x1A4
+hops=0x00,0x000
+type=float
+# 玩家结构体步长（多人列表时用；单人可留 0）
+stride=0
+index=0

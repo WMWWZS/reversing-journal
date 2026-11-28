@@ -1,0 +1,8 @@
+# 模拟 32 位布局的靶子（指针 4 字节，地址都在 4GB 以下）
+process=target32sim.exe
+slot=0x7040
+ptr_size=4
+hops=0x00,0x10
+type=float
+stride=0x28
+index=0

@@ -89,4 +89,4 @@
 | 进程 / 线程 / 虚拟内存 / 句柄 / PE | [14-operating-system.md](14-operating-system.md) |
 | 协议 / 分帧 / 校验 / 权威边界 | [15-network.md](15-network.md)、[06-network-protocol.md](06-network-protocol.md) |
 | 检测面（内核回调、句柄检查） | [07-anticheat.md](07-anticheat.md) |
-| 当前实验进度 | [../labs/LABS-00-06.md](../labs/LABS-00-06.md) |
+| 当前实验进度 | [../labs/INDEX.md](../labs/INDEX.md) |

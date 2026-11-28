@@ -1,0 +1,8 @@
+# 故意写错：32 位目标却用 8 字节指针
+process=target32sim.exe
+slot=0x7040
+ptr_size=8
+hops=0x00,0x10
+type=float
+stride=0x28
+index=0

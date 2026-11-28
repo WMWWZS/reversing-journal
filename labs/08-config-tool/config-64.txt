@@ -1,0 +1,8 @@
+# lab04 的 64 位靶子
+process=target.exe
+slot=0x7030
+ptr_size=8
+hops=0x00,0x10
+type=float
+stride=0x28
+index=0
