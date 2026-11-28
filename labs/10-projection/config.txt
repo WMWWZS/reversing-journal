@@ -1,0 +1,9 @@
+# lab10：相机 + 三个敌人
+process=target.exe
+slot=0x8030
+ptr_size=8
+cam_off=0x00
+units_off=0x18
+count_off=0x20
+stride=0x24
+screen=1280x720

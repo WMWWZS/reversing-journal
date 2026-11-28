@@ -22,6 +22,7 @@
 | [07-net-os](07-net-os) | 网络/系统侧的靶场 | 既有实验 | 既有 |
 | [08-config-tool](08-config-tool) | 工具怎么指向任意目标 | 配置驱动 + `ptr_size=4/8`；宽度写错会得到假地址 | 完成 |
 | [09-hook](09-hook) | 怎么让目标「算不出伤害」 | 五步：存原字节 → VirtualProtectEx → WriteProcessMemory → FlushInstructionCache → 还原权限；补丁长度必须精确到字节 | 完成 |
+| [10-projection](10-projection) | 敌人在我屏幕的哪个像素 | 世界坐标 → 相机前/右轴 → 像素；点积法与角度法互验；符号错差 832 像素 | 完成 |
 
 ## 与 OS / 网络文档的关系
 
