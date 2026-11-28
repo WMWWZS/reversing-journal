@@ -228,3 +228,12 @@ flowchart TD
 - 已有的完整靶场：[`labs/07-net-os`](../labs/07-net-os/)
 - 任务清单：[`TASKS.md`](../TASKS.md)
 - 姊妹仓库：[os-journal](https://github.com/WMWWZS/os-journal) · [network-journal](https://github.com/WMWWZS/network-journal)
+
+---
+
+## ▍ 什么时候补操作系统 / 网络
+
+不要一开始就把这两块全啃：操作系统的细节**已经在实验里天天用到**（句柄、页保护、私有内存、线程），
+缺的只是把名字对上；网络则**只有换到联机目标才需要**。
+
+分档与触发条件见 [16-when-os-and-net.md](16-when-os-and-net.md)。
