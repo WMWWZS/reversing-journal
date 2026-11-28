@@ -172,3 +172,17 @@ etwork-journal/](network-journal/) | 支线：网络 —— 分帧、校验和�
 判断标准与分档见 [docs/16-when-os-and-net.md](docs/16-when-os-and-net.md)。
 原 os-journal / 
 etwork-journal 两个仓库可设为 **Archived（只读）**，避免再出现"两库不同步"。
+---
+
+## ▍ 文档怎么找
+
+三个 docs/ 目录各有一份**中文索引**（GitHub 点进目录就会显示）：
+
+| 目录 | 索引 | 内容 |
+|---|---|---|
+| docs/ | [docs/README.md](docs/README.md) | 主线 17 篇：内存、PE、调试器、引擎、反作弊，以及 OS/网络何时补 |
+| os-journal/docs/ | [os-journal/docs/README.md](os-journal/docs/README.md) | 支线 11 篇：内核边界、调度、虚拟/物理内存、同步、IPC、IO |
+| 
+etwork-journal/docs/ | [network-journal/docs/README.md](network-journal/docs/README.md) | 支线 11 篇：分层、TCP、UDP/DNS、HTTP/TLS、抓包、私有协议、延迟 |
+
+文件名保持英文（不改链接），标题与摘要都是中文；每篇正文本身也是中文的。
